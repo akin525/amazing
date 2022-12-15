@@ -101,7 +101,7 @@
                                 </label>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up<span class="load loading"></span></button>
+                                <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up<span class="load loading"></span></button>
                             </div>
                         </form>
                             <script>
