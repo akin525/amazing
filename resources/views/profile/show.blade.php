@@ -1,0 +1,88 @@
+@extends('layouts.sidebar')
+@section('content')
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group input-group-outline">
+                            <label class="form-label">Type here...</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <ul class="navbar-nav  justify-content-end">
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="#" class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1"></i>
+                                <span class="d-sm-inline d-none">{{Auth::user()->name}}</span>
+                            </a>
+                        </li>
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0">
+                                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- end page title -->
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Profile') }}
+        </h2>
+    </x-slot>
+
+    <div>
+        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                @livewire('profile.update-profile-information-form')
+
+                <x-jet-section-border />
+            @endif
+
+            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+                <div class="mt-10 sm:mt-0">
+                    @livewire('profile.update-password-form')
+                </div>
+
+                <x-jet-section-border />
+            @endif
+
+            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+                <div class="mt-10 sm:mt-0">
+                    @livewire('profile.two-factor-authentication-form')
+                </div>
+
+                <x-jet-section-border />
+            @endif
+
+            <div class="mt-10 sm:mt-0">
+                @livewire('profile.logout-other-browser-sessions-form')
+            </div>
+
+        </div>
+    </div>
+</x-app-layout>
+    </main>
+@endsection
