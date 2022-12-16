@@ -69,6 +69,7 @@
                             <tr>
                                 <th>Customer</th>
                                 <th>Email</th>
+                                <th>Balance</th>
                                 <th>Phone-No</th>
                                 <th>Full-Name</th>
                                 <th>Action</th>
@@ -78,15 +79,13 @@
                             @foreach($users as $user )
                                 <tr>
                                     <td>
-                                        @if($user->profile_photo_path==NULL) <img width="50" src="{{asset("images/bn.jpeg")}}" alt="" class="rounded-circle thumb-sm mr-1">
-                                        @else
-                                            <img width="50" src="{{url('/', $user->profile_photo_path)}}" alt="" class="rounded-circle thumb-sm mr-1">
-                                        @endif
+                                        <img width="50" src="{{asset('ama.jpeg')}}" alt="" class="rounded-circle thumb-sm mr-1">
                                         {{$user->username}}
                                     </td>
 {{--                                    <td>₦{{$user->balance}}</td>--}}
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->phone_no}}</td>
+                                    <td>₦{{$user->wallet}}</td>
+                                    <td>{{$user->phone}}</td>
                                     <td>{{$user->name}}</td>
                                     <td><a href="profile/{{ $user->username }}" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a></td>
                                 </tr>

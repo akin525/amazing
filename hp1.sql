@@ -1277,7 +1277,7 @@ CREATE TABLE `messages` (
 
 INSERT INTO `messages` (`id`, `message`, `status`) VALUES
 (1, 'All Data Network Are Excellent (MTN)', '0'),
-(2, 'Dear Valued Customer, MTN CG is not available (MTN has refused to sell stock to anyone for about a week now and we are almost out of stock) MTN SME is available!  Thanks for understanding. (Joy from PrimeData)', '1');
+(2, 'Dear Valued Customer, MTN CG is not available (MTN has refused to sell stock to anyone for about a week now and we are almost out of stock) MTN SME is available!  Thanks for understanding. (Joy from Amazing-Data)', '1');
 
 -- --------------------------------------------------------
 

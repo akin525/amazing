@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://mobile.primedata.com.ng/'),
+    'url' => env('APP_URL', 'https://mobile.Amazing-Data.com.ng/'),
 
     'asset_url' => env('ASSET_URL'),
 

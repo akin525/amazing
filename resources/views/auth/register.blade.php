@@ -66,6 +66,9 @@
                                     <p class="mb-0">Enter your email and password to register</p>
                                 </div>
                                 <div class="card-body">
+                                    <center>
+                                        <img width="100" src="{{asset('ama.jpeg')}}">
+                                    </center>
                         <form method="post" role="form" action="{{ route('register') }}">
                             @csrf
                             <x-jet-validation-errors class="alert text-white alert-danger" />

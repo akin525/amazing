@@ -143,7 +143,6 @@
                         <tr>
                             <th>id</th>
                             <th>Username</th>
-                            <th>Receipt</th>
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Number</th>
@@ -158,18 +157,16 @@
                         @foreach($data as $dat)
                             <tr>
                                 <td>{{$dat->id}}</td>
-                                <td>{{$dat->username}}
-                                <td><a href="{{route('admin/viewpdf', $dat->id)}}" class="badge badge-success"><i class="fa fa-download">Pdf</i></a> </td>
-                                </td>
+                                <td>{{$dat->username}}</td>
                                 <td>{{$dat->amount}}</td>
                                 <td class="center">
 
                                     @if($dat->result=="1")
-                                        <span class="badge badge-success">Delivered</span>
+                                        <span class="btn bg-success text-white">Delivered</span>
                                     @elseif($dat->result=="0")
-                                        <span class="badge badge-warning">Not-Delivered</span>
+                                        <span class="btn bg-warning text-white">Not-Delivered</span>
                                     @else
-                                        <span class="badge badge-info">{{$dat->result}}</span>
+                                        <span class="btn bg-info text-white">{{$dat->result}}</span>
                                     @endif
 
                                 </td>

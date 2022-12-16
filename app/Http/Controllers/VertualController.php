@@ -118,7 +118,7 @@ class VertualController
                 ]);
 
 
-                $admin= 'admin@primedata.com.ng';
+                $admin= 'admin@Amazing-Data.com.ng';
 
                 $receiver= $user->email;
                 Mail::to($receiver)->send(new Emailcharges($charp ));

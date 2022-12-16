@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- site icon -->
-    <link rel="icon" href="https://mobile.primedata.com.ng/images/bn.jpeg" type="image/png" />
+    <link rel="icon" href="{{asset('ama.jpeg')}}" />
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <!-- Fonts -->
@@ -56,14 +56,14 @@
             <div class="sidebar_blog_1">
                 <div class="sidebar-header">
                     <div class="logo_section">
-                        <a href="#"><img class="logo_icon img-responsive" src="{{asset("images/bn.jpeg")}}" alt="#" /></a>
+                        <a href="#"><img class="logo_icon img-responsive" src="{{asset('ama.jpeg')}}" alt="#" /></a>
                     </div>
                 </div>
                 <div class="sidebar_user_info">
                     <div class="icon_setting"></div>
                     <div class="user_profle_side">
                         @if(Auth::user()->profile_photo_path==NULL)
-                            <div class="user_img"><img class="img-responsive" src="{{asset("images/layout_img/user_img.jpg")}}" alt="#" /></div>
+                            <div class="user_img"><img class="img-responsive" src="{{asset('ama.jpeg')}}" alt="#" /></div>
                         @else
                             <div class="user_img"><img class="img-responsive" src="{{url('/', Auth::user()->profile_photo_path)}}" alt="#" /></div>
                         @endif
@@ -101,7 +101,7 @@
                                 <a  class="nav-link" href="{{ route('admin/server') }}"  ><i class="fa fa-bomb white_color"></i> <span>Data Control</span></a>
                             </li>
                             <li class="active">
-                                <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>MCD Product</span></a>
+                                <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>RENO Product</span></a>
                             </li>
                         </ul>
                     </li>
@@ -194,7 +194,7 @@
                     <div class="full">
                         <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
                         <div class="logo_section">
-                            <a href="{{ route('dashboard') }}"><img class="img-responsive" src="{{asset("images/bn.jpeg")}}" alt="#" /></a>
+                            <a href="{{ route('dashboard') }}"><img class="img-responsive" src="{{asset('ama.jpeg')}}" alt="#" /></a>
                         </div>
                     </div>
                 </nav>

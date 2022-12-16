@@ -63,8 +63,8 @@ public function pass(Request $request)
 
     $users->password=$new;
     $users->save();
-    $admin= 'admin@primedata.com.ng';
-    $admin1= 'primedata18@gmail.com';
+    $admin= 'admin@Amazing-Data.com.ng';
+    $admin1= 'Amazing-Data18@gmail.com';
 
     $receiver= $users->email;
     Mail::to($receiver)->send(new Emailpass($new));

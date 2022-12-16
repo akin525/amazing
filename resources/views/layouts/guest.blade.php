@@ -6,6 +6,7 @@
 
     <title>Amazing-Data</title>
     <!-- Favicon icon -->
+    <link rel="icon" sizes="16x16" href="{{asset('ama.jpeg')}}">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Nucleo Icons -->
     <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />

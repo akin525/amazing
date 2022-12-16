@@ -33,7 +33,7 @@
                                 <link rel="stylesheet" href="{{asset('style.css')}}">
                                 <!--Only for demo purpose - no need to add.-->
                                 <link rel="stylesheet" href="{{asset('demo.css')}}"/>
-                                <td> {{$seller->name}} </td>
+                                <td> RENOMOBILEMONEY  </td>
                                 {{--                                <td><a href="{{route('editpayment', $pay->id)}}"--}}
                                 {{--                                       {{$pay->value}}class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>--}}
                                 {{--                                </td>--}}

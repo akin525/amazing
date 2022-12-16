@@ -162,11 +162,11 @@
                                 <td class="center">
 
                                     @if($dat->status=="1")
-                                        <span class="badge badge-success">Delivered</span>
+                                        <span class="bg bg-success text-white">Delivered</span>
                                     @elseif($dat->status=="0")
-                                        <span class="badge badge-warning">Not-Delivered</span>
+                                        <span class="bg-warning text-white">Not-Delivered</span>
                                     @else
-                                        <span class="badge badge-info">{{$dat->status}}</span>
+                                        <span class="bg-info text-white">{{$dat->status}}</span>
                                     @endif
 
                                 </td>

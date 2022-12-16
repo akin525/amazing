@@ -51,7 +51,7 @@
                         </table>
                         <table class='es-content' cellspacing='0' cellpadding='0' align='center' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%'>
                             <tr>
-                                <td style='padding:0;Margin:0;background-image:url(https://rszomp.stripocdn.email/content/guids/CABINET_c2a5428bd0934f3fbd34e54cb3601b70/images/32801632220122584.jpg);background-repeat:no-repeat;background-position:left top' background='https://mobile.primedata.com.ng/images/bn.jpeg' align='center'>
+                                <td style='padding:0;Margin:0;background-image:url(https://rszomp.stripocdn.email/content/guids/CABINET_c2a5428bd0934f3fbd34e54cb3601b70/images/32801632220122584.jpg);background-repeat:no-repeat;background-position:left top' background='https://mobile.Amazing-Data.com.ng/images/bn.jpeg' align='center'>
                                     <table class='es-content-body' cellspacing='0' cellpadding='0' bgcolor='#ffffff' align='center' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px'>
                                         <tr>
                                             <td align='left' style='Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px'>

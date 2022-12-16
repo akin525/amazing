@@ -20,14 +20,14 @@
         <div class="card">
             <div class="card-body met-pro-bg">
                 <div class="met-profile" >
-                    <div class="row" style='background-image: url("/images/pattern.png"); padding: 20px; color: white'>
+                    <div class="row" style='background-image: url("/pattern.jpg"); padding: 20px; color: white'>
                         <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
                             <div class="met-profile-main">
                                 <div class="met-profile-main-pic">
                                     @if($user->profile_photo_path!=null)
                                         <img src="{{url('/', $user->profile_photo_path)}}" alt="img" class="img img-thumbnail">
                                     @else
-                                        <img alt="image" class="img img-thumbnail" width="100" src="{{asset("images/bn.jpeg")}}">
+                                        <img alt="image" class="img img-thumbnail" width="100" src="{{asset('ama.jpeg')}}">
                                     @endif
                                     <span class="fro-profile_main-pic-change"><i class="fa fa-camera"></i></span></div>
                                 <div class="met-profile_user-detail">
@@ -49,11 +49,11 @@
                                 <li class="mt-2"><i class="fa fa-calendar text-info"></i> <b>Reg. Date</b> : {{$user->created_at}}</li>
                                 <br>
                                 <li class="mt-2"><i class="fa fa-key text-info "></i> <b>Api</b> : {{$user->apikey}}</li>
-                                @if($wallet->account_number != "1")
+                                @if($user->account_number != "1")
                                 <br>
-                                <li class="mt-2"><i class="fa fa-phone text-info "></i> <b>Account-No</b> : {{$wallet->account_number}}</li>
+                                <li class="mt-2"><i class="fa fa-phone text-info "></i> <b>Account-No</b> : {{$user->account_number}}</li>
                                 <br>
-                                <li class="mt-2"><i class="fa fa-user text-info "></i> <b>Account-Name</b> : {{$wallet->account_name}}</li>
+                                <li class="mt-2"><i class="fa fa-user text-info "></i> <b>Account-Name</b> : {{$user->account_name}}</li>
                                 @endif
                             </ul>
                         </div>
@@ -87,7 +87,7 @@
 </div>
 <!--end row-->
 <div class="card-body">
-    <div class="w3-panel w3-yellow w3-round-xlarge">
+    <div class="alert alert-info">
         <div class="card-body">
             <center>
                 <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
@@ -119,7 +119,7 @@
                                 <div class="d-flex justify-content-between bg-purple p-3 mt-3 rounded">
                                     <center>
                                     <div>
-                                        <h4 class="font-weight-semibold ">&#8358;{{number_format($wallet->balance)}}</h4>
+                                        <h4 class="font-weight-semibold ">&#8358;{{number_format($user->wallet)}}</h4>
                                         <p class="mb-0 ">Wallet Balance</p>
                                     </div>
                                     </center>

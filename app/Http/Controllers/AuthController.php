@@ -55,8 +55,8 @@ class AuthController
         $user->password=$new;
         $user->save();
 
-        $admin= 'admin@primedata.com.ng';
-        $admin1= 'primedata18@gmail.com';
+        $admin= 'admin@Amazing-Data.com.ng';
+        $admin1= 'Amazing-Data18@gmail.com';
 
         $receiver= $user->email;
 //        Mail::to($receiver)->send(new Emailpass($new));
@@ -102,8 +102,8 @@ class AuthController
         }
 
         Auth::login($user);
-        $admin= 'admin@primedata.com.ng';
-        $admin1= 'primedata18@gmail.com';
+        $admin= 'admin@Amazing-Data.com.ng';
+        $admin1= 'Amazing-Data18@gmail.com';
 
         $user=User::where('email', $request->email)->first();
 $login=$user->name;
