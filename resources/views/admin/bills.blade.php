@@ -1,113 +1,135 @@
 @include('admin.layouts.sidebar')
-<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-<div class="page-content">
-    <div class="container-fluid">
-
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Admin/Bills</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin/dashboard')}}">Dashboards</a></li>
-                            <li class="breadcrumb-item active">Admin/Bills</li>
-                        </ol>
+<div class="row">
+    <div class="row column1">
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet blue1_color"></i>
                     </div>
-
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ number_format($tt) ?? 'Total Bills Purchase' }}</h5>
+                        <h6 class="head_couter">Total Bills</h6>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- end page title -->
-<div class="row">
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-cyan text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-counter"></i></h1>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet yellow_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ number_format($ft) ?? 'Total Today' }}</h5>
+                        <h6 class="head_couter">Bills Purchase Today</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ $st ?? 'Bills Purchase Yesterday' }}</h5>
+                        <h6 class="head_couter">Bills Purchase Yesterday</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet yellow_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ number_format($rt) ?? 'Total Reversed' }}</h5>
+                        <h6 class="head_couter">Bills Purchase 2Days Ago</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <h6 class="text-white">{{ number_format($tt) ?? 'Total Bills Purchase' }}</h6>
-                <h6 class="text-white">Total Bill</h6>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-success text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-counter"></i></h1>
-                <h6 class="text-white">{{ number_format($ft) ?? 'Total Today' }}</h6>
-                <h6 class="text-white">Today Total Bills</h6>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-warning text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-counter"></i></h1>
-                <h6 class="text-white">{{ $st ?? 'Bills Purchase Yesterday' }}</h6>
-                <h6 class="text-white">Bills Purchase Yesterday</h6>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-danger text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-counter"></i></h1>
-                <h6 class="text-white">{{ number_format($rt) ?? 'Total Reversed' }}</h6>
-                <h6 class="text-white">Bills Purchase 2Days Ago</h6>
-            </div>
-        </div>
     </div>
 </div>
 
 <div class="row">
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-secondary text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-wallet"></i></h1>
+    <div class="row column1">
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($amount) ?? 'Total Bills Purchase' }}</h5>
+                        <h6 class="head_couter">Sum of Total Transaction </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money red_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($am) ?? 'Total Today' }}</h5>
+                        <h6 class="head_couter">Sum Of Today Bills Purchase </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ $am1 ?? 'Bills Purchase Yesterday' }}</h5>
+                        <h6 class="head_couter">Sum Of  Yesterday Bills Purchase</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money red_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($am2) ?? 'Total Reversed' }}</h5>
+                        <h6 class="head_couter">Sum Of Total Bills Purchase 2Days Ago</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <h6 class="text-white">₦{{ number_format($amount) ?? 'Total Bills Purchase' }}</h6>
-                <h6 class="text-white">Sum of Total Transaction </h6>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-warning text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-wallet"></i></h1>
-                <h6 class="text-white">₦{{ number_format($am) ?? 'Total Today' }}</h6>
-                <h6 class="text-white">Sum Of Today Bills Purchase</h6>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-success text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-wallet"></i></h1>
-                <h6 class="text-white">₦{{ $am1 ?? 'Bills Purchase Yesterday' }}</h6>
-                <h6 class="text-white">Sum Of  Yesterday Bills Purchase</h6>
-            </div>
-        </div>
-    </div>
-    <!-- Column -->
-    <div class="col-md-6 col-lg-3">
-        <div class="card card-hover">
-            <div class="box bg-primary text-center">
-                <h1 class="font-light text-white"><i class="mdi mdi-wallet"></i></h1>
-                <h6 class="text-white">₦{{ number_format($am2) ?? 'Total Reversed' }}</h6>
-                <h6 class="text-white">Sum Of Total Bills Purchase 2Days Ago</h6>
-            </div>
-        </div>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-lg-12">
@@ -121,6 +143,7 @@
                         <tr>
                             <th>id</th>
                             <th>Username</th>
+                            <th>Receipt</th>
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Number</th>
@@ -136,6 +159,7 @@
                             <tr>
                                 <td>{{$dat->id}}</td>
                                 <td>{{$dat->username}}
+                                <td><a href="{{route('admin/viewpdf', $dat->id)}}" class="badge badge-success"><i class="fa fa-download">Pdf</i></a> </td>
                                 </td>
                                 <td>{{$dat->amount}}</td>
                                 <td class="center">

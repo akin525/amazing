@@ -45,23 +45,19 @@
             </div>
         </nav>
 
+        <br>
+        <br>
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Tv Subscription</h6>
+            </div>
+        </div>
         <!-- end page title -->
 {{--<div class="page-wrapper">--}}
     <div class="content container-fluid">
 {{--        <div class="row justify-content-lg-center">--}}
             <div class="col-lg-10">
 
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="page-title">TV Subscription</h4>
-                            <ul class="breadcrumb">
-                                {{--                                <li class=""><a href="{{route('dashboard')}}">Dashboard</a></li>--}}
-                                {{--                                <li class="breadcrumb-item active">Profile</li>--}}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 <div class="card">
                     <div class="card-body">
                         <!--                    <div class="box w3-card-4">-->

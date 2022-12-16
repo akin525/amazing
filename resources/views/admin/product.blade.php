@@ -1,25 +1,5 @@
 @include('admin.layouts.sidebar')
-<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-<div class="page-content">
-    <div class="container-fluid">
 
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Admin/Product</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin/dashboard')}}">Dashboards</a></li>
-                            <li class="breadcrumb-item active">Admin/Product</li>
-                        </ol>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- end page title -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -44,9 +24,9 @@
                         <tr>
                             <th>Network</th>
                             <th>Plan</th>
-{{--                            <th>Actual Amount</th>--}}
+                            <th>Actual Amount</th>
                             <th>Selling Amount</th>
-{{--                            <th>Reseller Amount</th>--}}
+                            <th>Reseller Amount</th>
                             <th>Status</th>
                             <th>Switch</th>
                             <th>Edit</th>
@@ -60,9 +40,9 @@
                                 <link rel="stylesheet" href="{{asset('demo.css')}}"/>
                                 <td> {{$seller->network}} </td>
                                 <td> {{$seller->plan}}</td>
-{{--                                <td> {{$seller->amount}}</td>--}}
+                                <td> {{$seller->amount}}</td>
                                 <td> {{$seller->tamount}}</td>
-{{--                                <td> {{$seller->ramount}}</td>--}}
+                                <td> {{$seller->ramount}}</td>
                                 {{--                                <td><a href="{{route('editpayment', $pay->id)}}"--}}
                                 {{--                                       {{$pay->value}}class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>--}}
                                 {{--                                </td>--}}

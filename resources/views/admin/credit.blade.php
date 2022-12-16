@@ -1,24 +1,4 @@
 @include('admin.layouts.sidebar')
-<div class="page-content">
-    <div class="container-fluid">
-
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Admin/Credit User</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin/dashboard')}}">Dashboards</a></li>
-                            <li class="breadcrumb-item active">Admin/Credit User</li>
-                        </ol>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- end page title -->
 <div class="midde_cont">
     <div class="container-fluid">
         <div class="row column_title">
@@ -28,27 +8,27 @@
                 </div>
             </div>
         </div>
-        <div class="row align-content-center">
-            <!-- Column -->
-            <div class="col-md-9 col-lg-12">
-                <div class="card card-hover">
-                    <div class="box bg-cyan text-center">
-                        <h1 class="font-light text-white"><i class="fa fa-money"></i></h1>
 
-                        <h6 class="text-white">₦{{number_format(intval($totalwallet *1),2)}}</h6>
-                        <h6 class="text-white">All User Balance</h6>
+        <div class="row column1">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet yellow_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦<?php echo number_format(intval($totalwallet *1),2);?></h5>
+                        <h6 class="head_couter">All User Balance</h6>
                     </div>
                 </div>
             </div>
-
-            <!-- Column -->
         </div>
         <!-- Title & Breadcrumbs-->
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                <div class="card-body">
                     <div class="row">
                         <!-- col-md-6 -->
                         <div class="col-md-12 col-12">

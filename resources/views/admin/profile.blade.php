@@ -1,25 +1,5 @@
 @include('admin.layouts.sidebar')
-<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-<div class="page-content">
-    <div class="container-fluid">
 
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Admin/Profile</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin/dashboard')}}">Dashboards</a></li>
-                            <li class="breadcrumb-item active">Admin/Profile</li>
-                        </ol>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- end page title -->
 <div class="row">
 
     @if (session('success'))
@@ -40,14 +20,14 @@
         <div class="card">
             <div class="card-body met-pro-bg">
                 <div class="met-profile" >
-                    <div class="row" style='background-image: url("/img/pattern.png"); padding: 20px; color: white'>
+                    <div class="row" style='background-image: url("/images/pattern.png"); padding: 20px; color: white'>
                         <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
                             <div class="met-profile-main">
                                 <div class="met-profile-main-pic">
-                                    @if($user->photo!=null)
-                                        <img src="https://mcd.5starcompany.com.ng/app/avatar/{{$user->username }}.JPG" alt="img" class="img img-thumbnail">
+                                    @if($user->profile_photo_path!=null)
+                                        <img src="{{url('/', $user->profile_photo_path)}}" alt="img" class="img img-thumbnail">
                                     @else
-                                        <img alt="image" class="img img-thumbnail" width="300" src="{{asset('bv2.png')}}">
+                                        <img alt="image" class="img img-thumbnail" width="100" src="{{asset("images/bn.jpeg")}}">
                                     @endif
                                     <span class="fro-profile_main-pic-change"><i class="fa fa-camera"></i></span></div>
                                 <div class="met-profile_user-detail">
@@ -62,18 +42,18 @@
                             <ul class="list-unstyled personal-detail">
                                 <li class=""><i class="fa fa-user text-info "></i> <b>Full-Name</b> : {{$user->name}}</li>
                                 <br>
-                                <li class=""><i class="fa fa-phone text-info "></i> <b>Phone </b> : {{$user->phone}}</li>
+                                <li class=""><i class="fa fa-phone text-info "></i> <b>Phone </b> : {{$user->phone_no}}</li>
                                 <br>
                                 <li class="mt-2"><i class="fa fa-envelope text-info "></i> <b>Email </b> : {{$user->email}}</li>
                                 <br>
                                 <li class="mt-2"><i class="fa fa-calendar text-info"></i> <b>Reg. Date</b> : {{$user->created_at}}</li>
                                 <br>
                                 <li class="mt-2"><i class="fa fa-key text-info "></i> <b>Api</b> : {{$user->apikey}}</li>
-                                @if($user->account_number != "1")
+                                @if($wallet->account_number != "1")
                                 <br>
-                                <li class="mt-2"><i class="fa fa-phone text-info "></i> <b>Account-No</b> : {{$user->account_number}}</li>
+                                <li class="mt-2"><i class="fa fa-phone text-info "></i> <b>Account-No</b> : {{$wallet->account_number}}</li>
                                 <br>
-                                <li class="mt-2"><i class="fa fa-user text-info "></i> <b>Account-Name</b> : {{$user->account_name}}</li>
+                                <li class="mt-2"><i class="fa fa-user text-info "></i> <b>Account-Name</b> : {{$wallet->account_name}}</li>
                                 @endif
                             </ul>
                         </div>
@@ -111,10 +91,10 @@
         <div class="card-body">
             <center>
                 <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
-                <a class="badge badge-gradient-primary" href="{{route('admin/credit')}}">Credit User</a>
+                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Credit User</a>
 
-                <a class="badge badge-gradient-primary" href="{{route('admin/credit')}}">Refund User</a>
-                <a class="badge badge-gradient-primary" href="{{route('admin/charge')}}">Charge User</a>
+                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Refund User</a>
+                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/charge')}}">Charge User</a>
 
                 <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
             </center>
@@ -136,27 +116,27 @@
                                 {{--                                            <h4 class="title-text mb-0">Monthly Revenue</h4>--}}
                                 {{--                                        </div>--}}
                                 {{--                                    </div>--}}
-                                <div class="d-flex justify-content-between badge-gradient-primary p-3 mt-3 rounded">
+                                <div class="d-flex justify-content-between bg-purple p-3 mt-3 rounded">
                                     <center>
                                     <div>
-                                        <h4 class="font-weight-semibold text-white">&#8358;{{number_format($user->wallet)}}</h4>
-                                        <p class="mb-0 text-white ">Wallet Balance</p>
+                                        <h4 class="font-weight-semibold ">&#8358;{{number_format($wallet->balance)}}</h4>
+                                        <p class="mb-0 ">Wallet Balance</p>
                                     </div>
                                     </center>
                                     <div>
-                                        <h4 class="mb-1 font-weight-semibold text-white">&#8358;{{$sumtt}}</h4>
-                                        <p class="mb-0 text-white">Total Deposit</p>
+                                        <h4 class="mb-1 font-weight-semibold ">&#8358;{{$sumtt}}</h4>
+                                        <p class="mb-0">Total Deposit</p>
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-between badge-gradient-primary p-3 mt-3 rounded">
+                                <div class="d-flex justify-content-between bg-purple p-3 mt-3 rounded">
                                     <div>
-                                        <h4 class="mb-1 font-weight-semibold text-white">&#8358;{{number_format($sumbo)}}</h4>
-                                        <p class=" mb-0 text-white">Total Bills</p>
+                                        <h4 class="mb-1 font-weight-semibold ">&#8358;{{number_format($sumbo)}}</h4>
+                                        <p class=" mb-0">Total Bills</p>
                                     </div>
                                     <div>
-                                        <h4 class="mb-1 font-weight-semibold text-white">&#8358;{{number_format($sumch)}}</h4>
-                                        <p class="mb-0 text-white">Total Charges</p>
+                                        <h4 class="mb-1 font-weight-semibold ">&#8358;{{number_format($sumch)}}</h4>
+                                        <p class="mb-0">Total Charges</p>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +216,7 @@
                             @foreach($referrals as $referral)
                                 @if($referral->photo!=null)
                                     <a href="{{$referral->username}}" class="btn btn-pink btn-circle ml-2">
-                                        <img alt="image" class="card-img img" width="50" src="{{asset('assets/images/favicon.png')}}">
+                                        <img alt="image" class="card-img img" width="50" src="{{asset("images/bn.jpeg")}}">
                                         {{$referral->username}}
                                     </a>
                                 @else
@@ -417,7 +397,7 @@
                                             <div class="">
                                                 <div class="field">
                                                     <label class="label_field">Phone No</label>
-                                                    <input type="number" class="form-control" name="number" value="{{$user->phone}}" required />
+                                                    <input type="number" class="form-control" name="number" value="{{$user->phone_no}}" required />
                                                 </div>
                                                 <br>
                                                 <div class="field">

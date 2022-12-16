@@ -49,11 +49,16 @@
         <br>
 <br>
 <br>
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Airtime Purchase</h6>
+            </div>
+        </div>
 
     <form action="{{ route('buyairtime') }}" method="post" class="m-lg-4">
         @csrf
-        <div class="row card card-body">
-            <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-8 card card-body">
                 <div id="AirtimeNote" class="alert alert-danger" style="text-transform: uppercase;font-weight: bold;font-size: 23px;display: none;"></div>
                 <div id="AirtimePanel">
                     <div class="input-group input-group-outline mb-3">

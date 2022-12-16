@@ -135,7 +135,11 @@
 
             <div class="card-body">
                 <div class="invoice-table">
-                    <h4 class="fw-bold"><b>Purchase History</b></h4>
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Purchase History</h6>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -174,8 +178,10 @@
     </div>
     <div class="col-xxl-6 col-xl-6 col-lg-6">
         <div id="user-activity" class="card" data-aos="fade-up">
-            <div class="card-header">
-                <h4 class="card-title">Virtual Account Detail</h4>
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Virtual Account Detail</h6>
+                </div>
             </div>
             <div class="card-body">
                 <div class="chartjs-size-monitor">

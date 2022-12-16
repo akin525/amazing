@@ -60,24 +60,24 @@
                                                 <input type="hidden" class="form-control"  name="id" value="{{$pro->id}}" required />
                                             </div>
                                         </div>
-{{--                                        <div class="col-md-6 col-12">--}}
-{{--                                            <div class="form-group">--}}
-{{--                                                <label>Actual Amount </label>--}}
-                                                <input type="hidden" name="amount" class="form-control" value="{{$pro->amount}}" readonly/>
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label>Actual Amount </label>
+                                                <input type="number" name="amount" class="form-control" value="{{$pro->amount}}" required/>
+                                            </div>
+                                        </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label>Selling Amount </label>
                                                 <input type="number" name="tamount" class="form-control" value="{{$pro->tamount}}" required/>
                                             </div>
                                         </div>
-{{--                                        <div class="col-md-6 col-12">--}}
-{{--                                            <div class="form-group">--}}
-{{--                                                <label>Reseller Amount </label>--}}
-                                                <input type="hidden" name="ramount" class="form-control" value="{{$pro->ramount}}" required/>
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label>Reseller Amount </label>
+                                                <input type="number" name="ramount" class="form-control" value="{{$pro->ramount}}" required/>
+                                            </div>
+                                        </div>
                                     </div>
                             </div>
 

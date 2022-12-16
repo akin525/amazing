@@ -1,264 +1,135 @@
 @include('admin.layouts.sidebar')
-<link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-@livewireStyles
-
-<!-- Scripts -->
-<script src="{{ mix('js/app.js') }}" defer></script>
-<div class="page-content">
-    <div class="container-fluid">
-
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Admin/All Deposit</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="{{route('admin/dashboard')}}">Dashboards</a></li>
-                            <li class="breadcrumb-item active">Admin/All Deposit</li>
-                        </ol>
+<div class="row">
+    <div class="row column1">
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet blue1_color"></i>
                     </div>
-
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ number_format($tt) ?? 'Total Transactions' }}</h5>
+                        <h6 class="head_couter">Total Transactions</h6>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- end page title -->
-        <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-muted mb-0">Total Transactions</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-success fs-14 mb-0">
-                                    <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ number_format($tt) ?? 'Total Transactions' }}</h4>
-                                <a href="#" class="text-decoration-underline">View All</a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-success rounded fs-3">
-                                                <i class="bx bxs-user-account text-success"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet yellow_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ number_format($ft) ?? 'Total Today' }}</h5>
+                        <h6 class="head_couter">Transactions Today</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ $st ?? 'Transactions Yesterday' }}</h5>
+                        <h6 class="head_couter">Transactions Yesterday</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-google-wallet yellow_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">{{ number_format($rt) ?? 'Total Reversed' }}</h5>
+                        <h6 class="head_couter">Transactions 2Days Ago</h6>
+                    </div>
+                </div>
+            </div>
+    </div>
 
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate bg-info">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-white-50 mb-0">Transactions Today</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-warning fs-14 mb-0">
-                                    <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-white">{{ number_format($ft) ?? 'Total Today' }}</h4>
-                                <a href="#" class="text-decoration-underline text-white-50">View all</a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-light rounded fs-3">
-                                                <i class="bx bxs-user-account text-white"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
+        </div>
+    </div>
 
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-muted mb-0">Transactions Yesterday</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-success fs-14 mb-0">
-                                    <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ $st ?? 'Transactions Yesterday' }}</h4>
-                                <a href="#" class="text-decoration-underline">See details</a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-warning rounded fs-3">
-                                                <i class="bx bxs-user-account text-warning"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
+<div class="row">
+    <div class="row column1">
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($amount) ?? 'Total Transactions' }}</h5>
+                        <h6 class="head_couter">Sum of Total Transaction </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money red_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($am) ?? 'Total Today' }}</h5>
+                        <h6 class="head_couter">Sum Of Today Transactions </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money blue1_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ $am1 ?? 'Transactions Yesterday' }}</h5>
+                        <h6 class="head_couter">Sum Of  Yesterday Transactions</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="full counter_section margin_bottom_30">
+                <div class="couter_icon">
+                    <div>
+                        <i class="fa fa-money red_color"></i>
+                    </div>
+                </div>
+                <div class="counter_no">
+                    <div>
+                        <h5 class="total_no text-center">₦{{ number_format($am2) ?? 'Total Reversed' }}</h5>
+                        <h6 class="head_couter">Sum Of Total Transactions 2Days Ago</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-muted mb-0">Transactions 2Days Ago</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-muted fs-14 mb-0">
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{ number_format($rt) ?? 'Total Reversed' }}</h4>
-                                <a href="#" class="text-decoration-underline">All</a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-primary rounded fs-3">
-                                                <i class="bx bxs-user-account text-primary"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-        </div> <!-- end row-->
-
-        <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-muted mb-0">Sum of Total Transaction </p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-success fs-14 mb-0">
-                                    <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">₦{{number_format(intval(($amount)  *1), 2)}}</h4>
-                                <a href="#" class="text-decoration-underline">View All</a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-success rounded fs-3">
-                                                <i class="bx bx-wallet text-success"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate bg-info">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-white-50 mb-0">Sum Of Today Transactions</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-warning fs-14 mb-0">
-                                    <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4 text-white">₦{{number_format(intval($am *1), 2)}}</h4>
-                                <a href="#" class="text-decoration-underline text-white-50">View all</a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-light rounded fs-3">
-                                                <i class="bx bx-wallet text-white"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-muted mb-0">Sum Of  Yesterday Transactions</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-success fs-14 mb-0">
-                                    <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">₦{{number_format(intval($am1 *1), 2)}}</h4>
-                                <a href="#" class="text-decoration-underline">See details</a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-warning rounded fs-3">
-                                                <i class="bx bx-wallet text-warning"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-
-            <div class="col-xl-3 col-md-6">
-                <!-- card -->
-                <div class="card card-animate">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">
-                                <p class="text-uppercase fw-medium text-muted mb-0">Sum Of Total Transactions 2Days Ago</p>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <h5 class="text-muted fs-14 mb-0">
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end justify-content-between mt-4">
-                            <div>
-                                <h4 class="fs-22 fw-semibold ff-secondary mb-4">₦{{number_format(intval($am2 *1), 2)}}</h4>
-                                <a href="#" class="text-decoration-underline">All </a>
-                            </div>
-                            <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-soft-primary rounded fs-3">
-                                                <i class="bx bx-wallet text-primary"></i>
-                                            </span>
-                            </div>
-                        </div>
-                    </div><!-- end card body -->
-                </div><!-- end card -->
-            </div><!-- end col -->
-        </div> <!-- end row-->
-
+    </div>
+</div>
 
 <div class="row">
     <div class="col-lg-12">
