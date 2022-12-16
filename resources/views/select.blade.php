@@ -46,7 +46,7 @@
         </nav>
 
         <!-- end page title -->
-<div class="row">
+<div class="row card card-body">
     <!--    <div class="card">-->
     <div class="card-body">
         <div class="module-head">

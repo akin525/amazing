@@ -52,7 +52,7 @@
 
     <form action="{{ route('buyairtime') }}" method="post" class="m-lg-4">
         @csrf
-        <div class="row">
+        <div class="row card card-body">
             <div class="col-sm-8">
                 <div id="AirtimeNote" class="alert alert-danger" style="text-transform: uppercase;font-weight: bold;font-size: 23px;display: none;"></div>
                 <div id="AirtimePanel">
