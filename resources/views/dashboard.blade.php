@@ -127,7 +127,25 @@
                 </div>
             </div>
         </div>
+
 <br>
+<br>
+        <br>
+{{--        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">--}}
+{{--            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">--}}
+{{--                <h6 class="text-white text-capitalize ps-3">Join Whatsapp Group!: kindly Join Our Whatsapp-group For any complain:
+ <button type="button" onclick="window.location.href='https://chat.whatsapp.com/GgBq2QWvj46Awh1JRNj2KK'" class="btn bg-gradient-info mt-4 w-100">Join now</button>--}}
+{{--                </h6>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+        <div class="alert alert-info alert-dismissible text-white" role="alert">
+            <span class="text-sm">Join Whatsapp Group!: <a href="javascript:;" class="alert-link text-white">kindly Join Our Whatsapp-group For any complain:  </a></span>
+            <button type="button" onclick="window.location.href='https://chat.whatsapp.com/GgBq2QWvj46Awh1JRNj2KK'" class="btn bg-gradient-primary mt-4 ">Join now</button>
+            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
 <br>
 <div class="row">
     <div class="col-xl-6 col-lg-6">

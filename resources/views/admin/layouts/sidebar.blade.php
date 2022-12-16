@@ -25,29 +25,29 @@
     <!-- site css -->
     <link rel="stylesheet" href="{{asset('style1.css')}}" />
     <!-- responsive css -->
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/css/responsive.css')}}" />
     <!-- color css -->
-    <link rel="stylesheet" href="{{asset('css/colors.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/css/colors.css')}}" />
     <!-- select bootstrap -->
-    <link rel="stylesheet" href="{{asset('css/bootstrap-select.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/css/bootstrap-select.css')}}" />
     <!-- scrollbar css -->
-    <link rel="stylesheet" href="{{asset('css/perfect-scrollbar.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/css/perfect-scrollbar.css')}}" />
     <!-- custom css -->
-    <link rel="stylesheet" href="{{asset('css/custom.css')}}" />
-    <link rel="stylesheet" href="{{asset('Buy Data _ MobileNig_files/w3(1).css')}}">
+    <link rel="stylesheet" href="{{asset('admin/css/custom.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/Buy Data _ MobileNig_files/w3(1).css')}}">
 
-    <link rel="stylesheet" href="{{asset('Buy Data _ MobileNig_files/w3(2).css')}}">
-    <link rel="stylesheet" href="{{asset('Buy Data _ MobileNig_files/font-awesome.min.css')}}">
-    <link href="{{asset('Buy Data _ MobileNig_files/icon')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('admin/Buy Data _ MobileNig_files/w3(2).css')}}">
+    <link rel="stylesheet" href="{{asset('admin/Buy Data _ MobileNig_files/font-awesome.min.css')}}">
+    <link href="{{asset('admin/Buy Data _ MobileNig_files/icon')}}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('hp/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('hp/main.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/hp/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/hp/main.css')}}" />
 </head>
 
 <body class="dashboard dashboard_1">
 <div id="loading-wrapper">
     <div class="spinner-border" style="color: #FF0066"></div>
-    PRIMEDATA ADMIN......
+   ADMIN......
 </div>
 <div class="full_container">
     <div class="inner_container">
@@ -72,11 +72,6 @@
                             <p><span class="online_animation"></span> Online</p>
                         </div>
                     </div>
-                    <form method="post" action="{{route('pic')}}" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="pic" required>
-                        <button type="submit" class="badge badge-success">Upload</button>
-                    </form>
                     <form method="POST" action="{{ route('logout') }}" x-data>
                         @csrf
                         <br>
@@ -105,9 +100,6 @@
                             <li class="nav-item">
                                 <a  class="nav-link" href="{{ route('admin/server') }}"  ><i class="fa fa-bomb white_color"></i> <span>Data Control</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ route('admin/product1') }}"  ><i class="fa fa-shopping-cart white_color"></i> <span>Honorworld Product</span></a>
-                            </li>
                             <li class="active">
                                 <a href="{{ route('admin/product') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>MCD Product</span></a>
                             </li>
@@ -117,33 +109,30 @@
                         <a href="#app6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-laptop"></i> <span>Others</span></a>
                         <ul class="collapse list-unstyled" id="app6">
                             <li class="nav-item">
-                                <a  class="nav-link" href="{{ route('admin/vertual') }}"  ><i class="fa fa-area-chart red_color"></i> <span>All-Vertual</span></a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin/refer') }}"  ><i class="fa fa-bar-chart white_color"></i> <span>All-Referal</span></a>
                             </li>
 
                         </ul>
                     </li>
-                    <li>
-                        <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-recycle"></i> <span>Query</span></a>
-                        <ul class="collapse list-unstyled" id="app">
-                            <li class="active">
-                                <a href="{{ route('admin/depositquery') }}"  ><i class="fa fa-calendar"></i> <span>Query Deposite</span></a>
-                            </li>
-                            <li class="active">
-                                <a href="{{ route('admin/billquery') }}"  ><i class="fa fa-calendar"></i> <span>Query Bills</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-object-group blue2_color"></i> <span>Report</span></a>
-                        <ul class="collapse list-unstyled" id="apps">
-                            <li><a href="{{url('admin/report_daily')}}"><i class="fa fa-book"></i><span>Daily Report</span></a></li>
-                            <li><a href="{{url('admin/report_monthly')}}"><i class="fa fa-book"></i><span>Monthly Report</span></a></li>
-                            <li><a href="{{url('admin/report_yearly')}}"><i class="fa fa-book"></i><span>Yearly Report</span></a></li>
-                        </ul>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-recycle"></i> <span>Query</span></a>--}}
+{{--                        <ul class="collapse list-unstyled" id="app">--}}
+{{--                            <li class="active">--}}
+{{--                                <a href="{{ route('admin/depositquery') }}"  ><i class="fa fa-calendar"></i> <span>Query Deposite</span></a>--}}
+{{--                            </li>--}}
+{{--                            <li class="active">--}}
+{{--                                <a href="{{ route('admin/billquery') }}"  ><i class="fa fa-calendar"></i> <span>Query Bills</span></a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-object-group blue2_color"></i> <span>Report</span></a>--}}
+{{--                        <ul class="collapse list-unstyled" id="apps">--}}
+{{--                            <li><a href="{{url('admin/report_daily')}}"><i class="fa fa-book"></i><span>Daily Report</span></a></li>--}}
+{{--                            <li><a href="{{url('admin/report_monthly')}}"><i class="fa fa-book"></i><span>Monthly Report</span></a></li>--}}
+{{--                            <li><a href="{{url('admin/report_yearly')}}"><i class="fa fa-book"></i><span>Yearly Report</span></a></li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
                     <li>
                         <a href="#app3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-database"></i> <span>Settings</span></a>
                         <ul class="collapse list-unstyled" id="app3">
@@ -166,10 +155,6 @@
                         <a href="#app5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-bar-chart"></i> <span>Transactions</span></a>
                         <ul class="collapse list-unstyled" id="app5">
 
-
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ route('admin/mcdtransaction') }}"  ><i class="fa fa-home white_color"></i> <span>Mcdtransaction</span></a>
-                            </li>
                             <li class="active">
                                 <a href="{{ route('admin/finddeposite') }}"  ><i class="fa fa-search red_color"></i> <span>Find Deposit</span></a>
                             </li>
@@ -198,9 +183,7 @@
 
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a  class="nav-link" href="{{ route('admin/webbook') }}"  ><i class="fa fa-bookmark white_color"></i> <span>Webbook</span></a>
-                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -255,30 +238,30 @@
 
 
             <!-- jQuery -->
-            <script src="{{asset('js/jquery.min.js')}}"></script>
-            <script src="{{asset('js/popper.min.js')}}"></script>
-            <script src="{{asset('js/bootstrap.min.js')}}"></script>
+            <script src="{{asset('admin/js/jquery.min.js')}}"></script>
+            <script src="{{asset('admin/js/popper.min.js')}}"></script>
+            <script src="{{asset('admin/js/bootstrap.min.js')}}"></script>
             <!-- wow animation -->
-            <script src="{{asset('js/animate.js')}}"></script>
+            <script src="{{asset('admin/js/animate.js')}}"></script>
             <!-- select country -->
-            <script src="{{asset('js/bootstrap-select.js')}}"></script>
+            <script src="{{asset('admin/js/bootstrap-select.js')}}"></script>
             <!-- owl carousel -->
-            <script src="{{asset('js/owl.carousel.js')}}"></script>
+            <script src="{{asset('admin/js/owl.carousel.js')}}"></script>
 
             <!-- nice scrollbar -->
-            <script src="{{asset('js/perfect-scrollbar.min.js')}}"></script>
+            <script src="{{asset('admin/js/perfect-scrollbar.min.js')}}"></script>
             <script>
                 var ps = new PerfectScrollbar('#sidebar');
             </script>
             <!-- custom js -->
-            <script src="{{asset('js/custom.js')}}"></script>
-            <script src="{{asset('js/chart_custom_style1.js')}}"></script>
+            <script src="{{asset('admin/js/custom.js')}}"></script>
+            <script src="{{asset('admin/js/chart_custom_style1.js')}}"></script>
 
-            <script src="{{asset('hp/jquery.min.js')}}"></script>
-            <script src="{{asset('hp/bootstrap.bundle.min.js')}}"></script>
-            <script src="{{asset('hp/modernizr.js')}}"></script>
-            <script src="{{asset('hp/moment.js')}}"></script>
-            <script src="{{asset('hp/main.js')}}"></script>
+            <script src="{{asset('admin/hp/jquery.min.js')}}"></script>
+            <script src="{{asset('admin/hp/bootstrap.bundle.min.js')}}"></script>
+            <script src="{{asset('admin/hp/modernizr.js')}}"></script>
+            <script src="{{asset('admin/hp/moment.js')}}"></script>
+            <script src="{{asset('admin/hp/main.js')}}"></script>
 
 
 
