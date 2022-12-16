@@ -15,11 +15,10 @@
                         <center>
                             <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
                             <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Credit User</a>
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="#">Withdraw MCD Wallet</a>
+                            <a class="w3-btn w3-green w3-border w3-round-large" href="#">Withdraw RENO Wallet</a>
 
                             <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Refund User</a>
                             <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/charge')}}">Charge User</a>
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="#">Withdraw MCD Commission</a>
 
                             <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
                         </center>
