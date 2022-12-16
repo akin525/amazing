@@ -83,6 +83,21 @@
                     <span class="nav-link-text ms-1">Pay Electricity</span>
                 </a>
             </li>
+                <li class="nav-item">
+                <a class="nav-link text-white " href="{{route('waec')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">bookmark</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Waec Epin</span>
+                </a>
+            </li><li class="nav-item">
+                <a class="nav-link text-white " href="{{route('neco')}}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">bookmark</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Neco Epin</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link text-white " href="{{route('profile.show')}}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -247,7 +262,7 @@
     }
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<a href="https://wa.me/2347036710638/?text=Goodday, My Username is {{\Illuminate\Support\Facades\Auth::user()->username}}" class="float" target="_blank">
+<a href="https://wa.me/2347065946772/?text=Goodday, My Username is {{\Illuminate\Support\Facades\Auth::user()->username}}" class="float" target="_blank">
     <i class="fa fa-whatsapp my-float"></i>
 </a>
 </body>
