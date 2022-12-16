@@ -201,7 +201,7 @@
                             <div>
                                 <h5 class="total_no text-center">₦{{number_format(intval($tran *1),2)}}</h5>
 
-                                <h6 class="head_couter">MCD Balance</h6>
+                                <h6 class="head_couter">RENO Balance</h6>
                             </div>
                         </div>
                     </div>
