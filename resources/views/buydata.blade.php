@@ -51,15 +51,6 @@
                 <h6 class="text-white text-capitalize ps-3">Product list</h6>
             </div>
         </div>
-        <!-- end page title -->
-<div class="row">
-    <!--    <div class="card">-->
-    <div class="card card-body">
-        <div class="module-head">
-            <center><h3>
-                    Buy Data</h3></center>
-        </div>
-        <center>
             <script>
                 function myNewFunction(sel) {
                     // alert(sel.options[sel.selectedIndex].id);
@@ -67,9 +58,14 @@
                     document.getElementById("pk").value = (sel.options[sel.selectedIndex].text);
                 }
             </script>
-            <div class="btn-controls mb-lg-7">
+
                 <form action="{{ route('bill') }}" method="post" class="m-lg-3">
                     @csrf
+                    <div class="row ">
+                        <div class="col-sm-8 card card-body">
+                            <div class="card card-body">
+                            <div id="AirtimeNote" class="alert alert-danger" style="text-transform: uppercase;font-weight: bold;font-size: 23px;display: none;"></div>
+                            <div id="AirtimePanel">
                     <label for="network" class=" requiredField">
                         Select Network from the Rectangular Box<span class="asteriskField">*</span>
                     </label>
@@ -109,16 +105,17 @@
                             })
                         })
                     </script>
+                            </div>
+                        </div>
+                        </div>
                 </form>
-        </center>
         <br>
 
 
-
+        <div class="col-sm-4 ">
         <p>You can use the codes below to check your Data Balance!  </p>
-
         <h6>
-            <ul>
+            <ul class="list-group">
                 <li class="list-group-item list-group-item-primary"> MTN [SME] *461*4# or *556#</li>
                 <li class="list-group-item list-group-item-success">MTN [CG] *131*4# or *460*260#</li>
                 <li class="list-group-item list-group-item-action">9mobile [Gifting] *228#</li>
@@ -126,9 +123,8 @@
                 <li class="list-group-item list-group-item-primary">Glo *127*0#</li>
             </ul>
         </h6>
-
+        </div>
         <br>
     </div>
-</div>
     </main>
 @endsection
