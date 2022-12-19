@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Emailtrans;
 use App\Models\bo;
+use App\Models\Comission;
 use App\Models\data;
 use App\Models\User;
 use App\Models\wallet;
@@ -21,8 +22,6 @@ class AirtimeController
         ]);
 
             $user = User::find($request->user()->id);
-//            $wallet = wallet::where('username', $user->username)->first();
-
 
             if ($user->wallet < $request->amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
@@ -46,14 +45,13 @@ class AirtimeController
             } else {
                 $user = User::find($request->user()->id);
                 $bt = data::where("id", $request->id)->first();
-//                $wallet = wallet::where('username', $user->username)->first();
-
-
                 $gt = $user->wallet - $request->amount;
 
 
                 $user->wallet = $gt;
                 $user->save();
+                $per=2/100;
+                $comission=$per*$request->amount;
 
                 $bo = bo::create([
                     'username' => $user->username,
@@ -65,7 +63,11 @@ class AirtimeController
                     'refid' => $request->refid,
                     'discountamoun' => 0,
                 ]);
-//return $request;
+
+                $comiS=Comission::create([
+                    'username'=>Auth::user()->username,
+                    'amount'=>$comission,
+                ]);
                 $resellerURL = 'https://renomobilemoney.com/api/';
                 $curl = curl_init();
 
@@ -89,39 +91,31 @@ class AirtimeController
                 $response = curl_exec($curl);
 
                 curl_close($curl);
-
-//                    return $response;
-//    return;
                 $data = json_decode($response, true);
                 $success = $data["success"];
-//                $tran1 = $data["discountAmount"];
-
-//                        return $response;
                 if ($success == 1) {
 
-
-
-
-//                    $name = $bt->plan;
                     $am = "NGN $request->amount  Airtime Purchase Was Successful To";
                     $ph = $request->number;
+                    $com=$user->wallet+$comission;
+                    $user->balance=$com;
+                    $user->save();
 
                     $receiver = $user->email;
                     $admin = 'info@amazingdata.com.ng';
 
                     Mail::to($receiver)->send(new Emailtrans($bo));
                     Mail::to($admin)->send(new Emailtrans($bo));
-//                    Mail::to($admin2)->send(new Emailtrans($bo));
+                    $parise=$comission."₦ Commission Is added to your wallet balance";
+                    $msg=$am.' ' .$ph.' & '.$parise;
 
-                    Alert::success('Success', $am.''.$ph);
+                    Alert::success('Success', $msg);
                     return back();
 
                 } elseif ($success == 0) {
                     $zo = $user->wallet + $request->amount;
                     $user->wallet = $zo;
                     $user->save();
-
-//                    $name = $bt->plan;
                     $am = "NGN $request->amount Was Refunded To Your Wallet";
                     $ph = ", Transaction fail";
                     Alert::error('error', $am.''.$ph);
