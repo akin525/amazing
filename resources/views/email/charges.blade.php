@@ -37,7 +37,7 @@
                                                         <td valign='top' align='center' style='padding:0;Margin:0;width:560px'>
                                                             <table width='100%' cellspacing='0' cellpadding='0' role='presentation' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                                 <tr>
-                                                                    <td style='padding:0;Margin:0;padding-top:10px;padding-bottom:10px;font-size:0px' align='center'><img src='https://amazingdata.com.ng/logoi.png.png' alt style='display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic' width='150'></td>
+                                                                    <td style='padding:0;Margin:0;padding-top:10px;padding-bottom:10px;font-size:0px' align='center'><img src='https://amazingdata.com.ng/ama.jpeg' alt style='display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic' width='150'></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align='center' style='padding:0;Margin:0;padding-bottom:10px'>Account Being Charge By Admin<br></td>
@@ -71,7 +71,7 @@
                                                 </table></td>
                                         </tr>
                                         <tr>
-                                            <td style='Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px;background-image:url(https://rszomp.stripocdn.email/content/guids/CABINET_c2a5428bd0934f3fbd34e54cb3601b70/images/32801632220122584.jpg);background-repeat:no-repeat;background-position:left top' background='https://amazingdata.com.ng/images/yel.png' align='left'>
+                                            <td style='Margin:0;padding-bottom:10px;padding-top:20px;padding-left:20px;padding-right:20px;background-image:url(https://rszomp.stripocdn.email/content/guids/CABINET_c2a5428bd0934f3fbd34e54cb3601b70/images/32801632220122584.jpg);background-repeat:no-repeat;background-position:left top' background='https://amazingdata.com.ng/ama.jpeg' align='left'>
                                                 <!--[if mso]><table style='width:560px' cellpadding='0' cellspacing='0'><tr><td style='width:280px' valign='top'><![endif]-->
                                                 <table class='es-left' cellspacing='0' cellpadding='0' align='left' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left'>
                                                     <tr>

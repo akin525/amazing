@@ -35,7 +35,7 @@
                                                         <td class='es-m-p0r' valign='top' align='center' style='padding:0;Margin:0;width:560px'>
                                                             <table width='100%' cellspacing='0' cellpadding='0' role='presentation' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                                 <tr>
-                                                                    <td style='padding:0;Margin:0;padding-bottom:20px;font-size:0px' align='center'><img  src='https://amazingdata.com.ng/logoi.png.png' alt='Logo' style='display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;font-size:12px' title='Logo' width='150' height='150'></td>
+                                                                    <td style='padding:0;Margin:0;padding-bottom:20px;font-size:0px' align='center'><img  src='https://amazingdata.com.ng/ama.jpeg' alt='Logo' style='display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;font-size:12px' title='Logo' width='150' height='150'></td>
                                                                 </tr>
                                                             </table></td>
                                                     </tr>

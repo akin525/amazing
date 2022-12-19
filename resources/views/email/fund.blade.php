@@ -156,7 +156,7 @@
                                                 <td align='center' valign='top' style='padding:0;Margin:0;width:560px'>
                                                     <table cellpadding='0' cellspacing='0' width='100%' role='presentation' style='mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px'>
                                                         <tr>
-                                                            <td align='center' style='padding:0;Margin:0;padding-top:10px;padding-bottom:10px;font-size:0px'><img src='https://amazingdata.com.ng/logoi.png.png' alt style='display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic' width='100'></td>
+                                                            <td align='center' style='padding:0;Margin:0;padding-top:10px;padding-bottom:10px;font-size:0px'><img src='https://amazingdata.com.ng/ama.jpeg' alt style='display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic' width='100'></td>
                                                         </tr>
                                                         <tr>
                                                             <td align='center' style='padding:0;Margin:0;padding-bottom:10px'><h4 style='Margin:0;line-height:46px;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:46px;font-style:normal;font-weight:bold;color:#405189;align-content: center'>Wallet Funded</h4></td>
