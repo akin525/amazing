@@ -98,7 +98,7 @@ class AirtimeController
                     $am = "NGN $request->amount  Airtime Purchase Was Successful To";
                     $ph = $request->number;
                     $com=$user->wallet+$comission;
-                    $user->balance=$com;
+                    $user->wallet=$com;
                     $user->save();
 
                     $receiver = $user->email;
