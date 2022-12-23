@@ -64,6 +64,10 @@ class CreateNewUser implements CreatesNewUsers
                 $number = $data["data"]["account_number"];
                 $bank = $data["data"]["bank_name"];
 
+            }elseif ($data['success']==0){
+                $account = "1";
+                $number = "1";
+
             }
 
             $receiver=$input ['email'];
