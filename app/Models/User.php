@@ -26,7 +26,14 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'phone',
+        'name',
+        'email',
+        'password',
+        'username',
+        'phone',
+        'account_number',
+        'account_name',
+
     ];
 
     /**
@@ -39,6 +46,8 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'account_number',
+        'account_name',
     ];
 
     /**

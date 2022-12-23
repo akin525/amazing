@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -35,6 +36,36 @@ class CreateNewUser implements CreatesNewUsers
 
         return DB::transaction(function () use ($input) {
 
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/virtual-account',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_SSL_VERIFYHOST => 0,
+                CURLOPT_SSL_VERIFYPEER => 0,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array('account_name' => $input['name'], 'business_short_name' => 'Amazing-Data', 'uniqueid' => $input['username'], 'email' => $input['email'], 'phone' => $input['number'], 'webhook_url' => 'https://amazingdata.com.ng/api/run',),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: mcd_key_75rq4][oyfu545eyuriup1q2yue4poxe3jfd'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            $data = json_decode($response, true);
+            if ($data['success']==1){
+                $account = $data["data"]["account_name"];
+                $number = $data["data"]["account_number"];
+                $bank = $data["data"]["bank_name"];
+
+            }
+
             $receiver=$input ['email'];
             $admin= 'info@amazingdata.com.ng';
             Mail::to($receiver)->send(new Emailotp($input));
@@ -44,6 +75,8 @@ class CreateNewUser implements CreatesNewUsers
                 'username'=>$input['username'],
                 'phone'=>$input['number'],
                 'email' => $input['email'],
+                'account_number'=>$number,
+                'account_name'=>$account,
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
                 $this->createTeam($user);
