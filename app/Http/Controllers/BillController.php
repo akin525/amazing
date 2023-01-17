@@ -7,6 +7,7 @@ use App\Models\bo;
 use App\Models\data;
 use App\Models\deposit;
 use App\Models\profit;
+use App\Models\easy;
 use App\Models\server;
 use App\Models\setting;
 use App\Models\wallet;
@@ -34,7 +35,10 @@ class BillController extends Controller
                 $product = big::where('id', $request->productid)->first();
             } elseif ($serve->name == 'mcd') {
                 $product = data::where('id', $request->productid)->first();
+            }elseif ($serve->name == 'easyaccess') {
+            $product = easy::where('id', $request->productid)->first();
             }
+
 //return $product;
             if ($user->apikey == '') {
                 $amount = $product->tamount;
@@ -84,12 +88,12 @@ class BillController extends Controller
                 $daterserver = new DataserverController();
                 $mcd = server::where('status', "1")->first();
 
-                if ($mcd->name == "honorworld") {
-                    $response = $daterserver->honourwordbill($object);
+                if ($mcd->name == "easyaccess") {
+                    $response = $daterserver->easyaccess($object);
 
                     $data = json_decode($response, true);
                     $success = "";
-                    if ($data['code'] == '200') {
+                    if ($data['success'] == 'true') {
                         $success = 1;
                         $ms = $data['message'];
 
@@ -128,11 +132,11 @@ class BillController extends Controller
                         Alert::success('Success', $am.' '.$ph);
                         return redirect(route('dashboard'));
 
-                    } elseif ($data['code'] == '300') {
+                    } elseif ($data['success'] == 'false') {
                         $success = 0;
-                        $zo = $wallet->balance + $request->amount;
-                        $wallet->balance = $zo;
-                        $wallet->save();
+                        $zo = $user->wallet + $request->amount;
+                        $user->wallet = $zo;
+                        $user->save();
 
                         $name = $product->plan;
                         $am = "NGN $request->amount Was Refunded To Your Wallet";

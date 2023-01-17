@@ -288,7 +288,7 @@ $login=$user->name;
 //            $wallet = wallet::where('username', $user->username)->first();
 
             return view('airtime', compact('user', 'data'));
-        } elseif ($se == 'Honor'){
+        } elseif ($se == 'easyaccess'){
             return view('airtime1');
 
         }else {

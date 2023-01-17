@@ -143,6 +143,7 @@ foreach ($plan as $pla) {
 
 
                 if ($user->wallet < $tv->tamount) {
+                    
                     $mg = "You Cant Make Purchase Above" . "NGN" . $tv->tamount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
                     Alert::error('Error', $mg);
                     return redirect('dashboard');
@@ -191,9 +192,9 @@ foreach ($plan as $pla) {
                     curl_close($curl);
 //                    echo $response;
                     $data = json_decode($response, true);
-                    $success = $data["success"];
+//                    $success = $data["success"];
 
-//                        return $response;
+                        return $response;
                     if ($success == 1) {
 
                         $bo = bo::create([
@@ -218,7 +219,7 @@ foreach ($plan as $pla) {
                         Mail::to($receiver)->send(new Emailtrans($bo));
                         Mail::to($admin)->send(new Emailtrans($bo));
                         $mg= $am." ".$ph;
-Alert::success('Success', $mg);
+                        Alert::success('Success', $mg);
                         return redirect('dashboard');
 
 
