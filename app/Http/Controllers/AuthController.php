@@ -227,7 +227,7 @@ $login=$user->name;
 
 
             return view('buydata', compact('user', 'data'));
-        } elseif ($serve->name == 'honorworld') {
+        } elseif ($serve->name == 'easyaccess') {
             $user = User::find($request->user()->id);
             $data= big::where('status', '1')->where('network', $request->id)->get();
 //return $data;
@@ -250,7 +250,7 @@ $login=$user->name;
 
 //return $data;
             return view('redata', compact('user', 'data'));
-        } elseif ($serve->name == 'honorworld') {
+        } elseif ($serve->name == 'easyaccess') {
             $user = User::find($request->user()->id);
             $data= big::where('status', '1')->where('network', $request->id)->get();
 //return $data;
