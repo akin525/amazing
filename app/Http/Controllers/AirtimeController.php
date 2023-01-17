@@ -184,7 +184,7 @@ Alert::error('Insufficient Balance', $mg);
                     'client_reference' => $request->refid, //update this on your script to receive webhook notifications
                 ),
                 CURLOPT_HTTPHEADER => array(
-                    "AuthorizationToken: 904cc8b30fb06707862323030783481b", //replace this with your authorization_token
+                    "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
                     "cache-control: no-cache"
                 ),
             ));
