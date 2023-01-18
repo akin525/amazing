@@ -161,29 +161,9 @@ class VertualController
 
     public function honor(Request $request)
     {
-//        dd($request->all());
-//        $webook=webook::create([
-//            'code'=>$request,
-//            'message'=>$request,
-//        ]);
-
-       $json = json_decode(file_get_contents("php://input"), true) ;
-//            print_r($json['ref']);
-//    print_r($json['accountDetails']['accountName']);
-//        return $request;
-//        $data = json_decode($request, true);
-
-        $data = $json;
-//        return $data;
-
-
-
-        $code=$data['code'];
-        $message=$data['message'];
-
-        $webook=webook::create([
-            'code'=>$code,
-            'message'=>$message,
+        $web = web::create([
+            'webbook' => $request
         ]);
+
     }
 }
