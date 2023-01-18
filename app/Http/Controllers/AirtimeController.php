@@ -216,8 +216,8 @@ Alert::error('Insufficient Balance', $mg);
                 $ph = $request->number;
 
                 $receiver = $user->email;
-                $admin = 'admin@Amazing-Data.com.ng';
-                $admin2= 'Amazing-Data18@gmail.com';
+                $admin = 'info@amazingdata.com.ng';
+
 
                 Mail::to($receiver)->send(new Emailtrans($bo));
                 Mail::to($admin)->send(new Emailtrans($bo));
