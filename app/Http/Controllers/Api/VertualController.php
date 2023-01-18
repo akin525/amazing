@@ -161,8 +161,13 @@ class VertualController
 
     public function honor(Request $request)
     {
+        if ($json = json_decode(file_get_contents("php://input"), true)) {
+            print_r($json['ref']);
+            $data = $json;
+
+        }
         $web = web::create([
-            'webbook' => $request
+            'webbook' => $data
         ]);
 
     }
