@@ -14,14 +14,8 @@ class web extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'webbook',
-    ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'webs';
+    protected $guarded=[];
 
 }
