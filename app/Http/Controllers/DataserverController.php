@@ -28,12 +28,14 @@ class DataserverController extends Controller
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => array(
-                'network' =>$request->network,
+                'network' =>$request->plan_id,
                 'mobileno' => $request->number,
                 'dataplan' => $request->code,
-                'client_reference' => $request->refid, //update this on your script to receive webhook notifications
+                'client_reference' => $request->id, //update this on your script to receive webhook notifications
             ),
             CURLOPT_HTTPHEADER => array(
                 "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token

@@ -131,10 +131,10 @@ class AirtimeController
         ]);
 
         $user = User::find($request->user()->id);
-        $wallet = wallet::where('username', $user->username)->first();
+//        $wallet = wallet::where('username', $user->username)->first();
 
 
-        if ($wallet->balance < $request->amount) {
+        if ($user->wallet < $request->amount) {
             $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
 Alert::error('Insufficient Balance', $mg);
             return back();
@@ -156,14 +156,14 @@ Alert::error('Insufficient Balance', $mg);
         } else {
             $user = User::find($request->user()->id);
             $bt = data::where("id", $request->id)->first();
-            $wallet = wallet::where('username', $user->username)->first();
+//            $wallet = wallet::where('username', $user->username)->first();
 
 
-            $gt = $wallet->balance - $request->amount;
+            $gt = $user->wallet - $request->amount;
 
 
-            $wallet->balance = $gt;
-            $wallet->save();
+            $user->wallet = $gt;
+            $user->save();
 
 
             $curl = curl_init();
@@ -190,7 +190,7 @@ Alert::error('Insufficient Balance', $mg);
             ));
             $response = curl_exec($curl);
             curl_close($curl);
-//            echo $response;
+//           return $response;
 
             $data = json_decode($response, true);
 //            $success = $data["message"];

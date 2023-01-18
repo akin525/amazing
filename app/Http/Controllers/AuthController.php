@@ -7,6 +7,7 @@ use App\Models\airtimecon;
 use App\Models\big;
 use App\Models\charp;
 use App\Mail\Emailpass;
+use App\Models\easy;
 use App\Models\Messages;
 use App\Models\refer;
 use App\Models\server;
@@ -229,7 +230,7 @@ $login=$user->name;
             return view('buydata', compact('user', 'data'));
         } elseif ($serve->name == 'easyaccess') {
             $user = User::find($request->user()->id);
-            $data= big::where('status', '1')->where('network', $request->id)->get();
+            $data= easy::where('status', '1')->where('network', $request->id)->get();
 //return $data;
             return view('buydata', compact('user', 'data'));
 
@@ -252,7 +253,7 @@ $login=$user->name;
             return view('redata', compact('user', 'data'));
         } elseif ($serve->name == 'easyaccess') {
             $user = User::find($request->user()->id);
-            $data= big::where('status', '1')->where('network', $request->id)->get();
+            $data= easy::where('status', '1')->where('network', $request->id)->get();
 //return $data;
             return view('redata', compact('user', 'data'));
 

@@ -84,14 +84,15 @@ class BillController extends Controller
                 $object->number = $request->number;
                 $object->id = $request->id;
                 $json = json_encode($object);
-
+//return $object;
                 $daterserver = new DataserverController();
                 $mcd = server::where('status', "1")->first();
-
+//return $mcd;
                 if ($mcd->name == "easyaccess") {
                     $response = $daterserver->easyaccess($object);
 
                     $data = json_decode($response, true);
+//                    return $response;
                     $success = "";
                     if ($data['success'] == 'true') {
                         $success = 1;

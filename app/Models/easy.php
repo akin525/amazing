@@ -17,18 +17,9 @@ class easy extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'id',
-        'plan_id',
-        'code',
-        'network',
-        'plan',
-        'amount',
-        'tamount',
-        'ramount',
-        'status',
-        'cat_id',
-    ];
+    use HasFactory;
 
+    protected $table = 'easies';
+    protected $guarded=[];
 
 }
