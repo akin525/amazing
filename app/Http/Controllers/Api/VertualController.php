@@ -164,9 +164,10 @@ class VertualController
         $json = json_decode(file_get_contents("php://input"), true) ;
 
         $data = $json;
+        $message=$data["message"];
 
         $web = web::create([
-            'webbook' => $data,
+            'webbook' => $message
         ]);
 
     }
