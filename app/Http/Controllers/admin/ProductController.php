@@ -105,6 +105,7 @@ public function edit(Request $request)
     }
 
 
+
 public function air()
 {
     $air=DB::table('airtimecons')->get();

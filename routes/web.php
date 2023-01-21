@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\Easy;
 use App\Http\Controllers\admin\HonorApi;
 use App\Http\Controllers\admin\CandCController;
 use App\Http\Controllers\admin\McdController;
@@ -127,6 +128,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin/update', [VertualAController::class, 'updateuser'])->name('admin/update');
     Route::post('admin/pass', [VertualAController::class, 'pass'])->name('admin/pass');
     Route::get('admin/credit', [CandCController::class, 'cr'])->name('admin/credit');
+    Route::get('admin/webbook', [Easy::class, 'webook'])->name('admin/webbook');
     Route::post('admin/cr', [CandCController::class, 'credit'])->name('admin/cr');
     Route::post('admin/ch', [CandCController::class, 'charge'])->name('admin/ch');
     Route::post('admin/finduser', [UsersController::class, 'finduser'])->name('admin/finduser');

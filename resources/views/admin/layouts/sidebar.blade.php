@@ -85,6 +85,9 @@
                     <li class="active">
                         <a href="{{ route('dashboard') }}"  ><i class="fa fa-amazon white_color"></i> <span>Back To User Account</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/webbook') }}"  ><i class="fa fa-bookmark white_color"></i> <span>Webbook</span></a>
+                    </li>
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/dashboard') }}"  ><i class="fa fa-dashboard red_color"></i> <span>Dashboard</span></a>
                     </li>
