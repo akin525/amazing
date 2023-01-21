@@ -14,6 +14,10 @@ class Easy extends Controller
         return view('admin/look', compact('web'));
     }
 
+    public function easybalance()
+    {
+
+    }
 
 
 }

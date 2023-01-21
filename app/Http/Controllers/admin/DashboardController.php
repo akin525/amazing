@@ -95,7 +95,32 @@ public function dashboard(Request $request)
         $data['sum_deposits'] = deposit::where([['created_at', 'LIKE', '%' . $today . '%']])->sum('amount');
         $data['sum_bill'] = bo::where([['created_at', 'LIKE', '%' . $today . '%']])->sum('amount');
 
-        return view('admin/dashboard', compact('user',  'data', 'lock', 'totalcharge', 'pa',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count'));
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://easyaccess.com.ng/api/wallet_balance.php",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+//        return $response;
+        $data1 = json_decode($response, true);
+
+
+        if ($data1['success']=='true'){
+            $easy=$data1['balance'];
+        }
+        return view('admin/dashboard', compact('user',  'data', 'lock', 'totalcharge', 'pa',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count', 'easy'));
 
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');
