@@ -10,7 +10,7 @@ class Easy extends Controller
 {
     public function webook()
     {
-        $web=web::all();
+        $web=web::orderBy('id', 'desc')->get();
         return view('admin/look', compact('web'));
     }
 
