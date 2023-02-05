@@ -17,6 +17,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class EducationController
 {
+
 public function indexw()
 {
     $waec=data::where('network', 'WAEC')->first();
@@ -94,49 +95,46 @@ $request->validate([
         ]);
         $resellerURL = 'https://app2.mcd.5starcompany.com.ng/api/reseller/';
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://renomobilemoney.com/api/waec',
+            CURLOPT_URL => "https://easyaccess.com.ng/api/waec_v2.php",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
+            CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('value' => $request->value,'amount' => $request->amount,'refid' => $request->id),
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'no_of_pins' =>$request->value,
+            ),
             CURLOPT_HTTPHEADER => array(
-                'apikey: RENO-63939122379b03.42488714'
+                "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                "cache-control: no-cache"
             ),
         ));
-
         $response = curl_exec($curl);
-
         curl_close($curl);
+//        echo $response;
         $data = json_decode($response, true);
 //        return $data;
 
-        $success = $data['ok']["success"];
-//return $success;
-        if ($success==1) {
-            $ref=$data['ok']['ref'];
-            $token=$data['ok']['token'];
-            $token1=json_decode($token, true);
+        if ($data['success']=="true") {
+            $ref=$data['reference_no'];
+            $token=$data['pin'];
 //return $token1;
-            foreach ($token1 as $to){
 
                 $insert=waec::create([
                     'username'=>$user->username,
-                    'seria'=>$to['serial_number'],
-                    'pin'=>$to['pin'],
+                    'seria'=>'serial_number',
+                    'pin'=>$token,
                     'ref'=>$ref,
                 ]);
-            }
+
             $mg='Waec Checker Successful Generated, kindly check your pin';
             Alert::success('Successful',$mg );
             return redirect('waec')->with('success', $mg);
 
-        }elseif($success==0){
+        }elseif($data['success']=="false"){
 
             Alert::error('Fail', $response);
             return redirect('waec')->with('error', $response);
@@ -205,50 +203,43 @@ public function neco(Request $request)
             'refid' => $request->id,
             'discountamoun'=>0,
         ]);
-        $resellerURL = 'https://app2.mcd.5starcompany.com.ng/api/reseller/';
+
+
         $curl = curl_init();
-
-
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://renomobilemoney.com/api/neco',
+            CURLOPT_URL => "https://easyaccess.com.ng/api/neco_v2.php",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
+            CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('value' => $request->value,'amount' => $request->amount,'refid' => $request->id),
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'no_of_pins' =>$request->value,
+            ),
             CURLOPT_HTTPHEADER => array(
-                'apikey: RENO-63939122379b03.42488714'
+                "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                "cache-control: no-cache"
             ),
         ));
-
         $response = curl_exec($curl);
-
         curl_close($curl);
-                return $response;
         $data = json_decode($response, true);
-//        $success = $data['ok']['success'];
-//return $success;
-        if ($success==1) {
-            $ref=$data['ok']['ref'];
-            $token=$data['ok']['token'];
-            $token1=json_decode($token, true);
-//return $token1;
-            foreach ($token1 as $to){
-
+        if ($data['success']=="true") {
+            $ref=$data['reference_no'];
+            $token=$data['pin'];
                 $insert=neco::create([
                     'username'=>$user->username,
-                    'pin'=>$to['pin'],
+                    'pin'=>$token,
                     'ref'=>$ref,
                 ]);
-            }
+
             $mg='Waec Checker Successful Generated, kindly check your pin';
             Alert::success('Successful',$mg );
             return redirect('neco')->with('success', $mg);
 
-        }elseif($success==0){
+        }elseif($data['success']=="false"){
 
             Alert::error('Fail', $response);
             return redirect('neco')->with('error', $response);
@@ -256,5 +247,6 @@ public function neco(Request $request)
         return $response;
     }
 }
+
 }
 
