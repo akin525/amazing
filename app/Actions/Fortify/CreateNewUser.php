@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Mail\Emailotp;
+use App\Models\refer;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -35,8 +36,16 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         return DB::transaction(function () use ($input) {
+            if ($input['refer'] != "1") {
+                $refe = refer::create([
+                    'username' => $input['refer'],
+                    'newuserid' => $input['username'],
+                    'amount' => 100,
+                ]);
+            }
 
-            $curl = curl_init();
+
+                $curl = curl_init();
 
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/virtual-account',

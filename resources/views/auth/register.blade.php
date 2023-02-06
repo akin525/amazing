@@ -79,8 +79,18 @@
                             </div>
                             <div class="input-group input-group-outline mb-3">
                                 <label class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control" required>
+                                <input type="text" name="username" class="form-control" required/>
                             </div>
+                            @if(isset($request->refer))
+                                <div class="input-group input-group-outline mb-3">
+{{--                                    <label class="form-label">Refer</label>--}}
+                                    <input type="text" name="refer" value="{{$request->refer}}" class="form-control" readonly/>
+                                </div>
+                            @else
+                                <div class="field">
+                                    <input id="username" class="block mt-1 w-full" type="hidden" name="refer" value="1" required autofocus autocomplete="username" readonly/>
+                                </div>
+                            @endif
                             <div class="input-group input-group-outline mb-3">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="email" class="form-control">

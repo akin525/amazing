@@ -55,6 +55,75 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    <div class="card">
+        <div class="card-body">
+            <h6>Your Referal Link</h6>
+            <!-- The text field -->
+            <input id="myInput" type="text" class="form-control" value="https://amazingdata.com.ng/register?refer={{$user->username}}" >
+
+            <!-- The button used to copy the text -->
+            <button class="btn btn-info" onclick="myFunction()">Copy Referral Link</button>
+        </div>
+    </div>
+
+
+    <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    </style>
+
+    <script>
+        function myFunction() {
+            /* Get the text field */
+            var copyText = document.getElementById("myInput");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            /* Alert the copied text */
+            alert( copyText.value);
+        }
+    </script>
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -129,16 +198,7 @@
         </div>
 
 <br>
-<br>
-        <br>
-{{--        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">--}}
-{{--            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">--}}
-{{--                <h6 class="text-white text-capitalize ps-3">Join Whatsapp Group!: kindly Join Our Whatsapp-group For any complain:
- <button type="button" onclick="window.location.href='https://chat.whatsapp.com/GgBq2QWvj46Awh1JRNj2KK'" class="btn bg-gradient-info mt-4 w-100">Join now</button>--}}
-{{--                </h6>--}}
-{{--            </div>--}}
 
-{{--        </div>--}}
         <div class="alert alert-info alert-dismissible text-white" role="alert">
             <span class="text-sm">Join Whatsapp Group!: <a href="javascript:;" class="alert-link text-white">kindly Join Our Whatsapp-group For any complain:  </a></span>
             <button type="button" onclick="window.location.href='https://chat.whatsapp.com/GgBq2QWvj46Awh1JRNj2KK'" class="btn bg-gradient-primary mt-4 ">Join now</button>
