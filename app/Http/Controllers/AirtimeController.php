@@ -91,6 +91,8 @@ class AirtimeController
                 $response = curl_exec($curl);
 
                 curl_close($curl);
+
+                return $response;
                 $data = json_decode($response, true);
                 $success = $data["success"];
                 if ($success == 1) {
@@ -104,8 +106,8 @@ class AirtimeController
                     $receiver = $user->email;
                     $admin = 'info@amazingdata.com.ng';
 
-                    Mail::to($receiver)->send(new Emailtrans($bo));
-                    Mail::to($admin)->send(new Emailtrans($bo));
+//                    Mail::to($receiver)->send(new Emailtrans($bo));
+//                    Mail::to($admin)->send(new Emailtrans($bo));
                     $parise=$comission."₦ Commission Is added to your wallet balance";
                     $msg=$am.' ' .$ph.' & '.$parise;
 
@@ -190,7 +192,7 @@ Alert::error('Insufficient Balance', $mg);
             ));
             $response = curl_exec($curl);
             curl_close($curl);
-//           return $response;
+           return $response;
 
             $data = json_decode($response, true);
 //            $success = $data["message"];
@@ -219,8 +221,8 @@ Alert::error('Insufficient Balance', $mg);
                 $admin = 'info@amazingdata.com.ng';
 
 
-                Mail::to($receiver)->send(new Emailtrans($bo));
-                Mail::to($admin)->send(new Emailtrans($bo));
+//                Mail::to($receiver)->send(new Emailtrans($bo));
+//                Mail::to($admin)->send(new Emailtrans($bo));
 //                Mail::to($admin2)->send(new Emailtrans($bo));
 //
                 Alert::success('Success', $am.' '.$ph);

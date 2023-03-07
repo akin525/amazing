@@ -81,8 +81,8 @@ class CreateNewUser implements CreatesNewUsers
 
             $receiver=$input ['email'];
             $admin= 'info@amazingdata.com.ng';
-            Mail::to($receiver)->send(new Emailotp($input));
-            Mail::to($admin)->send(new Emailotp($input));
+//            Mail::to($receiver)->send(new Emailotp($input));
+//            Mail::to($admin)->send(new Emailotp($input));
             return tap(User::create([
                 'name' => $input['name'],
                 'username'=>$input['username'],
