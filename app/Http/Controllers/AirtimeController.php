@@ -92,7 +92,7 @@ class AirtimeController
 
                 curl_close($curl);
 
-                return $response;
+//                return $response;
                 $data = json_decode($response, true);
                 $success = $data["success"];
                 if ($success == 1) {
@@ -192,7 +192,7 @@ Alert::error('Insufficient Balance', $mg);
             ));
             $response = curl_exec($curl);
             curl_close($curl);
-           return $response;
+//           return $response;
 
             $data = json_decode($response, true);
 //            $success = $data["message"];
