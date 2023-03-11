@@ -115,13 +115,13 @@ class VertualController
                 $admin= 'info@amazingdata.com.ng';
 
                 $receiver= $user->email;
-                Mail::to($receiver)->send(new Emailcharges($charp ));
-                Mail::to($admin)->send(new Emailcharges($charp ));
-
-
-                $receiver = $user->email;
-                Mail::to($receiver)->send(new Emailfund($deposit));
-                Mail::to($admin)->send(new Emailfund($deposit));
+//                Mail::to($receiver)->send(new Emailcharges($charp ));
+//                Mail::to($admin)->send(new Emailcharges($charp ));
+//
+//
+//                $receiver = $user->email;
+//                Mail::to($receiver)->send(new Emailfund($deposit));
+//                Mail::to($admin)->send(new Emailfund($deposit));
 
 
                 $resellerURL = 'https://renomobilemoney.com/api/';
