@@ -58,7 +58,7 @@ class DatapinController extends Controller
             $user = User::find($request->user()->id);
 
 
-            $gt = $user->wallet - $request->amount;
+            $gt = $user->wallet - $product->tamount;
 
 
             $user->wallet = $gt;
