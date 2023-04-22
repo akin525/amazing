@@ -97,6 +97,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
     Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
     Route::view('recharge', 'recharge');
+    Route::get('datapin', [\App\Http\Controllers\DatapinController::class, 'pinindex'])->name('datapin');
+    Route::post('datapon', [\App\Http\Controllers\DatapinController::class, 'processdatapin'])->name('datapon');
 });
 
 Route::get('/logout', function(){

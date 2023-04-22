@@ -50,6 +50,38 @@ class DataserverController extends Controller
 
             }
 
+    public function Ridamsub($request)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://ridamsub.com/api/data/",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS =>'{"network":"network_id",
+"mobile_number": "09095263835",
+"plan": "plan_id",
+"Ported_number":"true"
+}',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Token d281eaad090e83b849e2ec3cc1b1466dc639ca81',
+                'Content-Type: application/json'
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+//        echo $response;
+
+                    return $response;
+
+            }
+
     public function mcdbill( $request)
     {
 
