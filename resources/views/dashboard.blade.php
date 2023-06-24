@@ -219,19 +219,19 @@
                     <center>
                     <div class="col-md-8">
                         <div class="card bg-gradient-dark" >
-                            <a href="{{route('select')}}"><div class="card-body">
+                            <div class="card-body">
                                 <div class="d-flex justify-content-between">
-                                    <div class="sales-bx">
+                                    <a href="{{route('select')}}"><div class="sales-bx">
                                         <i class="fa fa-network-wired text-white" style="font-size: 40px;"></i>
                                         <h4>Buy Data</h4>
                                     </div>
+                                    </a>
                                     <div class="sales-bx" data-bs-toggle="modal" data-bs-target="#airtimeModalCenter">
                                         <i class="fa fa-phone text-white" style="font-size: 40px"></i>
                                         <h4>Airtime</h4>
                                     </div>
                                 </div>
                             </div>
-                            </a>
                         </div>
                     </div>
                     </center>
