@@ -64,11 +64,11 @@ class DataserverController extends Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS =>'{"network":"network_id",
-"mobile_number": "09095263835",
-"plan": "plan_id",
-"Ported_number":"true"
-}',
+            CURLOPT_POSTFIELDS =>'{"network":'+$request->network+',
+                                   "mobile_number": '+$request->number+',
+                                   "plan": '+$request->plan_id+',
+                                   "Ported_number":"true"
+                                    }',
             CURLOPT_HTTPHEADER => array(
                 'Authorization: Token d281eaad090e83b849e2ec3cc1b1466dc639ca81',
                 'Content-Type: application/json'

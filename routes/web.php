@@ -16,6 +16,7 @@ use App\Http\Controllers\AirtimeController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EkectController;
 use App\Http\Controllers\listdata;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RefersController;
 use App\Http\Controllers\RenoController;
 use App\Http\Controllers\ResellerController;
@@ -85,6 +86,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
     Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
     Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
+
+    Route::get('getOptions/{selectedValue}', [AuthController::class, 'netwplanrequest'])->name('getOptions');
+    Route::get('viewpdf/{id}', [PdfController::class, 'viewpdf'])->name('viewpdf');
+    Route::get('/dopdf/{id}', [PdfController::class, 'dopdf'])->name('dopdf');
+
+
 //Route::get('airtime1', [AuthController::class, 'airtime'])->name('airtime1');
     Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
     Route::post('buydata', [AuthController::class, 'buydata'])->name('buydata');

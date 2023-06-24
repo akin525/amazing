@@ -640,6 +640,7 @@ class ComposerStaticInite14b43af0803a45a82d036d1650fad34
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\BillController' => __DIR__ . '/../..' . '/app/Http/Controllers/BillController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DatapinController' => __DIR__ . '/../..' . '/app/Http/Controllers/DatapinController.php',
         'App\\Http\\Controllers\\DataserverController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataserverController.php',
         'App\\Http\\Controllers\\EducationController' => __DIR__ . '/../..' . '/app/Http/Controllers/EducationController.php',
         'App\\Http\\Controllers\\RefersController' => __DIR__ . '/../..' . '/app/Http/Controllers/RefersController.php',

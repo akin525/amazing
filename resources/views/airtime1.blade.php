@@ -3,6 +3,9 @@
 
 @section('content')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <div class="loading-overlay" id="loadingSpinner" style="display: none;">
+            <div class="loading-spinner"></div>
+        </div>
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
             <div class="container-fluid py-1 px-3">
@@ -51,20 +54,19 @@
         <br>
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Airtime Purchase</h6>
+                <h6 class="text-info text-capitalize ps-3">Airtime Purchase</h6>
             </div>
         </div>
 
-        <form action="{{ route('buyairtime1') }}" method="post" class="m-lg-4">
+        <form id="dataForm"  class="m-lg-4">
             @csrf
             <div class="row">
                 <div class="col-sm-8 card card-body">
                     <div id="AirtimeNote" class="alert alert-danger" style="text-transform: uppercase;font-weight: bold;font-size: 23px;display: none;"></div>
                     <div id="AirtimePanel">
                         <div class="input-group input-group-outline mb-3">
-                            <label class="form-label">Network</label>
                             <select name="name" class="text-success form-control" required="">
-                                <option></option>
+                                <option>Select your network</option>
                                 <option value="01">MTN</option>
                                 <option value="02">GLO</option>
                                 <option value="03">AIRTEL</option>
@@ -73,36 +75,38 @@
                         </div>
                         <div class="input-group input-group-outline mb-3">
                             <label class="form-label">Amount</label>
-                            <input type="number" name="amount" min="100" max="4000" class="form-control" required>
+                            <input type="number" id="amount" name="amount" min="100" max="4000" class="form-control" required>
                         </div>
                         <div class="input-group input-group-outline mb-3">
                             <label class="form-label">Phone Number</label>
-                            <input type="number" name="number" minlength="11" class="form-control" required>
+                            <input type="number" id="number" name="number" minlength="11" class="form-control" required>
                         </div>
                         <input type="hidden" name="refid" value="<?php echo rand(10000000, 999999999); ?>">
                         <br>
-                        <button type="submit" class=" btn" style="color: white;background-color: #28a745" id="btnsubmit"> Purchase Now<span class="load loading"></span></button>
-                        <script>
-                            const btns = document.querySelectorAll('button');
-                            btns.forEach((items)=>{
-                                items.addEventListener('click',(evt)=>{
-                                    evt.target.classList.add('activeLoading');
-                                })
-                            })
-                        </script>
+                        <button type="submit" class=" btn" style="color: white;background-color: #28a745" id="btnsubmit"> Purchase No</button>
                     </div>
                 </div>
                 <div class="col-sm-4 ">
                     <br>
-                    <center> <h6>Codes for Airtime Balance: </h6></center>
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-primary">MTN Airtime VTU    <span id="RightT"> *556#  </span></li>
+                    <div class="">
+                        <div class="card bg-gradient-success" >
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="sales-bx">
+                                        <i class="fa fa-wallet text-white" style="font-size: 30px;"></i>
+                                        <h4>Balance</h4>
+                                        <span>₦{{number_format(intval(Auth::user()->wallet *1), 2)}}</span>
+                                    </div>
+                                    <div class="sales-bx" data-bs-toggle="modal" data-bs-target="#airtimeModalCenter">
+                                        <i class="fa fa-wallet text-white" style="font-size: 30px"></i>
+                                        <h4>Deposit</h4>
+                                        <span>₦{{number_format(intval($totaldeposite *1), 2)}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <li class="list-group-item list-group-item-success"> 9mobile Airtime VTU   *232# </li>
-                        <li class="list-group-item list-group-item-action"> Airtel Airtime VTU   *123# </li>
-                        <li class="list-group-item list-group-item-info"> Glo Airtime VTU #124#. </li>
-                    </ul>
-                    <br>
 
                 </div>
             </div>
@@ -110,4 +114,80 @@
 
     </main>
 
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+
+
+            // Send the AJAX request
+            $('#dataForm').submit(function(e) {
+                e.preventDefault(); // Prevent the form from submitting traditionally
+
+                // Get the form data
+                var formData = $(this).serialize();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you want to buy airtime of ₦' + document.getElementById("amount").value + ' on ' + document.getElementById("number").value +' ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // The user clicked "Yes", proceed with the action
+                        // Add your jQuery code here
+                        // For example, perform an AJAX request or update the page content
+                        $('#loadingSpinner').show();
+
+                        $.ajax({
+                            url: "{{ route('buyairtime1') }}",
+                            type: 'POST',
+                            data: formData,
+                            success: function(response) {
+                                // Handle the success response here
+                                $('#loadingSpinner').hide();
+
+                                console.log(response);
+                                // Update the page or perform any other actions based on the response
+
+                                if (response.status == 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text: response.message
+                                    }).then(() => {
+                                        // location.reload(); // Reload the page
+                                        window.location.href = "{{ url('viewpdf') }}/" + response.id;                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'info',
+                                        title: 'Pending',
+                                        text: response.message
+                                    });
+                                    // Handle any other response status
+                                }
+
+                            },
+                            error: function(xhr) {
+                                $('#loadingSpinner').hide();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'fail',
+                                    text: xhr.responseText
+                                });
+                                // Handle any errors
+                                console.log(xhr.responseText);
+
+                            }
+                        });
+
+                    }
+                });
+            });
+        });
+
+    </script>
 @endsection

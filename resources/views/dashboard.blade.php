@@ -1,9 +1,5 @@
 @extends('layouts.sidebar')
-
-
 @section('content')
-
-
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
@@ -147,12 +143,12 @@
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-header p-3 pt-2">
-                        <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                        <div class="icon icon-lg icon-shape bg-gradient-success shadow-primary text-center border-radius-xl mt-n4 position-absolute">
                             <i class="material-icons opacity-10">weekend</i>
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Total Deposit</p>
-                            <h4 class="mb-0">₦{{number_format(intval($bill *1), 2)}}</h4>
+                            <h4 class="mb-0">₦{{number_format(intval($totaldeposite *1), 2)}}</h4>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
@@ -199,66 +195,119 @@
 
 <br>
 
-        <div class="alert alert-info alert-dismissible text-white" role="alert">
+        <div class="alert alert-secondary alert-dismissible text-white" role="alert">
             <span class="text-sm">Join Whatsapp Group!: <a href="javascript:;" class="alert-link text-white">kindly Join Our Whatsapp-group For any complain:  </a></span>
-            <button type="button" onclick="window.location.href='https://chat.whatsapp.com/GgBq2QWvj46Awh1JRNj2KK'" class="btn bg-gradient-primary mt-4 ">Join now</button>
+            <button type="button" onclick="window.location.href='https://chat.whatsapp.com/GgBq2QWvj46Awh1JRNj2KK'" class="btn bg-gradient-info mt-4 ">Join now</button>
             <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"></span>
             </button>
         </div>
 <br>
 <div class="row">
-    <div class="col-xl-6 col-lg-6">
+    <div class="col-xl-6 ">
         <div class="card">
 
             <div class="card-body">
                 <div class="invoice-table">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                            <h6 class="text-white text-capitalize ps-3">Purchase History</h6>
+                        <div class="bg-gradient-black shadow-info border-radius-lg pt-4 pb-3">
+                            <h6 class="text-capitalize ps-3">Quick Purchase</h6>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Product</th>
-                                <th>Amount</th>
-                                <th>Number</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($bil3 as $dp)
-                                <tr>
-                                    <td>{{$dp->username}}</td>
-                                    <td>{{$dp->plan}}</td>
-                                    <td>{{$dp->amount}}</td>
-                                    <td>{{$dp->phone}}</td>
-                                    <td>{{$dp->date}}</td>
-                                    <td>@if($dp->result==1)
-                                            <span class="badge px-3 py-2 bg-success">Delivered</span>
-                                        @else
-                                            <span class="badge px-3 py-2 bg-warning">Pending</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {{$bil3->links()}}
+                    <br>
+                    <br>
+                    <center>
+                    <div class="col-md-8">
+                        <div class="card bg-gradient-dark" >
+                            <a href="{{route('select')}}"><div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div class="sales-bx">
+                                        <i class="fa fa-network-wired text-white" style="font-size: 40px;"></i>
+                                        <h4>Buy Data</h4>
+                                    </div>
+                                    <div class="sales-bx" data-bs-toggle="modal" data-bs-target="#airtimeModalCenter">
+                                        <i class="fa fa-phone text-white" style="font-size: 40px"></i>
+                                        <h4>Airtime</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
                     </div>
+                    </center>
+                    <div class="modal fade" id="airtimeModalCenter">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="loading-overlay" id="loadingSpinner" style="display: none;">
+                                <div class="loading-spinner"></div>
+                            </div>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Airtime Recharge</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                    </button>
+                                </div>
+                                <form id="dataForm" >
+                                    @csrf
+                                    <div class="card card-body">
+                                        <p>AIRTIME PURCHASE</p>
+                                        {{--                       <input placeholder="Your e-mail" class="subscribe-input" name="email" type="email">--}}
+                                        <br/>
+                                        <div id="div_id_network" class="form-group">
+                                            <label for="network" class=" requiredField">
+                                                Network<span class="asteriskField">*</span>
+                                            </label>
+                                            <div class="">
+                                                <select name="name" class="text-success form-control" required="">
+
+                                                    <option value="m">MTN</option>
+                                                    <option value="g">GLO</option>
+                                                    <option value="a">AIRTEL</option>
+                                                    <option value="9">9MOBILE</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div id="div_id_network" >
+                                            <label for="network" class=" requiredField">
+                                                Enter Amount<span class="asteriskField">*</span>
+                                            </label>
+                                            <div class="">
+                                                <input type="number" id="amount" name="amount" min="100" max="4000" class="text-success form-control" required>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div id="div_id_network" class="form-group">
+                                            <label for="network" class=" requiredField">
+                                                Enter Phone Number<span class="asteriskField">*</span>
+                                            </label>
+                                            <div class="">
+                                                <input type="number" id="number" name="number" minlength="11" class="text-success form-control" required >
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="refid" value="<?php echo rand(10000000, 999999999); ?>">
+                                        <button type="submit" class="btn btn-info">PURCHASE</button>
+                                    </div>
+                                </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    {{--                        <button type="button" class="btn btn-primary">Save changes</button>--}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
+        <br>
     </div>
     <div class="col-xxl-6 col-xl-6 col-lg-6">
         <div id="user-activity" class="card" data-aos="fade-up">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">Virtual Account Detail</h6>
+                <div class="bg-gradient-black shadow-info border-radius-lg pt-4 pb-3">
+                    <h6 class=" text-capitalize ps-3">Virtual Account Detail</h6>
                 </div>
             </div>
             <div class="card-body">
@@ -272,7 +321,7 @@
                 </div>
                 <div class="card">
                     <div class="">
-                        <div class="alert alert-primary">
+                        <div class="alert alert-black">
                                 @if (Auth::user()->account_number==1 && Auth::user()->account_name==1)
                                     <a href='{{route('vertual')}}' class='btn btn-primary'>Click this section to get your  Virtual Bank Account</a>
                                 @else
@@ -282,9 +331,9 @@
                                                 <ul style="list-style-type:square">
 {{--                                                    <li class="text-white"><h6 class="text-white"><b>Personal Virtual Account Number</b></h6></li>--}}
 {{--                                                    <br>--}}
-                                                    <li class='text-white'><h6 class="text-white"><b>{{Auth::user()->account_name}}</b></h6></li>
-                                                    <li class='text-white'><h6 class="text-white"><b>Account No:{{Auth::user()->account_number}}</b></h6></li>
-                                                    <li class='text-white'><h6 class="text-white"><b>WEMA-BANK</b></h6></li>
+                                                    <li ><h6 ><b>{{Auth::user()->account_name}}</b></h6></li>
+                                                    <li><h6 ><b>Account No:{{Auth::user()->account_number}}</b></h6></li>
+                                                    <li><h6><b>WEMA-BANK</b></h6></li>
 {{--                                                    <br>--}}
 {{--                                                    <li class='text-white'><h6 class="text-white"><b>Note: All virtual funding are being set automatically</b></h6></li>--}}
                                                 </ul>
@@ -310,5 +359,82 @@
 
 </div>
     </div>
+
 </main>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+
+
+            // Send the AJAX request
+            $('#dataForm').submit(function(e) {
+                e.preventDefault(); // Prevent the form from submitting traditionally
+
+                // Get the form data
+                var formData = $(this).serialize();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you want to buy airtime of ₦' + document.getElementById("amount").value + ' on ' + document.getElementById("number").value +' ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // The user clicked "Yes", proceed with the action
+                        // Add your jQuery code here
+                        // For example, perform an AJAX request or update the page content
+                        $('#loadingSpinner').show();
+
+                        $.ajax({
+                            url: "{{ route('buyairtime') }}",
+                            type: 'POST',
+                            data: formData,
+                            success: function(response) {
+                                // Handle the success response here
+                                $('#loadingSpinner').hide();
+
+                                console.log(response);
+                                // Update the page or perform any other actions based on the response
+
+                                if (response.status == 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text: response.message
+                                    }).then(() => {
+                                        // location.reload(); // Reload the page
+                                        window.location.href = "{{ url('viewpdf') }}/" + response.id;                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'info',
+                                        title: 'Pending',
+                                        text: response.message
+                                    });
+                                    // Handle any other response status
+                                }
+
+                            },
+                            error: function(xhr) {
+                                $('#loadingSpinner').hide();
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'fail',
+                                    text: xhr.responseText
+                                });
+                                // Handle any errors
+                                console.log(xhr.responseText);
+
+                            }
+                        });
+
+                    }
+                });
+            });
+        });
+
+    </script>
 @endsection

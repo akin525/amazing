@@ -77,8 +77,8 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                    <h6 class="text-white text-capitalize ps-3">Transactions</h6>
+                                <div class="bg-gradient-primary shadow-info border-radius-lg pt-4 pb-3">
+                                    <h6 class=" text-capitalize ps-3">Transactions</h6>
                                 </div>
                             </div>
 
@@ -88,6 +88,7 @@
                                     <tr>
                                         <th>Date</th>
                                         <th>Username</th>
+                                        <th>Receipt</th>
                                         <th>Plan</th>
                                         <th>Amount</th>
                                         <th>Phone No</th>
@@ -101,6 +102,7 @@
                                         <tr>
                                             <td>{{$re->date}}</td>
                                             <td>{{$re->username}}</td>
+                                            <td><a href="{{route('viewpdf', $re->id)}}" class="badge badge-success text-white"><i class="fa fa-download">Pdf</i></a> </td>
                                             <td>{{$re->plan}}</td>
                                             <td>{{$re->amount}}</td>
                                             <td>{{$re->phone}}</td>

@@ -29,6 +29,7 @@ return array(
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\BillController' => $baseDir . '/app/Http/Controllers/BillController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\DatapinController' => $baseDir . '/app/Http/Controllers/DatapinController.php',
     'App\\Http\\Controllers\\DataserverController' => $baseDir . '/app/Http/Controllers/DataserverController.php',
     'App\\Http\\Controllers\\EducationController' => $baseDir . '/app/Http/Controllers/EducationController.php',
     'App\\Http\\Controllers\\RefersController' => $baseDir . '/app/Http/Controllers/RefersController.php',

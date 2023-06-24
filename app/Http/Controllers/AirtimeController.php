@@ -9,6 +9,7 @@ use App\Models\data;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -25,22 +26,21 @@ class AirtimeController
 
             if ($user->wallet < $request->amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-                Alert::error('Insufficient Fund', $mg);
-                return back();
+                return response()->json($mg, Response:: HTTP_BAD_REQUEST );
 
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                Alert::warning('Warning', $mg);
-                return back();
+                return response()->json($mg, Response:: HTTP_BAD_REQUEST );
+
 
             }
             $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                Alert::error($mg);
-                return back();
+                return response()->json($mg, Response:: HTTP_CONFLICT );
+
 
             } else {
                 $user = User::find($request->user()->id);
@@ -62,6 +62,8 @@ class AirtimeController
                     'phone' => $request->number,
                     'refid' => $request->refid,
                     'discountamoun' => 0,
+                    'fbalance'=>$user->wallet,
+                    'balance'=>$gt,
                 ]);
 
                 $comiS=Comission::create([
@@ -111,8 +113,13 @@ class AirtimeController
                     $parise=$comission."₦ Commission Is added to your wallet balance";
                     $msg=$am.' ' .$ph.' & '.$parise;
 
-                    Alert::success('Success', $msg);
-                    return back();
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => $msg,
+                        'id'=>$bo['id'],
+
+//                            'data' => $responseData // If you want to include additional data
+                    ]);
 
                 } elseif ($success == 0) {
                     $zo = $user->wallet + $request->amount;
@@ -120,13 +127,143 @@ class AirtimeController
                     $user->save();
                     $am = "NGN $request->amount Was Refunded To Your Wallet";
                     $ph = ", Transaction fail";
-                    Alert::error('error', $am.''.$ph);
-                    return redirect('dashboard');
+                    return response()->json([
+                        'status' => 'fail',
+                        'message' => $response,
+//                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                    ]);
 
                 }
         }
     }
     public function honor(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $user = User::find($request->user()->id);
+//        $wallet = wallet::where('username', $user->username)->first();
+
+
+        if ($user->wallet < $request->amount) {
+            $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
+        }
+        if ($request->amount < 0) {
+
+            $mg = "error transaction";
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
+
+        }
+        $bo = bo::where('refid', $request->refid)->first();
+        if (isset($bo)) {
+            $mg = "duplicate transaction";
+            return response()->json($mg, Response::HTTP_CONFLICT);
+
+        } else {
+            $user = User::find($request->user()->id);
+            $bt = data::where("id", $request->id)->first();
+//            $wallet = wallet::where('username', $user->username)->first();
+
+
+            $gt = $user->wallet - $request->amount;
+
+
+            $user->wallet = $gt;
+            $user->save();
+
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://easyaccess.com.ng/api/airtime.php",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_SSL_VERIFYHOST => 0,
+                CURLOPT_SSL_VERIFYPEER => 0,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => array(
+                    'network' =>$request->name,
+                    'amount' => $request->amount,
+                    'mobileno' => $request->number,
+                    'airtime_type' => '001', //001 for VTU, 002 for Share and Sell. Share and Sell is only applicable to MTN network. For other networks, use 001 (VTU).
+                    'client_reference' => $request->refid, //update this on your script to receive webhook notifications
+                ),
+                CURLOPT_HTTPHEADER => array(
+                    "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                    "cache-control: no-cache"
+                ),
+            ));
+            $response = curl_exec($curl);
+            curl_close($curl);
+            $data = json_decode($response, true);
+            if ($data['success']== 'true') {
+
+                $bo = bo::create([
+                    'username' => $user->username,
+                    'plan' => 'airtime',
+                    'amount' => $request->amount,
+                    'server_res' => $response,
+                    'result' => 1,
+                    'phone' => $request->number,
+                    'refid' => $request->refid,
+                    'discountamoun' => '0',
+                    'fbalance'=>$user->wallet,
+                    'balance'=>$gt,
+                ]);
+
+                $success=1;
+                $name = "Airtime";
+                $am = "NGN $request->amount  Airtime Purchase Was Successful To";
+                $ph = $request->number;
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => $am.' '.$ph,
+                    'id'=>$bo['id'],
+                ]);
+            } elseif ($data['message']== 'Possible duplicate transaction, Please retry after 2 minutes') {
+                $zo = $user->balance + $request->amount;
+                $user->balance = $zo;
+                $user->save();
+$success=0;
+                $name = 'Airtime';
+                $am = "NGN $request->amount Was Refunded To Your Wallet";
+                $ph = ", Possible duplicate transaction, Please retry after 2 minutesl";
+
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                ]);
+
+            } elseif ($data['success']== 'false') {
+                $zo = $user->wallet + $request->amount;
+                $user->wallet = $zo;
+                $user->save();
+                $success=0;
+                $name = 'Airtime';
+                $am = "NGN $request->amount Was Refunded To Your Wallet";
+                $ph = ", Transaction fail";
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => $response,
+//                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                ]);
+
+            }
+        }
+
+        }
+    public function ridamsub(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -168,30 +305,36 @@ Alert::error('Insufficient Balance', $mg);
             $user->save();
 
 
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://easyaccess.com.ng/api/airtime.php",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => array(
-                    'network' =>$request->name,
-                    'amount' => $request->amount,
-                    'mobileno' => $request->number,
-                    'airtime_type' => '001', //001 for VTU, 002 for Share and Sell. Share and Sell is only applicable to MTN network. For other networks, use 001 (VTU).
-                    'client_reference' => $request->refid, //update this on your script to receive webhook notifications
-                ),
-                CURLOPT_HTTPHEADER => array(
-                    "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
-                    "cache-control: no-cache"
-                ),
-            ));
-            $response = curl_exec($curl);
-            curl_close($curl);
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://ridamsub.com/api/topup/',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS =>'{"network":'+$request->name+',
+"amount":'+$request->amount+',
+"mobile_number":'+$request->number+',
+"Ported_number":true,
+"airtime_type":"VTU"
+
+}',
+    CURLOPT_HTTPHEADER => array(
+        'Authorization: Token d281eaad090e83b849e2ec3cc1b1466dc639ca81',
+        'Content-Type: application/json'
+    ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+
 //           return $response;
 
             $data = json_decode($response, true);

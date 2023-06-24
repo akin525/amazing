@@ -12,6 +12,7 @@ use App\Models\server;
 use App\Models\setting;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use Session;
@@ -26,7 +27,7 @@ class BillController extends Controller
         $request->validate([
             'productid' => 'required',
         ]);
-//        return $request;
+//        return response()->json($request);
         if (Auth::check()) {
             $user = User::find($request->user()->id);
 //            $wallet = wallet::where('username', $user->username)->first();
@@ -48,23 +49,19 @@ class BillController extends Controller
 
             if ($user->wallet < $amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-                Alert::error('Insufficient Balance', $mg);
-
-                return redirect(route('dashboard'));
+                return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                Alert::error('Error', $mg);
-                return redirect(route('dashboard'));
+                return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
             }
-            $bo = bo::where('refid', $request->id)->first();
+            $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                Alert::error('Error', $mg);
-                return redirect(route('dashboard'));
+                return response()->json($mg, Response::HTTP_CONFLICT);
 
             } else {
                 $user = User::find($request->user()->id);
@@ -92,7 +89,7 @@ class BillController extends Controller
                     $response = $daterserver->easyaccess($object);
 
                     $data = json_decode($response, true);
-//                    return $response;
+//                    return response()->json($response);
                     $success = "";
                     if ($data['success'] == 'true') {
                         $success = 1;
@@ -109,7 +106,9 @@ class BillController extends Controller
                             'server_res' => $response,
                             'result' => $success,
                             'phone' => $request->number,
-                            'refid' => $request->id,
+                            'refid' => $request->refid,
+                            'fbalance'=>$user->wallet,
+                            'balance'=>$gt,
                         ]);
 
                         $profit = profit::create([
@@ -122,16 +121,11 @@ class BillController extends Controller
                         $am = "$product->plan  was successful delivered to";
                         $ph = $request->number;
 
-
-                        $receiver = $user->email;
-                        $admin = 'info@amazingdata.com.ng';
-
-//                        Mail::to($receiver)->send(new Emailtrans($bo));
-//                        Mail::to($admin)->send(new Emailtrans($bo));
-//                        Mail::to($admin2)->send(new Emailtrans($bo));
-
-                        Alert::success('Success', $am.' '.$ph);
-                        return redirect(route('dashboard'));
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => $am.' '.$ph,
+                            'id'=>$bo['id'],
+                        ]);
 
                     } elseif ($data['success'] == 'false') {
                         $success = 0;
@@ -142,10 +136,11 @@ class BillController extends Controller
                         $name = $product->plan;
                         $am = "NGN $request->amount Was Refunded To Your Wallet";
                         $ph = ", Transaction fail";
-                        Alert::error('Error', $am.' '.$ph);
-
-
-                        return redirect(route('dashboard'));
+                        return response()->json([
+                            'status' => 'fail',
+                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                        ]);
                     }
                 } else if ($mcd->name == "mcd") {
                     $response = $daterserver->mcdbill($object);
@@ -164,8 +159,10 @@ class BillController extends Controller
                             'amount' => $amount,
                             'server_res' => $response,
                             'result' => $success,
+                            'fbalance'=>$user->wallet,
+                            'balance'=>$gt,
                             'phone' => $request->number,
-                            'refid' => $request->id,
+                            'refid' => $request->refid,
                         ]);
 
                         $profit = profit::create([
@@ -178,17 +175,10 @@ class BillController extends Controller
                         $am = "$product->plan  was successful delivered to";
                         $ph = $request->number;
 
-
-                        $receiver = $user->email;
-                        $admin = 'info@amazingdata.com.ng';
-
-//                        Mail::to($receiver)->send(new Emailtrans($bo));
-//                        Mail::to($admin)->send(new Emailtrans($bo));
-//                        Mail::to($admin2)->send(new Emailtrans($bo));
-
-                        Alert::success('Success', $am.' '.$ph);
-
-                        return redirect(route('dashboard'));
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => $am.' '.$ph,
+                        ]);
 
                     }elseif ($data['success']==0) {
                         $success = 0;
@@ -199,8 +189,11 @@ class BillController extends Controller
                         $name = $product->plan;
                         $am = "NGN $amount Was Refunded To Your Wallet";
                         $ph = ", Transaction fail";
-                        Alert::error('Error', $am.' '.$ph);
-                        return redirect(route('dashboard'));
+                        return response()->json([
+                            'status' => 'fail',
+                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                        ]);
                     }
 
                 }

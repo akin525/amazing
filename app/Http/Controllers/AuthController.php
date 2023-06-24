@@ -168,6 +168,7 @@ $login=$user->name;
                         $greet="Good night";
                     }
             $charge=charp::where('username',$user->username )->sum('amount');
+        Alert::info('Hi!'.Auth::user()->username, ' You can purchase Data Refill | Data Pin|  Airtime | Cable TV | Electricity Subscription on Amazing Mobile Data');
 
             return  view('dashboard', compact('user', 'charge', 'bil3',  'greet', 'totaldeposite', 'me', 'deposite',  'bil2', 'bill', 'totalrefer', 'count'));
 
@@ -278,6 +279,12 @@ $login=$user->name;
     public function airtime(Request  $request)
     {
         $con=DB::table('airtimecons')->where('status', '=', '1')->first();
+        $deposite = deposit::where('username', $request->user()->username)->get();
+        $totaldeposite = 0;
+        foreach ($deposite as $depo){
+            $totaldeposite += $depo->amount;
+
+        }
         if (isset($con)) {
             $se = $con->server;
         }else{
@@ -288,13 +295,24 @@ $login=$user->name;
             $data = data::where('plan_id', "airtime")->get();
 //            $wallet = wallet::where('username', $user->username)->first();
 
-            return view('airtime', compact('user', 'data'));
+            return view('airtime', compact('user', 'data', 'totaldeposite'));
         } elseif ($se == 'easyaccess'){
-            return view('airtime1');
+            return view('airtime1', compact('totaldeposite'));
 
         }else {
             Alert::info('Server', 'Out of service, come back later');
             return redirect('dashboard');
+        }
+    }
+    function netwplanrequest(Request $request, $selectedValue)
+    {
+        $serve = server::where('status', '1')->first();
+        if ($serve->name == 'mcd') {
+            $options = data::where('network', $selectedValue)->get();
+            return response()->json($options);
+        }elseif ($serve->name == 'easyaccess') {
+            $options = easy::where('network', $selectedValue)->get();
+            return response()->json($options);
         }
     }
 

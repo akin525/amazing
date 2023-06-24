@@ -105,6 +105,8 @@ class DatapinController extends Controller
                     'result' => $success,
                     'phone' => 'any',
                     'refid' => $request->refid,
+                    'fbalance'=>$user->wallet,
+                    'balance'=>$gt,
                     'token'=>$data['pin'],
                 ]);
 

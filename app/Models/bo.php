@@ -25,6 +25,8 @@ class bo extends Authenticatable
         'result',
         'phone',
         'refid',
+        'fbalance',
+        'balance',
         'discountamoun',
         'token',
     ];
