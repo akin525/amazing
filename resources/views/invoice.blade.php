@@ -102,7 +102,7 @@
                                         <tr>
                                             <td>{{$re->date}}</td>
                                             <td>{{$re->username}}</td>
-                                            <td><a href="{{route('viewpdf', $re->id)}}" class="badge badge-success text-white"><i class="fa fa-download">Pdf</i></a> </td>
+                                            <td><a href="{{route('viewpdf', $re->id)}}" class="btn btn-success"><i class="fa fa-download">Pdf</i></a> </td>
                                             <td>{{$re->plan}}</td>
                                             <td>{{$re->amount}}</td>
                                             <td>{{$re->phone}}</td>
