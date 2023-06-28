@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\waec;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -52,25 +53,27 @@ $request->validate([
     if ($user->wallet < $amount) {
         $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
 
-        Alert::error('error', $mg);
-        return redirect(route('dashboard'))
-            ->with('error', $mg);
+       return response()->json($mg, Response::HTTP_BAD_REQUEST );
 
     }
     if ($request->amount < 0) {
 
         $mg = "error transaction";
-        Alert::error('error', $mg);
-        return redirect(route('dashboard'))
-            ->with('error', $mg);
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
+
+    }
+    if ($request->amount < 500) {
+
+        $mg = "Your amount must be at least 500";
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
 
     }
     $bo = bo::where('refid', $request->id)->first();
     if (isset($bo)) {
-        $mg = "duplicate transaction";
-        Alert::success('Success', $mg);
-        return redirect(route('dashboard'))
-            ->with('error', $mg);
+        return response()->json($mg, Response::HTTP_CONFLICT);
+
 
     } else {
 
@@ -92,6 +95,8 @@ $request->validate([
             'phone' => 'no',
             'refid' => $request->id,
             'discountamoun'=>0,
+            'fbalance'=>$user->wallet,
+            'balance'=>$gt,
         ]);
         $resellerURL = 'https://app2.mcd.5starcompany.com.ng/api/reseller/';
         $curl = curl_init();
@@ -131,8 +136,11 @@ $request->validate([
                 ]);
 
             $mg='Waec Checker Successful Generated, kindly check your pin';
-            Alert::success('Successful',$mg );
-            return redirect('waec')->with('success', $mg);
+            return response()->json([
+                'status' => 'success',
+                'message' =>$mg,
+                'id'=>$bo['id'],
+            ]);
 
         }elseif($data['success']=="false"){
 

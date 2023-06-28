@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Auth;
 class FundController
 
 {
+    public function deposit()
+    {
+         $deposit=deposit::where('username', Auth::user()->username)->paginate('15');
+         return view('deposit', compact('deposit'));
+
+    }
     public function fund(Request  $request)
     {
         if (Auth::check()) {
@@ -38,14 +44,16 @@ class FundController
 
     }
 
-        public function tran($reference)
+        public function tran(Request $request)
     {
 
+        $reference = $request->input('reference');
 
+//        return $reference;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$reference",
+            CURLOPT_URL => "https://sandbox-api-d.squadco.com/transaction/verify/$reference",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -55,7 +63,7 @@ class FundController
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer sk_test_280c68e08f76233b476038f04d92896b4749eec3",
+                "Authorization: Bearer sandbox_sk_52c20a220cf4ae33109313637b0c5043211c4ca4cab6",
                 "Cache-Control: no-cache",
             ),
         ));
@@ -73,8 +81,7 @@ class FundController
         }
 //        return $response;
         $data=json_decode($response, true);
-        $amount=$data["data"]["amount"]/100;
-        $auth=$data["data"]["authorization"]["authorization_code"];
+        $amount=$data["data"]["transaction_amount"]/100;
 // echo $auth;
 
         if(Auth::check()) {
@@ -108,7 +115,8 @@ $amount1=$amount - $char->charges;
                     'fwallet' => $gt,
                 ]);
 
-
+                $user->wallet = $gt;
+                $user->save();
 //
                 $admin= 'info@amazingdata.com.ng';
 
@@ -117,8 +125,7 @@ $amount1=$amount - $char->charges;
                 Mail::to($receiver)->send(new Emailcharges($charp ));
                 Mail::to($admin)->send(new Emailcharges($charp ));
 
-                $user->wallet = $gt;
-                $user->save();
+
                 $admin= 'info@amazingdata.com.ng';
 
               $receiver= $user->email;
@@ -127,7 +134,7 @@ $amount1=$amount - $char->charges;
 //                Mail::to($admin2)->send(new Emailfund($deposit ));
 $mg= '₦'.$amount.' was successfully fund into your account';
 Alert::success('Transaction', $mg);
-                return redirect("dashboard");
+                return redirect("fund");
             }
         }
 

@@ -1,29 +1,25 @@
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Intez</title>
-    <!-- Favicon icon -->
-    <link rel="icon" sizes="16x16" href="{{asset('ama.jpeg')}}">
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-    <!-- Nucleo Icons -->
-    <link href="{{asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
-    <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <!-- CSS Files -->
-    <link id="pagestyle" href="{{asset('assets/css/material-dashboard.css?v=3.0.4')}}" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>@yield('tittle')</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset('css/plugin.min.css')}}">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
+
+    <link rel="icon"  sizes="16x16" href="{{asset('ama.jpg')}}">
+
+    <link rel="stylesheet" href="{{asset('unicons.iconscout.com/release/v4.0.0/css/line.css')}}">
     <!-- SweetAlert CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 
     <!-- SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    @yield('style')
 </head>
 <style>
     .loading-overlay {
@@ -54,272 +50,362 @@
     }
 </style>
 
+<body class="layout-light side-menu">
+@include('sweetalert::alert')
+<div class="mobile-search">
+    <form action="#" class="search-form">
+        <img src="img/svg/search.svg" alt="search" class="svg">
+        <input class="form-control me-sm-2 box-shadow-none" type="search" placeholder="Search..." aria-label="Search">
+    </form>
+</div>
+<div class="mobile-author-actions"></div>
+<header class="header-top">
+    <nav class="navbar navbar-light">
+        <div class="navbar-left">
+            <div class="logo-area">
+                <a class="navbar-brand" href="{{route('dashboard')}}">
+                    <img class="dark" src="{{asset('ama.jpg')}}" alt="logo">
+                    <img class="light" src="{{asset('ama.jpg')}}" alt="logo">
+                </a>
+                <a href="#" class="sidebar-toggle">
+                    <img class="svg" src="img/svg/align-center-alt.svg" alt="img"></a>
+            </div>
+            <a href="#" class="customizer-trigger">
+                <i class="uil uil-edit-alt"></i>
+                <span>Customize...</span>
+            </a>
+            <div class="top-menu">
+                <div class="hexadash-top-menu position-relative">
+                    <ul class="d-flex align-items-center flex-wrap">
+                        <li>
+                            <a href="#" class="active">Dashboard</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-
-<body class="g-sidenav-show  bg-gray-200">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-            <img src="{{asset('ama.jpeg')}}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold text-white">{{Auth::user()->username}}</span>
-        </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-            @if(Auth::user()->role=="admin")
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{route('admin/dashboard')}}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">dashboard</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Administrator</span>
+        <div class="navbar-right">
+            <ul class="navbar-right__menu">
+                <li class="nav-search">
+                    <a href="#" class="search-toggle">
+                        <i class="uil uil-search"></i>
+                        <i class="uil uil-times"></i>
                     </a>
+                    <form action="#" class="search-form-topMenu">
+                        <span class="search-icon uil uil-search"></span>
+                        <input class="form-control me-sm-2 box-shadow-none" type="search" placeholder="Search..." aria-label="Search">
+                    </form>
                 </li>
-            @endif
-            <li class="nav-item">
-                <a class="nav-link text-white active bg-gradient-primary" href="{{route('dashboard')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">dashboard</i>
+
+                <li class="nav-author">
+                    <div class="dropdown-custom">
+                        <a href="javascript:;" class="nav-item-toggle"><img src="{{asset('pa.jpg')}}" alt class="rounded-circle">
+                            <span class="nav-item__title">{{\Illuminate\Support\Facades\Auth::user()->username}}<i class="las la-angle-down nav-item__arrow"></i></span>
+                        </a>
+                        <div class="dropdown-parent-wrapper">
+                            <div class="dropdown-wrapper">
+                                <div class="nav-author__info">
+                                    <div class="author-img">
+                                        <img src="{{asset('pa.jpg')}}" alt class="rounded-circle">
+                                    </div>
+                                    <div>
+                                        <h6>{{\Illuminate\Support\Facades\Auth::user()->name}}</h6>
+                                        <span>Customer</span>
+                                    </div>
+                                </div>
+                                <div class="nav-author__options">
+                                    <ul>
+                                        <li>
+                                            <a href="{{route('myaccount')}}">
+                                                <i class="uil uil-user"></i> Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('myaccount')}}">
+                                                <i class="uil uil-setting"></i>
+                                                Settings</a>
+                                        </li>
+                                    </ul>
+                                    <a href="{{route('logout')}}" class="nav-author__signout">
+                                        <i class="uil uil-sign-out-alt"></i> Sign Out</a>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
-                <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('referal')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">laptop</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Referral System</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('datapin')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Buy Datapin</span>
-                </a>
-            </li>
-                <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('airtime')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Buy Airtime</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('select')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Buy Data</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{url('picktv')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">tv</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Pay Tv</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('elect')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">light</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Pay Electricity</span>
-                </a>
-            </li>
-                <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('waec')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">bookmark</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Waec Epin</span>
-                </a>
-            </li><li class="nav-item">
-                <a class="nav-link text-white " href="{{route('neco')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">bookmark</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Neco Epin</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('profile.show')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('invoice')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">wallet</i>
-                    </div>
-                    <span class="nav-link-text ms-1">All Purchase</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="{{route('fund')}}">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">wallet</i>
-                    </div>
-                    <span class="nav-link-text ms-1">All Deposit</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-        <div class="mx-3">
-            <a class="btn bg-gradient-primary mt-4 w-100" href="{{route('logout')}}" type="button">Logout</a>
+                </li>
+
+            </ul>
+
+            <div class="navbar-right__mobileAction d-md-none">
+                <a href="#" class="btn-search">
+                    <img src="img/svg/search.svg" alt="search" class="svg feather-search">
+                    <img src="img/svg/x.svg" alt="x" class="svg feather-x"></a>
+                <a href="#" class="btn-author-action">
+                    <img class="svg" src="img/svg/more-vertical.svg" alt="more-vertical"></a>
+            </div>
+        </div>
+
+    </nav>
+</header>
+<main class="main-content">
+    <div class="sidebar-wrapper">
+        <div class="sidebar sidebar-collapse" id="sidebar">
+            <div class="sidebar__menu-group">
+                <ul class="sidebar_nav">
+                    @if(Auth::user()->role =="admin")
+                    <li>
+                        <a href="{{route('admin/dashboard')}}" class="active">
+                            <span class="nav-icon uil uil-create-dashboard"></span>
+                            <span class="menu-text">Admin</span>
+                        </a>
+                    </li>
+                    @endif
+                    <li>
+                        <a href="{{route('dashboard')}}" class="active">
+                            <span class="nav-icon uil uil-create-dashboard"></span>
+                            <span class="menu-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="has-child">
+                        <a href="#" class>
+                            <span class="nav-icon uil uil-tv-retro"></span>
+                            <span class="menu-text">Recharge</span>
+                            <span class="toggle-icon"></span>
+                        </a>
+                        <ul>
+                            <li class>
+                                <a href="{{route('airtime')}}">Buy Airtime</a>
+                            </li>
+                            <li class>
+                                <a href="{{route('select')}}">Buy Data</a>
+                            </li>
+                            <li class>
+                                <a href="{{route('datapin')}}">Buy Datapin</a>
+                            </li>
+                            <li class>
+                                <a href="{{url('picktv')}}">Tv Subscription</a>
+                            </li>
+                            <li class>
+                                <a href="{{route('elect')}}">Electricity</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-child">
+                        <a href="#" class>
+                            <span class="nav-icon uil uil-basketball"></span>
+                            <span class="menu-text">Education</span>
+                            <span class="toggle-icon"></span>
+                        </a>
+                        <ul>
+                            <li class>
+                                <a href="{{route('waec')}}">Waec Cardpin</a>
+                            </li>
+                            <li class>
+                                <a href="{{route('neco')}}">Neco Token</a>
+                            </li>
+                            <li class>
+                                <a href="{{route('datapin')}}">Nabteb Pin</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-child">
+                        <a href="#" class>
+                            <span class="nav-icon uil uil-invoice"></span>
+                            <span class="menu-text">Transaction</span>
+                            <span class="toggle-icon"></span>
+                        </a>
+                        <ul>
+                            <li class>
+                                <a href="{{route('deposit')}}">Deposit History</a>
+                            </li>
+                            <li class>
+                                <a href="{{route('invoice')}}">Purchase History</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-child">
+                        <a href="#" class>
+                            <span class="nav-icon uil uil-usd-square"></span>
+                            <span class="menu-text">Self Service</span>
+                            <span class="toggle-icon"></span>
+                        </a>
+                        <ul>
+                            <li class>
+                                <a href="{{url('service')}}">Verify Data/Airtime Status</a>
+                            </li>
+                            <li class>
+                                <a href="{{url('service1')}}">Verify Deposit</a>
+                            </li>
+                            <li class>
+                                <a href="{{url('service')}}">Verify Tv Subscription</a>
+                            </li>
+                            <li class>
+                                <a href="{{url('service')}}">Verify Electricity</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{route('reseller')}}" class="nav-link">
+                            <span class="nav-icon uil uil-arrow-up-left"></span>
+                            <span class="menu-text">Become a Reseller</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('vtu')}}" class="nav-link">
+                            <span class="nav-icon uil uil-webcam"></span>
+                            <span class="menu-text">Own A VTU Website</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('referal')}}" class="nav-link">
+                            <span class="nav-icon uil uil-eye-slash"></span>
+                            <span class="menu-text">View Referral</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('myaccount')}}" class="nav-link">
+                            <span class="nav-icon uil uil-user"></span>
+                            <span class="menu-text">My Account</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
         </div>
     </div>
-</aside>
-@yield('content')
-@include('sweetalert::alert')
+    <div class="contents">
+        <div class="demo5 mt-30 mb-25">
+            <div class="container-fluid">
+                <div class="row">
+                @yield('content')
 
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer class="footer-wrapper">
+        <div class="footer-wrapper__inside">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="footer-copyright">
+                            <p><span>© 2023</span><a href="#">Amazing-Data</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-menu text-end">
+                            <ul>
+                                <li>
+                                    <a href="#">About</a>
+                                </li>
+                                <li>
+                                    <a href="#">Team</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</main>
+
+<div id="overlayer">
+    <div class="loader-overlay">
+        <div class="dm-spin-dots spin-lg">
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+        </div>
+    </div>
+</div>
+<div class="overlay-dark-sidebar"></div>
+<div class="customizer-overlay"></div>
+<div class="customizer-wrapper">
+    <div class="customizer">
+        <div class="customizer__head">
+            <h4 class="customizer__title">Customizer</h4>
+            <span class="customizer__sub-title">Customize your overview page layout</span>
+            <a href="#" class="customizer-close">
+                <img class="svg" src="img/svg/x2.svg" alt>
+            </a>
+        </div>
+        <div class="customizer__body">
+            <div class="customizer__single">
+                <h4>Layout Type</h4>
+                <ul class="customizer-list d-flex layout">
+                    <li class="customizer-list__item">
+                        <a href="https://demo.dashboardmarket.com/hexadash-html/ltr" class="active">
+                            <img src="img/ltr.png" alt>
+                            <i class="fa fa-check-circle"></i>
+                        </a>
+                    </li>
+                    <li class="customizer-list__item">
+                        <a href="https://demo.dashboardmarket.com/hexadash-html/rtl">
+                            <img src="img/rtl.png" alt>
+                            <i class="fa fa-check-circle"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="customizer__single">
+                <h4>Sidebar Type</h4>
+                <ul class="customizer-list d-flex l_sidebar">
+                    <li class="customizer-list__item">
+                        <a href="#" data-layout="light" class="dark-mode-toggle active">
+                            <img src="img/light.png" alt>
+                            <i class="fa fa-check-circle"></i>
+                        </a>
+                    </li>
+                    <li class="customizer-list__item">
+                        <a href="#" data-layout="dark" class="dark-mode-toggle">
+                            <img src="img/dark.png" alt>
+                            <i class="fa fa-check-circle"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="customizer__single">
+                <h4>Navbar Type</h4>
+                <ul class="customizer-list d-flex l_navbar">
+                    <li class="customizer-list__item">
+                        <a href="#" data-layout="side" class="active">
+                            <img src="img/side.png" alt>
+                            <i class="fa fa-check-circle"></i>
+                        </a>
+                    </li>
+                    <li class="customizer-list__item top">
+                        <a href="#" data-layout="top">
+                            <img src="img/top.png" alt>
+                            <i class="fa fa-check-circle"></i>
+                        </a>
+                    </li>
+                    <li class="colors"></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgYKHZB_QKKLWfIRaYPCadza3nhTAbv7c"></script>
 @yield('script')
-<script src="{{asset('assets/js/core/popper.min.js')}}"></script>
-<script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
-<script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-<script src="{{asset('assets/js/plugins/chartjs.min.js')}}"></script>
-<script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
-        }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-</script>
-<!-- Github buttons -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{asset('assets/js/material-dashboard.min.js?v=3.0.4')}}"></script>.
+<script src="{{asset('js/plugins.min.js')}}"></script>
+<script src="{{asset('js/script.min.js')}}"></script>
 
-            <style>
-
-                * {
-                    padding: 0;
-                    margin: 0
-                }
-
-
-                button {
-                    padding: 20px 30px;
-                    font-size: 1.5em;
-                    /*width:200px;*/
-                    cursor: pointer;
-                    border: 0px;
-                    position: relative;
-                    /*margin: 20px;*/
-                    transition: all .25s ease;
-                    /*background: rgba(116, 23, 231, 1);*/
-                    color: #fff;
-                    overflow: hidden;
-                    border-radius: 10px
-                }
-
-                .load {
-                    position: absolute;
-                    left: 0px;
-                    top: 0px;
-                    width: 100%;
-                    height: 100%;
-                    background: inherit;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: inherit
-                }
-
-                .load::after {
-                    content: '';
-                    position: absolute;
-                    border-radius: 50%;
-                    border: 3px solid #fff;
-                    width: 30px;
-                    height: 30px;
-                    border-left: 3px solid transparent;
-                    border-bottom: 3px solid transparent;
-                    animation: loading1 1s ease infinite;
-                    z-index: 10
-                }
-
-                .load::before {
-                    content: '';
-                    position: absolute;
-                    border-radius: 50%;
-                    border: 3px dashed #fff;
-                    width: 30px;
-                    height: 30px;
-                    border-left: 3px solid transparent;
-                    border-bottom: 3px solid transparent;
-                    animation: loading1 2s linear infinite;
-                    z-index: 5
-                }
-
-                @keyframes loading1 {
-                    0% {
-                        transform: rotate(0deg)
-                    }
-
-                    100% {
-                        transform: rotate(360deg)
-                    }
-                }
-
-                button.active {
-                    transform: scale(.85)
-                }
-
-                button.activeLoading .loading {
-                    visibility: visible;
-                    opacity: 1
-                }
-
-                button .loading {
-                    opacity: 0;
-                    visibility: hidden
-                }
-            </style>
-
-
-
-<style>
-    .float{
-        position:fixed;
-        width:60px;
-        height:60px;
-        bottom:40px;
-        right:40px;
-        background-color:#25d366;
-        color:#FFF;
-        border-radius:50px;
-        text-align:center;
-        font-size:30px;
-        box-shadow: 2px 2px 3px #999;
-        z-index:100;
-    }
-
-    .my-float{
-        margin-top:16px;
-    }
-</style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<a href="https://wa.me/2347065946772/?text=Goodday, My Username is {{\Illuminate\Support\Facades\Auth::user()->username}}" class="float" target="_blank">
-    <i class="fa fa-whatsapp my-float"></i>
-</a>
 </body>
 
-
-
-
+<!-- Mirrored from demo.dashboardmarket.com/hexadash-html/ltr/demo10.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jun 2023 15:31:43 GMT -->
+</html>

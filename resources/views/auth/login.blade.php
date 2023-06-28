@@ -1,114 +1,142 @@
-<x-guest-layout>
-    <div class="container position-sticky z-index-sticky top-0">
-        <div class="row">
-            <div class="col-12">
-                <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
-                    <div class="container-fluid ps-2 pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{{route('login')}}">
-                           Amazing Data
-                        </a>
-                        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon mt-2">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navigation">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{{route('dashboard')}}">
-                                        <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="{{route('profile.show')}}">
-                                        <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                                        Profile
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="{{route('register')}}">
-                                        <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
-                                        Sign Up
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="{{route('login')}}">
-                                        <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                                        Sign In
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- End Navbar -->
-            </div>
-        </div>
-    </div>
+<!doctype html>
+<html lang="en" dir="ltr">
 
-    <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
-        <span class="mask bg-gradient-dark opacity-6"></span>
-        <div class="container my-auto">
-            <div class="row">
-                <div class="col-lg-4 col-md-8 col-12 mx-auto">
-                    <div class="card z-index-0 fadeIn3 fadeInBottom">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                <h4 class="font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
-                            </div>
+<!-- Mirrored from demo.dashboardmarket.com/hexadash-html/ltr/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 22 Jun 2023 15:34:22 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Amazing-Data</title>
+    <!-- Favicon icon -->
+    <link rel="icon" sizes="16x16" href="{{asset('ama.jpg')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset('css/plugin.min.css')}}">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
+
+    <link rel="stylesheet" href="{{asset('unicons.iconscout.com/release/v3.0.0/css/line.css')}}">
+</head>
+<body>
+<main class="main-content">
+    <div class="admin">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-sm-8">
+                    <div class="edit-profile">
+                        <div class="edit-profile__logos">
+                            <a href="index.html">
+                                <img class="dark" src="{{asset('ama.jpg')}}" alt>
+                                <img class="light" src="{{asset('ama.jpg')}}" alt>
+                            </a>
                         </div>
-                        <div class="card-body">
-                        @if (session('status'))
-                            <div class="mb-4 font-medium text-white alert alert-success">
-                                {{ session('status') }}
+                        <div class="card border-0">
+                            <div class="card-header">
+                                <div class="edit-profile__title">
+                                    <h6>Sign in Amazing Data</h6>
+                                </div>
                             </div>
-                        @endif
-                        <x-jet-validation-errors class="alert alert-danger text-white" />
-                            <center>
-                            <img width="100" src="{{asset('ama.jpeg')}}">
-                            </center>
-                        <form method="post" role="form" class="text-start" action="{{ route('login') }}">
-                            @csrf
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" name="email"  class="form-control" required>
+                            <form method="post"  action="{{ route('login') }}" id="myForm">
+                                @csrf
+                            <div class="card-body">
+                                @if (session('status'))
+                                    <div class="mb-4 font-medium text-white alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+
+                                            <x-jet-validation-errors class="alert alert-danger" />
+
+
+                                <div class="edit-profile__body">
+                                    <div class="form-group mb-25">
+                                        <label for="username"> Email Address</label>
+                                        <input type="text"  name="email" class="form-control" id="email" placeholder="name@example.com">
+                                    </div>
+                                    <div class="form-group mb-15">
+                                        <label for="password-field">password</label>
+                                        <div class="position-relative">
+                                            <input id="password-field" type="password"  class="form-control" name="password" placeholder="Password">
+                                            <div class="uil uil-eye-slash text-lighten fs-15 field-icon toggle-password2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="admin-condition">
+                                        <div class="checkbox-theme-default custom-checkbox ">
+                                            <input class="checkbox" type="checkbox" id="check-1">
+                                            <label for="check-1">
+                                                <span class="checkbox-text">Keep me logged in</span>
+                                            </label>
+                                        </div>
+                                        <a href="#">forget password?</a>
+                                    </div>
+                                    <div class="admin__button-group button-group d-flex pt-1 justify-content-md-start justify-content-center">
+                                        <button type="submit" class="btn btn-primary btn-default w-100 btn-squared text-capitalize lh-normal px-50 signIn-createBtn " id="submitButton">
+                                            sign in
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control">
+                            </form>
+                            <div class="px-20">
+                                <p class="social-connector social-connector__admin text-center">
+                                    <span>Or</span>
+                                </p>
                             </div>
-                            <div class="form-check form-switch d-flex align-items-center mb-3">
-                                <input class="form-check-input" type="checkbox" id="rememberMe" checked>
-                                <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
+                            <div class="admin-topbar">
+                                <p class="mb-0">
+                                    Don't have an account?
+                                    <a href="{{route('register')}}" class="color-primary">
+                                        Sign up
+                                    </a>
+                                </p>
                             </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn bg-gradient-info w-100 my-4 mb-2">Sign in
-                                    <span class="load loading"></span>
-                                </button>
-                            </div>
-                            <p class="mt-4 text-sm text-center">
-                                Don't have an account?
-                                <a href="{{route('register')}}" class="text-gradient font-weight-bold">Sign up</a>
-                            </p>
-                        </form>
-                             <script>
-                                    const btns = document.querySelectorAll('button');
-                                    btns.forEach((items)=>{
-                                        items.addEventListener('click',(evt)=>{
-                                            evt.target.classList.add('activeLoading');
-                                        })
-                                    })
-                                </script>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   </main>
-</x-guest-layout>
+</main>
+<div id="overlayer">
+    <div class="loader-overlay">
+        <div class="dm-spin-dots spin-lg">
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+        </div>
+    </div>
+</div>
+<div class="enable-dark-mode dark-trigger">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="uil uil-moon"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#myForm").on("submit", function(event) {
+            // Prevent form submission
+            event.preventDefault();
+
+            // Disable the submit button
+            $("#submitButton").prop("disabled", true);
+
+            // Change button text to "Loading..."
+            $("#submitButton").text("Loading...");
+
+            // Perform form submission asynchronously (AJAX call, etc.)
+            // Once the submission is complete, you can enable the button and reset the text
+        });
+    });
+</script>
+
+<script src="{{asset('js/plugins.min.js')}}"></script>
+<script src="{{asset('js/script.min.js')}}"></script>
+
+</body>
+</html>

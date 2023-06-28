@@ -20,6 +20,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RefersController;
 use App\Http\Controllers\RenoController;
 use App\Http\Controllers\ResellerController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -70,12 +71,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('select1', [AuthController::class, 'select1'])->name('select1');
     Route::post('tvp', [AlltvController::class, 'paytv'])->name('tvp');
     Route::get('paytv', [AlltvController::class, 'paytv'])->name('paytv');
-    Route::post('verifytv', [AlltvController::class, 'verifytv'])->name('verifytv');
+    Route::get('verifytv/{value1}/{value2}', [AlltvController::class, 'verifytv'])->name('verifytv');
     Route::get('listdata', [listdata::class, 'list'])->name('listdata');
     Route::get('listtv', [AlltvController::class, 'listtv'])->name('listv');
     Route::get('listelect', [EkectController::class, 'listelect'])->name('listelect');
     Route::get('elect', [EkectController::class, 'electric'])->name('elect');
-    Route::post('velect', [EkectController::class, 'verifyelect'])->name('velect');
+    Route::get('velect/{value1}/{value2}', [EkectController::class, 'verifyelect'])->name('velect');
     Route::post('payelect', [EkectController::class, 'payelect'])->name('payelect');
     Route::get('invoice', [AuthController::class, 'invoice'])->name('invoice');
     Route::get('charges', [AuthController::class, 'charges'])->name('charges');
@@ -87,10 +88,23 @@ Route::middleware(['auth'])->group(function () {
     Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
     Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
 
+
+    //profile route
+    Route::post('pic', [UserController::class, 'updateprofilephoto'])->name('pic');
+    Route::post('update', [UserController::class, 'updateuserdecry'])->name('update');
+    Route::get('myaccount', [UserController::class, 'viewuserencry'])->name('myaccount');
+    Route::get('deletepic', [UserController::class, 'removephoto'])->name('deletepic');
+
     Route::get('getOptions/{selectedValue}', [AuthController::class, 'netwplanrequest'])->name('getOptions');
     Route::get('viewpdf/{id}', [PdfController::class, 'viewpdf'])->name('viewpdf');
     Route::get('/dopdf/{id}', [PdfController::class, 'dopdf'])->name('dopdf');
 
+    Route::view('service1', 'service1');
+    Route::view('service', 'service');
+    Route::post('vser', [\App\Http\Controllers\SelfserviceController::class,'airtimedata'])->name('vser');
+    Route::post('vdepo', [\App\Http\Controllers\SelfserviceController::class,'deposit'])->name('vdepo');
+
+    Route::view('vtu', 'vtu');
 
 //Route::get('airtime1', [AuthController::class, 'airtime'])->name('airtime1');
     Route::get('airtime', [AuthController::class, 'airtime'])->name('airtime');
@@ -101,7 +115,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('referwith', [RefersController::class, 'index'])->name('referwith');
     Route::post('referwith1', [RefersController::class, 'with'])->name('referwith1');
     Route::get('fund', [FundController::class, 'fund'])->name('fund');
-    Route::get('tran/{reference}', [FundController::class, 'tran'])->name('tran');
+    Route::get('deposit', [FundController::class, 'deposit'])->name('deposit');
+    Route::get('tran', [FundController::class, 'tran'])->name('tran');
     Route::get('vertual', [VertualController::class, 'vertual'])->name('vertual');
     Route::view('recharge', 'recharge');
     Route::get('datapin', [\App\Http\Controllers\DatapinController::class, 'pinindex'])->name('datapin');

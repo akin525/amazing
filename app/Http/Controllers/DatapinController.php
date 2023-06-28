@@ -9,6 +9,7 @@ use App\Models\profit;
 use App\Models\server;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DatapinController extends Controller
@@ -36,23 +37,21 @@ class DatapinController extends Controller
 
         if ($user->wallet < $amount) {
             $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-            Alert::error('Insufficient Balance', $mg);
-
-            return redirect(route('dashboard'));
+           return response()->json($mg, Response:: HTTP_BAD_REQUEST);
 
         }
         if ($request->amount < 0) {
 
             $mg = "error transaction";
-            Alert::error('Error', $mg);
-            return redirect(route('dashboard'));
+            return response()->json($mg, Response:: HTTP_BAD_REQUEST);
+
 
         }
-        $bo = bo::where('refid', $request->id)->first();
+        $bo = bo::where('refid', $request->refid)->first();
         if (isset($bo)) {
             $mg = "duplicate transaction";
-            Alert::error('Error', $mg);
-            return redirect(route('dashboard'));
+            return response()->json($mg, Response:: HTTP_CONFLICT);
+
 
         } else {
             $user = User::find($request->user()->id);
@@ -122,8 +121,11 @@ class DatapinController extends Controller
 
 
 
-                Alert::success('Success', $am.' '.$ph);
-                return redirect(route('dashboard'));
+                return response()->json([
+                    'status' => 'success',
+                    'message' => $am.' '.$ph,
+                    'id'=>$bo['id'],
+                ]);
 
             } elseif ($data['success'] == 'false') {
                 $success = 0;
@@ -134,10 +136,12 @@ class DatapinController extends Controller
                 $name = $product->plan;
                 $am = "NGN $request->amount Was Refunded To Your Wallet";
                 $ph = ", Transaction fail";
-                Alert::error('Error', $am.' '.$ph);
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                ]);
 
-
-                return redirect(route('dashboard'));
             }
         }
     }

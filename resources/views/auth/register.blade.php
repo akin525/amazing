@@ -1,142 +1,166 @@
-<x-guest-layout>
-    <div class="container position-sticky z-index-sticky top-0">
-        <div class="row">
-            <div class="col-12">
-                <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
-                    <div class="container-fluid ps-2 pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{{route('login')}}">
-                            Amazing Data
-                        </a>
-                        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon mt-2">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navigation">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{{route('dashboard')}}">
-                                        <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="{{route('profile.show')}}">
-                                        <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                                        Profile
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="{{route('register')}}">
-                                        <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
-                                        Sign Up
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="{{route('login')}}">
-                                        <i class="fas fa-key opacity-6 text-dark me-1"></i>
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Amazing-Data</title>
+    <!-- Favicon icon -->
+    <link rel="icon" sizes="16x16" href="{{asset('ama.jpg')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset('css/plugin.min.css')}}">
+    <link rel="stylesheet" href="{{asset('style.css')}}">
+
+    <link rel="stylesheet" href="{{asset('unicons.iconscout.com/release/v3.0.0/css/line.css')}}">
+</head>
+<body>
+<main class="main-content">
+    <div class="admin">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-sm-8">
+                    <div class="edit-profile">
+                        <div class="edit-profile__logos">
+                            <a href="#">
+                                <img class="dark" src="{{asset('ama.jpg')}}" alt>
+                                <img class="light" src="{{asset('ama.jpg')}}" alt>
+                            </a>
+                        </div>
+                        <div class="card border-0">
+                            <div class="card-header">
+                                <div class="edit-profile__title">
+                                    <h6>Sign-up in Amazing Data</h6>
+                                </div>
+                            </div>
+                            <form method="post" role="form" action="{{ route('register') }}">
+                                @csrf
+                                <x-jet-validation-errors class="alert alert-danger" />
+
+                                <div class="card-body">
+                                <div class="edit-profile__body">
+                                    <div class="edit-profile__body">
+                                        <div class="form-group mb-20">
+                                            <label for="name">name</label>
+                                            <input type="text" name="name" class="form-control" id="name" placeholder="Full Name">
+                                        </div>
+                                        <div class="form-group mb-20">
+                                            <label for="username">username</label>
+                                            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                                        </div>
+                                        @if(isset($request->refer))
+                                            <div class="input-group input-group-outline mb-3">
+                                                {{--                                    <label class="form-label">Refer</label>--}}
+                                                <input type="text" name="refer" value="{{$request->refer}}" class="form-control" readonly/>
+                                            </div>
+                                        @else
+                                            <div class="field">
+                                                <input id="username" class="block mt-1 w-full" type="hidden" name="refer" value="1" required autofocus autocomplete="username" readonly/>
+                                            </div>
+                                        @endif
+                                        <div class="form-group mb-20">
+                                            <label for="email">Email Address</label>
+                                            <input type="text" name="email" class="form-control" id="email" placeholder="name@example.com">
+                                        </div>
+                                        <div class="form-group mb-20">
+                                            <label for="email">Phone Number</label>
+                                            <input type="number" name="number" class="form-control"  >
+                                        </div>
+                                        <div class="form-group mb-15">
+                                            <label for="password-field">password</label>
+                                            <div class="position-relative">
+                                                <input id="password-field" type="password" class="form-control" name="password" placeholder="Password">
+                                                <div class="uil uil-eye-slash text-lighten fs-15 field-icon toggle-password2"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-15">
+                                            <label for="password-field">Confirmed-password</label>
+                                            <div class="position-relative">
+                                                <input id="password-field" type="password" class="form-control" name="password_confirmation"  placeholder="Password">
+                                                <div class="uil uil-eye-slash text-lighten fs-15 field-icon toggle-password2"></div>
+                                            </div>
+                                        </div>
+                                        <div class="admin-condition">
+                                            <div class="checkbox-theme-default custom-checkbox ">
+                                                <input class="checkbox" type="checkbox" id="admin-1">
+                                                <label for="admin-1">
+<span class="checkbox-text">Creating an account means you’re okay
+with our <a href="#" class="color-primary">Terms of
+Service</a> and <a href="#" class="color-primary">Privacy
+Policy</a>
+my preference</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="admin__button-group button-group d-flex pt-1 justify-content-md-start justify-content-center">
+                                            <button class="btn btn-primary btn-default w-100 btn-squared text-capitalize lh-normal px-50 signIn-createBtn ">
+                                                Create Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                            <div class="px-20">
+                                <p class="social-connector social-connector__admin text-center">
+                                    <span>Or</span>
+                                </p>
+                            </div>
+                            <div class="admin-topbar">
+                                <p class="mb-0">
+                                    Don't have an account?
+                                    <a href="{{route('login')}}" class="color-primary">
                                         Sign In
                                     </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- End Navbar -->
-            </div>
-        </div>
-    </div>
-
-    <main class="main-content  mt-0">
-        <section>
-            <div class="page-header min-vh-100">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
-                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('../assets/img/illustrations/illustration-signup.jpg'); background-size: cover;">
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
-                            <div class="card card-plain">
-                                <div class="card-header">
-                                    <h4 class="font-weight-bolder">Sign Up</h4>
-                                    <p class="mb-0">Enter your email and password to register</p>
-                                </div>
-                                <div class="card-body">
-                                    <center>
-                                        <img width="100" src="{{asset('ama.jpeg')}}">
-                                    </center>
-                        <form method="post" role="form" action="{{ route('register') }}">
-                            @csrf
-                            <x-jet-validation-errors class="alert text-white alert-danger" />
-
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Name</label>
-                                <input type="text" name="name" class="form-control" required>
-                            </div>
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control" required/>
-                            </div>
-                            @if(isset($request->refer))
-                                <div class="input-group input-group-outline mb-3">
-{{--                                    <label class="form-label">Refer</label>--}}
-                                    <input type="text" name="refer" value="{{$request->refer}}" class="form-control" readonly/>
-                                </div>
-                            @else
-                                <div class="field">
-                                    <input id="username" class="block mt-1 w-full" type="hidden" name="refer" value="1" required autofocus autocomplete="username" readonly/>
-                                </div>
-                            @endif
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control">
-                            </div>
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Phone Number</label>
-                                <input type="number" name="number" class="form-control">
-                            </div>
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control">
-                            </div>
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Confirm-Password</label>
-                                <input type="password" name="password_confirmation" class="form-control">
-                            </div>
-                            <div class="form-check form-check-info text-start ps-0">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
-                                </label>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up<span class="load loading"></span></button>
-                            </div>
-                        </form>
-                            <script>
-                                    const btns = document.querySelectorAll('button');
-                                    btns.forEach((items)=>{
-                                        items.addEventListener('click',(evt)=>{
-                                            evt.target.classList.add('activeLoading');
-                                        })
-                                    })
-                                </script>
-                                </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-2 text-sm mx-auto">
-                                        Already have an account?
-                                        <a href="{{route('login')}}" class="text-primary text-gradient font-weight-bold">Sign in</a>
-                                    </p>
-                                </div>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-</x-guest-layout>
+        </div>
+    </div>
+</main>
+<div id="overlayer">
+    <div class="loader-overlay">
+        <div class="dm-spin-dots spin-lg">
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+            <span class="spin-dot badge-dot dot-primary"></span>
+        </div>
+    </div>
+</div>
+<div class="enable-dark-mode dark-trigger">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="uil uil-moon"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#myForm").on("submit", function(event) {
+            // Prevent form submission
+            event.preventDefault();
+
+            // Disable the submit button
+            $("#submitButton").prop("disabled", true);
+
+            // Change button text to "Loading..."
+            $("#submitButton").text("Loading...");
+
+            // Perform form submission asynchronously (AJAX call, etc.)
+            // Once the submission is complete, you can enable the button and reset the text
+        });
+    });
+</script>
+
+<script src="{{asset('js/plugins.min.js')}}"></script>
+<script src="{{asset('js/script.min.js')}}"></script>
+
+</body>
+</html>

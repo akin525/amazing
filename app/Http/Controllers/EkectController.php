@@ -1,13 +1,15 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
+use App\Models\easy;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -59,7 +61,7 @@ class EkectController
     {
         if (Auth::check()) {
             $user = User::find($request->user()->id);
-            $tv = data::where('network', 'elect')->get();
+            $tv = easy::where('network', 'elect')->get();
 
             return  view('elect', compact('user', 'tv'));
 
@@ -67,43 +69,51 @@ class EkectController
         return redirect("login")->withSuccess('You are not allowed to access');
 
     }
-    public function verifyelect(Request $request)
+    public function verifyelect($value1, $value2)
     {
         if (Auth::check()) {
-            $user = User::find($request->user()->id);
-            $tv = data::where('id', $request->id)->first();
+            $tv = easy::where('id', $value2)->first();
 
+//            return response()->json($value2);
 
             $curl = curl_init();
-
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/validate',
+                CURLOPT_URL => "https://easyaccess.com.ng/api/verifyelectricity.php",
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
+                CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('service' => 'electricity', 'coded' => $tv->plan_id, 'phone' => $request->number),
+                CURLOPT_SSL_VERIFYHOST => 0,
+                CURLOPT_SSL_VERIFYPEER => 0,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => array(
+                    'company' =>$tv->code,
+                    'metertype' =>01,
+                    'meterno' =>$value1,
+                    'amount' =>10000,
+                ),
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
+                    "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                    "cache-control: no-cache"
                 ),
             ));
-
             $response = curl_exec($curl);
-
             curl_close($curl);
 //            echo $response;
+//                        return response()->json($response);
+
             $data = json_decode($response, true);
             $success= $data["success"];
-            $name=$data["data"];
-            if ($success = 1){
+            if ($success == "true"){
+                $name=$data["message"]["content"]["Customer_Name"];
+
                 $log=$name;
             }else{
                 $log= "Unable to Identify meter Number";
             }
-            return view('payelect', compact('log', 'request', 'name'));
+            return response()->json($log);
 
 
         }
@@ -112,27 +122,26 @@ class EkectController
     {
         if (Auth::check()) {
             $user = User::find($request->user()->id);
-            $tv = data::where('id', $request->id)->first();
+            $tv = data::where('id', $request->productid)->first();
 
 //            $wallet = wallet::where('username', $user->username)->first();
 
 
             if ($user->wallet < $request->amount) {
                 $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-                Alert::error('Error', $mg);
-                return redirect('dashboard');
+               return response()->json($mg, Response::HTTP_BAD_REQUEST );
             }
             if ($request->amount < 0) {
 
                 $mg = "error transaction";
-                Alert::error('Error', $mg);
-                return redirect('dashboard');
+                return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
             }
             $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";
-                Alert::error('Error', $mg);
-                return redirect('dashboard');
+                return response()->json($mg, Response::HTTP_CONFLICT);
+
             } else {
                 $gt = $user->wallet - $request->amount;
 
@@ -143,34 +152,36 @@ class EkectController
 
 
                 $curl = curl_init();
-
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => $resellerURL.'payelect',
+                    CURLOPT_URL => "https://easyaccess.com.ng/api/payelectricity.php",
                     CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
+                    CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
                     CURLOPT_TIMEOUT => 0,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('service' => 'electricity', 'coded' => $tv->plan_id, 'phone' => $request->number, 'amount' => $request->amount, 'refid'=>$request->refid),
+                    CURLOPT_CUSTOMREQUEST => "POST",
+                    CURLOPT_POSTFIELDS => array(
+                        'company' =>$tv->code,
+                        'metertype' =>01,
+                        'meterno' =>$request->number,
+                        'amount' =>$request->amount,
+                    ),
                     CURLOPT_HTTPHEADER => array(
-                        'apikey: RENO-62c60552bbe6a5.09230661'
+                        "AuthorizationToken: 904cc8b30fb06707862323030783481b", //replace this with your authorization_token
+                        "cache-control: no-cache"
                     ),
                 ));
-
                 $response = curl_exec($curl);
-
                 curl_close($curl);
 //                echo $response;
-
                 $data = json_decode($response, true);
                 $success = $data["success"];
                 $tran1 = $data["discountAmount"];
                 $tran2 = $data["token"];
 
 //                        return $response;
-                if ($success == 1) {
+                if ($success == "true") {
 
                     $bo = bo::create([
                         'username' => $user->username,
@@ -182,6 +193,8 @@ class EkectController
                         'refid' => $request->refid,
                         'discountamoun' => $tran1,
                         'token' => $tran2,
+                        'fbalance'=>$user->wallet,
+                        'balance'=>$gt,
                     ]);
 
 
@@ -192,8 +205,8 @@ class EkectController
                     $receiver = $user->email;
                     $admin = 'info@amazingdata.com.ng';
 
-                    Mail::to($receiver)->send(new Emailtrans($bo));
-                    Mail::to($admin)->send(new Emailtrans($bo));
+//                    Mail::to($receiver)->send(new Emailtrans($bo));
+//                    Mail::to($admin)->send(new Emailtrans($bo));
                     Alert::success('Success', $am.' '.$ph);
                     return redirect('dashboard');
 

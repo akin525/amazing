@@ -148,13 +148,20 @@ class AirtimeController
 
 
         if ($user->wallet < $request->amount) {
-            $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+            $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
             return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
         }
         if ($request->amount < 0) {
 
             $mg = "error transaction";
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
+
+        }
+        if ($request->amount < 100) {
+
+            $mg = "Amount Must be more than 100";
             return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
 

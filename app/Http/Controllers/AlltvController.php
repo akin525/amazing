@@ -5,11 +5,13 @@ namespace app\Http\Controllers;
 use App\Mail\Emailtrans;
 use App\Models\bo;
 use App\Models\data;
+use App\Models\easy;
 use App\Models\Messages;
 use App\Models\refer;
 use App\Models\User;
 use App\Models\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -62,51 +64,47 @@ foreach ($plan as $pla) {
 }
     }
 
-    public function verifytv(Request $request)
+    public function verifytv($value1, $value2)
     {
-//        return $request;
-        $ve=data::where('id', $request->id)->first();
-//        return $request;
-
-//return $ve;
         $resellerURL='https://app2.mcd.5starcompany.com.ng/api/reseller/';
 
+//        return response()->json($value2);
+
+        $options = easy::where('network', $value2)->first();
 
         $curl = curl_init();
-
-
         curl_setopt_array($curl, array(
-
-            CURLOPT_URL => $resellerURL.'validate',
+            CURLOPT_URL => "https://easyaccess.com.ng/api/verifytv.php",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
+            CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('service' => 'tv', 'coded' =>$ve->network, 'phone' => $request->number),
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'company' =>$options->code,
+                'iucno' => $value1,
+            ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: MCDKEY_903sfjfi0ad833mk8537dhc03kbs120r0h9a'
-            )
+                "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
         ));
-
-                $response = curl_exec($curl);
-
+        $response = curl_exec($curl);
         curl_close($curl);
-//        echo $response;
-//return $response;
         $data = json_decode($response, true);
         $success= $data["success"];
-        $name=$data["data"];
-        if ($success = 1){
+        if($success== "true"){
+            $name=$data["message"]["content"]["Customer_Name"];
+
             $log=$name;
         }else{
-            $log= "Unable to Identify IUC Number";
+            $log= $data["message"];
         }
-        return view('tvp', compact('log', 'request', 'name'));
+        return response()->json($log);
 
 
     }
@@ -114,7 +112,7 @@ foreach ($plan as $pla) {
 //    {
 //        if (Auth::check()) {
 //            $user = User::find($request->user()->id);
-//            $tv = data::where('id', $request->id)->first();
+//       g     $tv = data::where('id', $request->id)->first();
 //
 //            return  view('tvp', compact('user', 'request'));
 //
@@ -124,12 +122,8 @@ foreach ($plan as $pla) {
 //    }
     public function tv(Request $request)
     {
-
-            $user = User::find($request->user()->id);
-        $tv = data::where('network', $request->id)->get();
-        return  view('tv', compact('user', 'tv'));
-
-        return redirect("login")->withSuccess('You are not allowed to access');
+        $tv = easy::where('network', $request->id)->get();
+        return  response()->json($tv);
 
     }
 
@@ -137,29 +131,28 @@ foreach ($plan as $pla) {
         {
             if (Auth::check()) {
                 $user = User::find($request->user()->id);
-                $tv = data::where('id', $request->id)->first();
+                $tv = easy::where('id', $request->productid)->first();
 
 //                $wallet = wallet::where('username', $user->username)->first();
 
 
                 if ($user->wallet < $tv->tamount) {
-                    
+
                     $mg = "You Cant Make Purchase Above" . "NGN" . $tv->tamount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-                    Alert::error('Error', $mg);
-                    return redirect('dashboard');
+                  return response()->json($mg, Response:: HTTP_BAD_REQUEST);
 
                 }
                 if ($tv->tamount < 0) {
 
                     $mg = "error transaction";
-                    Alert::error('Error', $mg);
-                    return redirect('dashboard');
+                    return response()->json($mg, Response:: HTTP_BAD_REQUEST);
+
                 }
                 $bo = bo::where('refid', $request->refid)->first();
                 if (isset($bo)) {
                     $mg = "duplicate transaction";
-                    Alert::error('Error', $mg);
-                    return redirect('dashboard');
+                    return response()->json($mg, Response:: HTTP_CONFLICT);
+
                 } else {
                     $gt = $user->wallet - $tv->tamount;
 
@@ -170,32 +163,31 @@ foreach ($plan as $pla) {
                     $resellerURL = 'https://renomobilemoney.com/api/';
 
                     $curl = curl_init();
-
                     curl_setopt_array($curl, array(
-                        CURLOPT_URL => $resellerURL.'paytv',
+                        CURLOPT_URL => "https://easyaccess.com.ng/api/paytv.php",
                         CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_ENCODING => '',
+                        CURLOPT_ENCODING => "",
                         CURLOPT_MAXREDIRS => 10,
                         CURLOPT_TIMEOUT => 0,
                         CURLOPT_FOLLOWLOCATION => true,
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                        CURLOPT_CUSTOMREQUEST => 'POST',
-                        CURLOPT_POSTFIELDS => array('refid'=>$request->refid, 'coded' => $tv->cat_id, 'phone' => $request->number),
+                        CURLOPT_CUSTOMREQUEST => "POST",
+                        CURLOPT_POSTFIELDS => array(
+                            'company' =>$request->code,
+                            'iucno' => $request['number'],
+                            'package' =>$tv['plan_id'],
+                        ),
                         CURLOPT_HTTPHEADER => array(
-                            'apikey: RENO-63939122379b03.42488714'
-
-                        )
+                            "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                            "cache-control: no-cache"
+                        ),
                     ));
-
                     $response = curl_exec($curl);
-
                     curl_close($curl);
-//                    echo $response;
                     $data = json_decode($response, true);
-//                    $success = $data["success"];
+                    $success = $data["success"];
 
-                        return $response;
-                    if ($success == 1) {
+                    if ($success == "true") {
 
                         $bo = bo::create([
                             'username' => $user->username,
@@ -204,8 +196,10 @@ foreach ($plan as $pla) {
                             'server_res' => $response,
                             'result' => $success,
                             'phone' => $request->number,
-                            'refid' => $request->refid,
+                            'refid' => $data['reference_no'],
                             'discountamoun' => 0,
+                            'fbalance'=>$user->wallet,
+                            'balance'=>$gt,
                         ]);
 
 
@@ -216,12 +210,14 @@ foreach ($plan as $pla) {
                         $receiver = $user->email;
                         $admin = 'info@amazingdata.com.ng';
 
-                        Mail::to($receiver)->send(new Emailtrans($bo));
-                        Mail::to($admin)->send(new Emailtrans($bo));
+//                        Mail::to($receiver)->send(new Emailtrans($bo));
+//                        Mail::to($admin)->send(new Emailtrans($bo));
                         $mg= $am." ".$ph;
-                        Alert::success('Success', $mg);
-                        return redirect('dashboard');
-
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => $am.' '.$ph,
+                            'id'=>$bo['id'],
+                        ]);
 
                     }elseif ($success==0){
                         $zo=$user->wallet+$tv->tamount;
@@ -232,8 +228,12 @@ foreach ($plan as $pla) {
                         $am= "NGN $request->amount Was Refunded To Your Wallet";
                         $ph=", Transaction fail";
 
-                        Alert::error('Fail', $am.' '.$ph);
-                        return redirect('dashboard');
+                        return response()->json([
+                            'status' => 'fail',
+                            'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                        ]);
+
                     }
                 }
             }

@@ -23,11 +23,11 @@
     <link href="{{asset('asset/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
     <!-- site css -->
-    <link rel="stylesheet" href="{{asset('style1.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/style1.css')}}" />
     <!-- responsive css -->
     <link rel="stylesheet" href="{{asset('admin/css/responsive.css')}}" />
     <!-- color css -->
-    <link rel="stylesheet" href="{{asset('admin/css/colors.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin/css/color_2.css')}}" />
     <!-- select bootstrap -->
     <link rel="stylesheet" href="{{asset('admin/css/bootstrap-select.css')}}" />
     <!-- scrollbar css -->
@@ -42,6 +42,7 @@
 
     <link rel="stylesheet" href="{{asset('admin/hp/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/hp/main.css')}}" />
+
 </head>
 
 <body class="dashboard dashboard_1">
@@ -56,14 +57,14 @@
             <div class="sidebar_blog_1">
                 <div class="sidebar-header">
                     <div class="logo_section">
-                        <a href="#"><img class="logo_icon img-responsive" src="{{asset('ama.jpeg')}}" alt="#" /></a>
+                        <a href="#"><img class="logo_icon img-responsive" src="{{asset('ama.jpg')}}" alt="#" /></a>
                     </div>
                 </div>
                 <div class="sidebar_user_info">
                     <div class="icon_setting"></div>
                     <div class="user_profle_side">
                         @if(Auth::user()->profile_photo_path==NULL)
-                            <div class="user_img"><img class="img-responsive" src="{{asset('ama.jpeg')}}" alt="#" /></div>
+                            <div class="user_img"><img class="img-responsive" src="{{asset('pa.jpg')}}" alt="#" /></div>
                         @else
                             <div class="user_img"><img class="img-responsive" src="{{url('/', Auth::user()->profile_photo_path)}}" alt="#" /></div>
                         @endif
@@ -200,7 +201,7 @@
                     <div class="full">
                         <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
                         <div class="logo_section">
-                            <a href="{{ route('dashboard') }}"><img class="img-responsive" src="{{asset('ama.jpeg')}}" alt="#" /></a>
+                            <a href="{{ route('admin/dashboard') }}"><img class="img-responsive" src="{{asset('ama.jpg')}}" alt="#" /></a>
                         </div>
                     </div>
                 </nav>
@@ -208,7 +209,9 @@
             <!-- end topbar -->
             @include('sweetalert::alert')
 
+            @stack('modals')
 
+            @livewireScripts
             <script type="text/javascript">
                 (function() {
                     var options = {
