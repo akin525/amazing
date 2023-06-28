@@ -74,7 +74,7 @@
             </ol><br><br><span><b>WEBSITE COST/PRICE (PROMO):</b></span><ol>
                 <li><b>N50,000</b> only (Including Domain Name, Hosting Fee and Security (SSL)). Only 70% payment <b>(N35,000)</b> is required as first installment and balance of 30% <b>(N15,000)</b> paid after completion.</li>
             </ol><br>
-            Ready to make a move? <a target="_blank" href="https://wa.me/2348066215840" style="text-decoration:none;"><button class="btn btn-success">Message Us</button></a><table class="table table-responsive text-left">
+            Ready to make a move? <a target="_blank" href="https://wa.me/2347036710638" style="text-decoration:none;"><button class="btn btn-success">Message Us</button></a><table class="table table-responsive text-left">
 
 
 

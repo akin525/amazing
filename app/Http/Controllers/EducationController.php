@@ -170,25 +170,22 @@ public function neco(Request $request)
     if ($user->wallet < $amount) {
         $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
 
-        Alert::error('error', $mg);
-        return redirect(route('dashboard'))
-            ->with('error', $mg);
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
 
     }
     if ($request->amount < 0) {
 
         $mg = "error transaction";
-        Alert::error('error', $mg);
-        return redirect(route('dashboard'))
-            ->with('error', $mg);
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
 
     }
     $bo = bo::where('refid', $request->id)->first();
     if (isset($bo)) {
         $mg = "duplicate transaction";
-        Alert::success('Success', $mg);
-        return redirect(route('dashboard'))
-            ->with('error', $mg);
+        return response()->json($mg, Response::HTTP_CONFLICT );
+
 
     } else {
 
@@ -210,6 +207,8 @@ public function neco(Request $request)
             'phone' => 'no',
             'refid' => $request->id,
             'discountamoun'=>0,
+            'fbalance'=>$user->wallet,
+            'balance'=>$gt,
         ]);
 
 
@@ -244,13 +243,19 @@ public function neco(Request $request)
                 ]);
 
             $mg='Waec Checker Successful Generated, kindly check your pin';
-            Alert::success('Successful',$mg );
-            return redirect('neco')->with('success', $mg);
+            return response()->json([
+                'status' => 'success',
+                'message' => $mg,
+                'id'=>$bo['id'],
+            ]);
 
         }elseif($data['success']=="false"){
 
-            Alert::error('Fail', $response);
-            return redirect('neco')->with('error', $response);
+            return response()->json([
+                'status' => 'fail',
+                'message' => $response,
+                'id'=>$bo['id'],
+            ]);
         }
         return $response;
     }

@@ -2,7 +2,7 @@
 @section('tittle', 'WAEC PIN')
 @section('content')
     <div class="col-lg-12">
-        <div class="loading-overlay" id="loadingSpinner1" style="display: none;">
+        <div class="loading-overlay" id="loadingSpinner" style="display: none;">
             <div class="loading-spinner"></div>
         </div>
         <div class="product-add global-shadow px-sm-30 py-sm-50 px-0 py-20 bg-white radius-xl w-100 mb-40">
@@ -30,7 +30,7 @@
                             </script>
 
 
-                            <form method="post" action="{{route('wac')}}" id="form_submit">
+                            <form  id="dataForm">
                                 @csrf
                                 <div class="row card card-body">
                                 <x-jet-validation-errors class="alert alert-success" />
@@ -108,5 +108,63 @@
     </div>
 </div>
 @endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#dataForm').submit(function(e) {
+                e.preventDefault(); // Prevent the form from submitting traditionally
+
+                // Get the form data
+                var formData = $(this).serialize();
+                $('#loadingSpinner').show();
+
+                // Send the AJAX request
+                $.ajax({
+                    url: "{{ route('wac') }}",
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Handle the success response here
+                        $('#loadingSpinner').hide();
+
+                        console.log(response);
+                        // Update the page or perform any other actions based on the response
+
+                        if (response.status == 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: response.message
+                            }).then(() => {
+                                location.reload(); // Reload the page
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'fail',
+                                text: response.message
+                            });
+                            // Handle any other response status
+                        }
+
+                    },
+                    error: function(xhr) {
+                        $('#loadingSpinner').hide();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'fail',
+                            text: xhr.responseText
+                        });
+                        // Handle any errors
+                        console.log(xhr.responseText);
+
+                    }
+                });
+            });
+        });
+
+    </script>
+@endsection
+
 
 
