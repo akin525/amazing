@@ -220,7 +220,7 @@
 
 
     <div class="col-xxl-3 col-lg-4 col-md-6 mb-25">
-        <a href="{{route('airtime')}}">
+        <a href="{{route('select')}}">
         <div class="feature-cards5 d-flex justify-content-between border-0 radius-xl p-25">
             <div class="application-task d-flex align-items-center">
                 <div class="application-task-icon wh-60 bg-success content-center">
