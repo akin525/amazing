@@ -1,6 +1,19 @@
 @extends('layouts.sidebar')
 @section('tittle', 'Dashboard')
 @section('content')
+    <style>
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
     <div class="col-xxl-12 mb-25">
         <div class="card banner-feature--18 d-flex">
             <div class="container-fluid">
@@ -280,8 +293,30 @@
             </figcaption>
         </figure>
     </div>
+    <style>
+        .alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: yellow;
+            padding: 20px;
+            animation: fadeIn 1s ease;
+        }
+    </style>
 @endsection
 @section('script')
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                Swal.fire({
+                    title: 'Hi {{Auth::user()->username}}',
+                    text: '{{$me->message}}',
+                    icon: 'info'
+                });
+            }, 1000); // 5000 milliseconds = 5 seconds
+        });
+    </script>
     <script>
         $(document).ready(function() {
 

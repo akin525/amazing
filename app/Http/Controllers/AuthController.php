@@ -165,7 +165,7 @@ $login=$user->name;
                         $greet="Good night 🌚";
                     }
             $charge=charp::where('username',$user->username )->sum('amount');
-        Alert::info('Hi!'.Auth::user()->username, ' You can purchase Data Refill | Data Pin|  Airtime | Cable TV | Electricity Subscription on Amazing Mobile Data');
+//        Alert::info('Hi!'.Auth::user()->username, ' You can purchase Data Refill | Data Pin|  Airtime | Cable TV | Electricity Subscription on Amazing Mobile Data');
 
             return  view('dashboard', compact('user', 'charge', 'bil3',  'greet', 'totaldeposite', 'me', 'deposite',  'bil2', 'bill', 'totalrefer', 'count'));
 
