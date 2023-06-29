@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://mobile.Amazing-Data.com.ng/'),
+    'url' => env('APP_URL', 'https://amazingdata.com.ng/'),
 
     'asset_url' => env('ASSET_URL'),
 
@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+
 
     ],
 
@@ -194,6 +196,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+
     ])->toArray(),
 
 ];
