@@ -185,6 +185,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
+Route::view('policy', 'policy');
 
 Route::get('admin/api', [HonorApi::class, 'api'])->name('admin/api');
 
