@@ -53,7 +53,7 @@ class FundController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://sandbox-api-d.squadco.com/transaction/verify/$reference",
+            CURLOPT_URL =>  "https://api-d.squadco.com/transaction/verify/$reference",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
