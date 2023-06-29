@@ -69,7 +69,7 @@ class BillController extends Controller
 //                $wallet = wallet::where('username', $user->username)->first();
 
 
-                $gt = $user->wallet - $request->amount;
+                $gt = $user->wallet - $amount;
 
 
                 $user->wallet = $gt;
