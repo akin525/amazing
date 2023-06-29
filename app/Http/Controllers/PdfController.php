@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\bo;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PdfController
 {
