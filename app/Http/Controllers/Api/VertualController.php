@@ -169,12 +169,11 @@ class VertualController
         $amount=$data["Body"]["amount"];
         $type=$data["Body"]["transaction_type"];
         $email=$data["Body"]["email"];
-        $no=$data["account_number"];
 
-        $wallet = User::where('account_number', $no)->first();
+        $wallet = User::where('email', $email)->first();
         $pt=$wallet['wallet'];
 
-        if ($no == $wallet->account_number) {
+        if ($email == $wallet->email) {
             $depo = deposit::where('payment_ref', $refid)->first();
             $user = user::where('username', $wallet->username)->first();
             if (isset($depo)) {
@@ -210,43 +209,15 @@ class VertualController
                 $admin= 'info@amazingdata.com.ng';
 
                 $receiver= $user->email;
-//                Mail::to($receiver)->send(new Emailcharges($charp ));
-//                Mail::to($admin)->send(new Emailcharges($charp ));
-//
-//
-//                $receiver = $user->email;
-//                Mail::to($receiver)->send(new Emailfund($deposit));
-//                Mail::to($admin)->send(new Emailfund($deposit));
+                Mail::to($receiver)->send(new Emailcharges($charp ));
+                Mail::to($admin)->send(new Emailcharges($charp ));
 
 
-                $resellerURL = 'https://renomobilemoney.com/api/';
-                $curl = curl_init();
-
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL =>$resellerURL.'fund',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_SSL_VERIFYHOST => 0,
-                    CURLOPT_SSL_VERIFYPEER => 0,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('refid' =>'Amazing-Data'.$refid, 'amount' => $amount),
-
-                    CURLOPT_HTTPHEADER => array(
-                        'apikey: RENO-63939122379b03.42488714'
-                    )));
+                $receiver = $user->email;
+                Mail::to($receiver)->send(new Emailfund($deposit));
+                Mail::to($admin)->send(new Emailfund($deposit));
 
 
-                $response = curl_exec($curl);
-
-                curl_close($curl);
-//                echo $response;
-
-
-                return $response;
 
             }
 
