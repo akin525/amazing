@@ -42,14 +42,14 @@
                     </select>
                     </div>
                                     <div class="form-group">
-                                        <label for="secondSelect">Network</label>
+                                        <label for="secondSelect">Select Plan</label>
                                         <select name="productid" id="secondSelect" class="text-success form-control" required="" onchange='document.getElementById("po").value = this.value.id;'>
 
                                             <option>Select Your Plan</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="number">Select Plan</label>
+                                        <label for="number">Number</label>
                                         <input type="number" id="number" name="number" minlength="11" class="text-success form-control" required>
                                     </div>
                                     <input type="hidden" name="refid" value="<?php echo rand(10000000, 999999999); ?>">
