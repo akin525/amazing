@@ -293,17 +293,7 @@
             </figcaption>
         </figure>
     </div>
-    <style>
-        .alert {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: yellow;
-            padding: 20px;
-            animation: fadeIn 1s ease;
-        }
-    </style>
+
 @endsection
 @section('script')
     <script>

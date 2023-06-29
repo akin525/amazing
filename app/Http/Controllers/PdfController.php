@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bill;
 use App\Models\bo;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\PDF;
 
 class PdfController
 {
