@@ -167,6 +167,12 @@
                             <span class="menu-text">Dashboard</span>
                         </a>
                     </li>
+                        <li>
+                        <a href="{{route('fund')}}" class="active">
+                            <span class="nav-icon uil uil-money-bill"></span>
+                            <span class="menu-text">Fund With Card</span>
+                        </a>
+                    </li>
                     <li class="has-child">
                         <a href="#" class>
                             <span class="nav-icon uil uil-tv-retro"></span>
