@@ -79,7 +79,7 @@ class FundController
         } else {
 //             echo $response;
         }
-//        return $response;
+        echo $response;
         $data=json_decode($response, true);
         $amount=$data["data"]["transaction_amount"]/100;
 // echo $auth;
