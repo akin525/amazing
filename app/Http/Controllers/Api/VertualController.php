@@ -166,7 +166,7 @@ class VertualController
 
         }
         $refid=$data["TransactionRef"];
-        $amount=$data["Body"]["amount"];
+        $amount=$data["Body"]["amount"]/100;
         $type=$data["Body"]["transaction_type"];
         $email=$data["Body"]["email"];
 
