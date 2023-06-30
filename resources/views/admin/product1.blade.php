@@ -35,9 +35,9 @@
                         <tbody>
                         @foreach($product as $seller)
                             <tr>
-                                <link rel="stylesheet" href="{{asset('style.css')}}">
+                                <link rel="stylesheet" href="{{asset('admin/style.css')}}">
                                 <!--Only for demo purpose - no need to add.-->
-                                <link rel="stylesheet" href="{{asset('demo.css')}}"/>
+                                <link rel="stylesheet" href="{{asset('admin/demo.css')}}"/>
                                 <td> {{$seller->network}} </td>
                                 <td> {{$seller->plan}}</td>
                                 <td> {{$seller->amount}}</td>

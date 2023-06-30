@@ -29,7 +29,7 @@
                             </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name1">Network</label>
+                                        <label for="name1">Plan</label>
                                         <select  name="productid"  class="text-success form-control" onChange="myNewFunction(this);" required="">
                                 <option value="{{$product->network}}" > MTN 1.5GB (DATACARD)</option>
                                         </select>
