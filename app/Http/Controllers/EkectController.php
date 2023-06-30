@@ -137,6 +137,12 @@ class EkectController
                 return response()->json($mg, Response::HTTP_BAD_REQUEST );
 
             }
+            if ($request->amount < 500) {
+
+                $mg = "Amount Must be more than 500";
+                return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
+            }
             $bo = bo::where('refid', $request->refid)->first();
             if (isset($bo)) {
                 $mg = "duplicate transaction";

@@ -72,6 +72,7 @@ $request->validate([
     }
     $bo = bo::where('refid', $request->id)->first();
     if (isset($bo)) {
+        $mg="Duplicate Transaction";
         return response()->json($mg, Response::HTTP_CONFLICT);
 
 
@@ -81,7 +82,7 @@ $request->validate([
 //                $bt = data::where("id", $request->productid)->first();
 
 
-        $gt = $user->wallet - $request->amount;
+        $gt = $user->wallet - $amount;
 
 
         $user->wallet = $gt;
@@ -193,7 +194,7 @@ public function neco(Request $request)
 //                $bt = data::where("id", $request->productid)->first();
 
 
-        $gt = $user->wallet - $request->amount;
+        $gt = $user->wallet - $amount;
 
 
         $user->wallet = $gt;
@@ -201,7 +202,7 @@ public function neco(Request $request)
         $bo = bo::create([
             'username' => $user->username,
             'plan' => $product->network ,
-            'amount' => $request->amount,
+            'amount' => $amount,
             'server_res' => 'ur fault',
             'result' => 1,
             'phone' => 'no',

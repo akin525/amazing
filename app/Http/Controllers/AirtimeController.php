@@ -164,7 +164,6 @@ class AirtimeController
             $mg = "Amount Must be more than 100";
             return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
-
         }
         $bo = bo::where('refid', $request->refid)->first();
         if (isset($bo)) {

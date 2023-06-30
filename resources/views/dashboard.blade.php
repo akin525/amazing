@@ -27,7 +27,7 @@
                             <div class="d-flex justify-content-sm-start justify-content-center">
                                 @if(Auth::user()->apikey ==null)
                                 <a href="#" class="btn btn-danger m-2">Customer</a>
-                                <a href="{{route('reseller')}}" class="btn btn-success">Upgrade Now</a>
+                                <a href="{{route('reseller')}}" class="btn btn-success">Upgrade</a>
                                 @else
                                 <a href="#" class="btn btn-danger m-2">Reseller</a>
                                 <a href="#" class="btn btn-success">Upgraded!</a>
