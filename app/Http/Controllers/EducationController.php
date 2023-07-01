@@ -6,6 +6,7 @@ use App\Console\encription;
 use App\Models\bill_payment;
 use App\Models\bo;
 use App\Models\data;
+use App\Models\easy;
 use App\Models\neco;
 use App\Models\server;
 use App\Models\User;
@@ -42,7 +43,7 @@ $request->validate([
 ]);
     $user = User::find($request->user()->id);
     $serve = server::where('status', '1')->first();
-    $product=data::where('network', 'WAEC')->first();
+    $product=easy::where('network', 'WAEC')->first();
 
     if ($user->apikey == '') {
         $amount = $product->tamount *$request->value;
@@ -160,7 +161,7 @@ public function neco(Request $request)
     ]);
     $user = User::find($request->user()->id);
     $serve = server::where('status', '1')->first();
-    $product=data::where('network', 'NECO')->first();
+    $product=easy::where('network', 'NECO')->first();
 
     if ($user->apikey == '') {
         $amount = $product->tamount *$request->value;

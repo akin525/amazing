@@ -33,7 +33,7 @@ class AuthController
         $airtel=data::where('network', 'airtel-data')->limit(7)->get();
         $me = Messages::where('status', 1)->first();
 
-        Alert::info('Important Notice:', $me->message);
+//        Alert::info('Important Notice:', $me->message);
 //        Alert::image('Amazing-Data!','Data Refill | Airtime | Cable TV | Electricity Subscription','https://amazingdata.com.ng/df.jpeg','200','200', 'Image Alt');
 
         return view("home", compact("mtn", "glo", "eti", "airtel"));
