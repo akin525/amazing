@@ -184,7 +184,7 @@
                             <a href="https://play.google.com/store/apps/details?id=com.a5starcompany.amazingdata" data-lity class="vid-btn">
                                 <img width="200" src="{{asset('play.png')}}"/>
                                 <span>
-                                        Download App<br>
+                                        <br>Download App
                                     </span>
                             </a>
                         </div>
