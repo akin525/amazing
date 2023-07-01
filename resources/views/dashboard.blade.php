@@ -34,9 +34,10 @@
                                 <a href="#" class="btn btn-success">Upgraded!</a>
                                 @endif
 
-                                    <a href="https://play.google.com/store/apps/details?id=com.a5starcompany.amazingdata " target="_blank"><img width="200" src="{{asset('play.png')}}"/> Download </a>
 
                             </div>
+                            <a href="https://play.google.com/store/apps/details?id=com.a5starcompany.amazingdata " target="_blank"><img width="200" src="{{asset('play.png')}}"/> Download </a>
+
                         </div>
 
                     </div>
