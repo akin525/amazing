@@ -48,7 +48,7 @@ class CreateNewUser implements CreatesNewUsers
                 $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/virtual-account',
+                CURLOPT_URL => 'https://integration.mcd.5starcompany.com.ng/api/reseller/virtual-account',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -81,8 +81,8 @@ class CreateNewUser implements CreatesNewUsers
 
             $receiver=$input ['email'];
             $admin= 'info@amazingdata.com.ng';
-//            Mail::to($receiver)->send(new Emailotp($input));
-//            Mail::to($admin)->send(new Emailotp($input));
+            Mail::to($receiver)->send(new Emailotp($input));
+            Mail::to($admin)->send(new Emailotp($input));
             return tap(User::create([
                 'name' => $input['name'],
                 'username'=>$input['username'],
