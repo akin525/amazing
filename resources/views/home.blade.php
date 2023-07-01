@@ -10,618 +10,714 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="https://amazingdata.com.ng/logoi.png.png" rel="icon">
-    <link href="https://amazingdata.com.ng/logoi.png.png" rel="apple-touch-icon">
+    <link href="https://amazingdata.com.ng/ama.jpg" rel="icon">
+    <link href="https://amazingdata.com.ng/ama.jpg" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="{{asset('lan/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('lan/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('lan/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-    <link href="{{asset('lan/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-    <link href="{{asset('lan/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-    <link href="{{asset('lan/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('land/cdn.jsdelivr.net/npm/bootstrap-icons%401.7.2/font/bootstrap-icons.css')}}">
 
-    <!-- Template Main CSS File -->
-    <link href="{{asset('lan/assets/css/style.css')}}" rel="stylesheet">
+    <!-- bootstrap 5 -->
+    <link rel="stylesheet" href="{{asset('land/assets/css/lib/bootstrap.min.css')}}">
 
-    <!-- =======================================================
-    * Template Name: Shuffle - v4.7.0
-    * Template URL: https://bootstrapmade.com/bootstrap-3-one-page-template-free-shuffle/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+    <!-- ====== font family ====== -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset('land/assets/css/lib/all.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('land/assets/css/lib/animate.css')}}" />
+    <link rel="stylesheet" href="{{asset('land/assets/css/lib/jquery.fancybox.css')}}" />
+    <link rel="stylesheet" href="{{asset('land/assets/css/lib/lity.css')}}" />
+    <link rel="stylesheet" href="{{asset('land/assets/css/lib/swiper.min.css')}}" />
+    <!-- ====== global style ====== -->
+    <link rel="stylesheet" href="{{asset('land/assets/css/style.css')}}" />
 </head>
 
 <body>
-<style>
-    .preloader
-    {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: #fff;
-        z-index: 9999;
-        text-align: center;
-    }
-    .preloader-icon
-    {
-        position: relative;
-        top: 45%;
-        width: 100px;
-        border-radius: 50%;
-        animation: shake 1.5s infinite;
-    }
-    @keyframes shake
-    {
-        0% { transform: translate(1px, -1px) rotate(0deg);}
-        10% { transform: translate(1px, -3px) rotate(-1deg);}
-        20% { transform: translate(1px, -5px) rotate(-3deg);}
-        30% { transform: translate(1px, -7px) rotate(0deg);}
-        40% { transform: translate(1px, -9px) rotate(1deg);}
-        50% { transform: translate(1px, -11px) rotate(3deg);}
-        60% { transform: translate(1px, -9px) rotate(0deg);}
-        70% { transform: translate(1px, -7px) rotate(-1deg);}
-        80% { transform: translate(1px, -5px) rotate(-3deg);}
-        90% { transform: translate(1px, -3px) rotate(0deg);}
-        100% { transform: translate(1px, -1px) rotate(-1deg);}
-    }
-</style>
-<div class="preloader"> <img class="preloader-icon" src="{{asset('gp.gif')}}" alt="My Site Preloader"> </div>
+<!-- ---------- loader ---------- -->
+<div id="preloader">
+    <div id="loading-wrapper" class="show">
+        <div id="loading-text"> <img src="{{asset('ama.jpg')}}" alt=""> </div>
+        <div id="loading-content"></div>
+    </div>
+</div>
+<!-- ====== end loading page ====== -->
 
- @include('sweetalert::alert')
+@include('sweetalert::alert')
 
-<!-- ======= Hero Section ======= -->
-<section id="hero">
-    <div class="hero-container">
-        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
-            <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
-            <div class="carousel-inner" role="listbox">
-
-                <!-- Slide 1 -->
-                <div class="carousel-item active">
-                    <div class="carousel-background"><img src="{{asset('lan/assets/img/so.png')}}" height="1000" width="2000"></div>
-                    <div class="carousel-container">
-                        <div class="carousel-content">
-                            <h2 class="animate__animated animate__fadeInDown">Welcome to <span>Amazing-Data</span></h2>
-                            <p class="animate__animated animate__fadeInUp">We are here to serve you better .</p>
-                            @if(Auth()->user())
-                                <a href="{{route('dashboard')}}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Dashboard</a>
-                                <a href="{{route('logout')}}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Logout</a>
-                            @else
-                            <a href="{{route('register')}}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Get Started</a>
-                            <a href="{{route('login')}}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Login</a>
-                            @endif
+<!-- ====== start top navbar ====== -->
+<div class="top-navbar style-1">
+    <div class="container">
+        <div class="content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="top-links">
+                        <div class="text text-white">
+                            <i class="fas fa-bullhorn"></i>
+                            <strong>Welcome:</strong>
+                            <span>To Amazing Mobile Data/Airtime<a href="#" class="p-0"><u>1st Line IT Support
+                                            </u></a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="r-side">
+                        <div class="socail-icons">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="me-1" src="assets/img/lang.png" alt=""> English
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">French</a></li>
+                                <li><a class="dropdown-item" href="#">Arabic</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
-            </div>
         </div>
-</section><!-- End Hero -->
-
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-
-        <div class="logo">
-            <h1 class="text-light"><a href="{{route('home')}}"><span>Amazing-Data</span></a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-                <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
     </div>
-</header><!-- End Header -->
+</div>
+<!-- ====== end top navbar ====== -->
 
-<main id="main">
+<!-- ====== start navbar ====== -->
+<nav class="navbar navbar-expand-lg navbar-light style-1">
+    <div class="container">
+        <a class="navbar-brand" href="#" data-scroll-nav="0">
+            <img width="100" src="{{asset('ama.jpg')}}" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link active"  data-scroll-nav="1">
+                        about us
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link"  data-scroll-nav="2">
+                        services
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  data-scroll-nav="3">
+                        why us
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-side">
+                <div class="hotline pe-4">
+                    <div class="icon me-3">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <div class="cont">
+                        <small class="text-muted m-0">hotline 24/7</small>
+                        <h6>07036710638</h6>
+                    </div>
+                </div>
+                <div class="qoute-nav ps-4">
+                    @if(\Illuminate\Support\Facades\Auth::check())
+                    <a href="{{route('dashboard')}}" class="btn sm-butn butn-gard border-0 text-white">
+                        <span>Dashboard</span>
+                    </a>
+                    @else
 
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>About Us</h2>
-                <p>We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment and more.....</p>
+                    <a href="{{route('login')}}" class="btn sm-butn butn-gard border-0 text-white">
+                        <span>Login/Signup</span>
+                    </a>
+                    @endif
+                </div>
             </div>
+        </div>
+    </div>
+</nav>
+<!-- ====== end navbar ====== -->
 
+<!-- ====== start header ====== -->
+<header class="section-padding style-1" data-scroll-index="0">
+    <div class="container">
+        <div class="content">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="{{asset('lan/assets/img/about.jpg')}}" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                    <h3><strong>About Amazing-Data</strong></h3>
-                    <p class="fst-italic">
-                        With Amazing-Data, you can purchase your airtime, data, electricity bills and TV subscription with just the click of a button, all by yourself, seamlessly and without stress. We operate a 24/7 days support system with prompt response to any complains or suggestion from our esteemed clients.
-                    </p>
-
-
-                    <div class="skills-content">
-
-                        <div class="progress">
-                            <span class="skill">REGISTERED USERS <i class="val">100%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                    <div class="info">
+                        <div class="section-head mb-60">
+                            <h6 class="color-main text-uppercase">Welcome To AmazingData!</h6>
+                            <h2>
+                                DATA, AIRTIME, EDUCATIONAL PINS, TV SUBSCRIPTION,
+                                <span class="fw-normal">ELECTRICITY BILLS!!</span>
+                            </h2>
                         </div>
-
-                        <div class="progress">
-                            <span class="skill">HAPPY CLIENTS<i class="val">90%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                        <div class="text">
+                            ...Your Satisfaction is Our Priority!!
                         </div>
-
-                        <div class="progress">
-                            <span class="skill">LOGGED IN USERS <i class="val">75%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                        <div class="bttns mt-5">
+                            @if(\Illuminate\Support\Facades\Auth::check())
+                            <a href="{{route('dashboard')}}" class="btn btn-dark">
+                                <span>Dashboard</span>
+                            </a>
+                            @else
+                                <a href="{{route('login')}}" class="btn btn-dark">
+                                <span>Login/Signup</span>
+                            </a>
+                            @endif
+{{--                            <a href="#" data-lity class="vid-btn">--}}
+{{--                                <i class="bi bi-play wow heartBeat infinite slow"></i>--}}
+{{--                                <span>--}}
+{{--                                        Iteck’s <br> Showreels--}}
+{{--                                    </span>--}}
+{{--                            </a>--}}
                         </div>
-
-                        <div class="progress">
-                            <span class="skill">YEARS OF EXPERIENCE <i class="val">55%</i></span>
-                            <div class="progress-bar-wrap">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-
                     </div>
-
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="img">
+                        <img src="{{asset('land/assets/img/header/head.png')}}" alt="">
+                    </div>
                 </div>
             </div>
-
         </div>
-    </section><!-- End About Us Section -->
+    </div>
+    <img src="{{asset('land/assets/img/header/head_shape_r.png')}}" alt="" class="head-shape-r wow">
+    <img src="{{asset('land/assets/img/header/head_shape_l.png')}}" alt="" class="head-shape-l wow">
+</header>
+<!-- ====== end header ====== -->
 
-    <!-- ======= Counts Section ======= -->
-    <section class="counts section-bg">
+<!--Contents-->
+<main>
+
+
+    <!-- ====== start about ====== -->
+    <section class="about style-1"  data-scroll-index="1">
         <div class="container">
-
-            <div class="row no-gutters">
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-                    <div class="count-box">
-                        <img class="img-fluid" src="lan/assets/img/mtn%20logo.png" alt="">
-                        <p><strong>MTN NETWORK</strong> </p>
+            <div class="content">
+{{--                <div class="about-logos d-flex align-items-center justify-content-between border-bottom border-1 brd-light pb-20">--}}
+{{--                    <a href="#" class="logo wow fadeInUp" data-wow-delay="0">--}}
+{{--                        <img src="assets/img/about/about_logos/1.png" alt="">--}}
+{{--                    </a>--}}
+{{--                    <a href="#" class="logo wow fadeInUp" data-wow-delay="0.2s">--}}
+{{--                        <img src="assets/img/about/about_logos/2.png" alt="">--}}
+{{--                    </a>--}}
+{{--                    <a href="#" class="logo wow fadeInUp" data-wow-delay="0.4s">--}}
+{{--                        <img src="assets/img/about/about_logos/3.png" alt="">--}}
+{{--                    </a>--}}
+{{--                    <a href="#" class="logo wow fadeInUp" data-wow-delay="0.6s">--}}
+{{--                        <img src="assets/img/about/about_logos/4.png" alt="">--}}
+{{--                    </a>--}}
+{{--                    <a href="#" class="logo wow fadeInUp" data-wow-delay="0.8s">--}}
+{{--                        <img src="assets/img/about/about_logos/5.png" alt="">--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+                <div class="about-info">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-5">
+                            <div class="title">
+                                <h3 class=" wow fadeInUp slow">“AmazingData is a registered telecommunication vendor known for providing internet services, airtime VTU, cable TV subscriptions, electricity payment,”</h3>
+                                <small class=" wow fadeInUp slow fw-bold">converting airtime to cash..</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="info">
+                                <h6 class=" wow fadeInUp slow">
+                                    Convert MTN, 9mobile, Airtel and Glo airtime to cash instantly. Airtime topup and data purchase are automated and get delivered to you almost instantly.
+                                </h6>
+                                <p class=" wow fadeInUp slow">
+                                    We use a customized application specifically designed a testing gnose to keep away for people.
+                                </p>
+                                <a href="#" class="btn btn-outline-light mt-5 sm-butn wow fadeInUp slow">
+                                    <span>more about us</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-                    <div class="count-box">
-                        <img class="img-fluid" src="lan/assets/img/Glon.png" alt="">
-                        <p><strong>GLO NETWORK</strong> </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-                    <div class="count-box">
-                        <img class="img-fluid" src="lan/assets/img/airtel.png" alt="">
-                        <p><strong>AIRTEL NETWORK</strong> </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-                    <div class="count-box">
-                        <img class="img-fluid" src="lan/assets/img/9mobile.jpg" alt="">
-                        <p><strong>9MOBILE NETWORK</strong> </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-                    <div class="count-box">
-                        <img class="img-fluid" src="lan/assets/img/BULB%20F.jfif" alt="">
-                        <p><strong>ELECTRICITY BILL</strong> </p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-                    <div class="count-box">
-                        <img class="img-fluid" src="lan/assets/img/TV.jpg" alt="">
-                        <p><strong>TV SUBCRIPTION</strong> </p>
-                    </div>
-                </div>
-
+                <img src="{{asset('land/assets/img/about/num_shap.png')}}" alt="" class="about_shap">
             </div>
-
         </div>
-    </section><!-- End Counts Section -->
+    </section>
+    <!-- ====== end about ====== -->
 
 
 
-    <!-- ======= Our Services Section ======= -->
-    <section id="services" class="services">
+
+    <!-- ====== start services ====== -->
+    <section class="services section-padding style-1"  data-scroll-index="2">
         <div class="container">
-
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p> We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment and more....</p>
-            </div>
-
             <div class="row">
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4 class="title"><a href="">Airtime</a></h4>
-                        <p class="description">Airtime is a live social space where you can do what you love over video</p>
+                <div class="col offset-lg-1">
+                    <div class="section-head mb-60">
+                        <h6 class="color-main text-uppercase wow fadeInUp">our services</h6>
+                        <h2 class="wow fadeInUp">
+                            Perfect IT Solutions <span class="fw-normal">For Your Business</span>
+                        </h2>
                     </div>
                 </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4 class="title"><a href="">Data Bundle</a></h4>
-                        <p class="description">Get cheap and fast internet for your Smartphone. Choose from a variety of data bundles</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4 class="title"><a href="">Cable Tv</a></h4>
-                        <p class="description">Pay your Gotv, DSTV, Startimes</p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4 class="title"><a href="">Electricity Bill Payment</a></h4>
-                        <p class="description"> Avoid the stress, pay for your electricity bills from your mobile and PC online.</p>
-                    </div>
-                </div>
-
             </div>
-
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="service-box mb-4 wow fadeInUp" data-wow-delay="0">
+                            <h5>
+                                <a href="{{route('select')}}">Mobile Data</a>
+                                <span class="num">01</span>
+                            </h5>
+                            <div class="icon">
+                                <img src="{{asset('land/assets/img/icons/serv_icons/1.png')}}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="text">
+                                    Start enjoying this very low rates Data plan for your internet browsing databundle.
+                                </div>
+                                <div class="tags">
+                                    <a href="#">MTN</a>
+                                    <a href="#">AIRTEL</a>
+                                    <a href="#">GLO</a>
+                                    <a href="#">9MOBILE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="service-box mb-4 wow fadeInUp" data-wow-delay="0.2s">
+                            <h5>
+                                <a href="{{route('airtime')}}">Airtime </a>
+                                <span class="num">02</span>
+                            </h5>
+                            <div class="icon">
+                                <img src="{{asset('land/assets/img/icons/serv_icons/2.png')}}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="text">
+                                    Never run low on airtime, purchase airtime for all networks instantly.
+                                </div>
+                                <div class="tags">
+                                    <a href="#">MTN</a>
+                                    <a href="#">AIRTEL</a>
+                                    <a href="#">GLO</a>
+                                    <a href="#">9MOBILE</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="service-box mb-4 wow fadeInUp" data-wow-delay="0.4s">
+                            <h5>
+                                <a href="{{url('vtu')}}"> Website Development </a>
+                                <span class="num">03</span>
+                            </h5>
+                            <div class="icon">
+                                <img src="{{asset('land/assets/img/icons/serv_icons/3.png')}}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="text">
+                                   Helping you becoming a website owner by upgrading your account to reseller
+                                </div>
+                                <div class="tags">
+                                    <a href="#">Ecommerce</a>
+                                    <a href="#">Landing Page</a>
+                                    <a href="#">CMS</a>
+                                    <a href="#">Plugin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="service-box mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0">
+                            <h5>
+                                <a href="{{url('picktv')}}"> TV Subscription</a>
+                                <span class="num">04</span>
+                            </h5>
+                            <div class="icon">
+                                <img src="{{asset('land/assets/img/icons/serv_icons/4.png')}}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="text">
+                                    Stay connected! Subscribe and Renew your Tv subscription instantly.
+                                </div>
+                                <div class="tags">
+                                    <a href="#">GOTV</a>
+                                    <a href="#">DSTV</a>
+                                    <a href="#">STARTIMES</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="service-box mb-4 mb-md-0 wow fadeInUp" data-wow-delay="0.2s">
+                            <h5>
+                                <a href="page-services-5.html">Electricity Bills</a>
+                                <span class="num">05</span>
+                            </h5>
+                            <div class="icon">
+                                <img src="{{asset('land/assets/img/icons/serv_icons/5.png')}}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="text">
+                                    Purchase prepaid meter tokens instantly and Pay estimated bill.
+                                </div>
+                                <div class="tags">
+                                    <a href="#">IKEDC</a>
+                                    <a href="#">EKO</a>
+                                    <a href="#">Etc..</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="service-box wow fadeInUp" data-wow-delay="0.4s">
+                            <h5>
+                                <a href="/waec"> WAEC/NECO Result Checker </a>
+                                <span class="num">06</span>
+                            </h5>
+                            <div class="icon">
+                                <img src="{{asset('land/assets/img/icons/serv_icons/6.png')}}" alt="">
+                            </div>
+                            <div class="info">
+                                <div class="text">
+                                    (Pin & Serial No.)
+                                </div>
+                                <div class="tags">
+                                    <a href="#">WAEC</a>
+                                    <a href="#">NECO</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section><!-- End Our Services Section -->
+        <img src="{{asset('land/assets/img/services/ser_shap_l.png')}}" alt="" class="ser_shap_l">
+        <img src="{{asset('land/assets/img/services/ser_shap_r.png')}}" alt="" class="ser_shap_r">
+    </section>
+    <!-- ====== end services ====== -->
 
-    <!-- ======= Cta Section ======= -->
-    <section class="cta">
+    <!-- ====== start choose-us====== -->
+    <section class="choose-us section-padding pt-0 style-1"  data-scroll-index="3">
         <div class="container">
-
-            <div class="text-center">
-                <h3>Call To Action</h3>
-                <p> You Can Perform Quick Transactions Anytime And Anywhere Using Any Device. Awesome Customer Support. Quick Payment Steps. Safe and Secure. Services: Instant Reconnection, 24/7 Support, Secure Payment, Fast Support Response, Prompt Customer Support..</p>
-                <a class="cta-btn" href="#">Call To Action</a>
-            </div>
-
-        </div>
-    </section><!-- End Cta Section -->
-
-    <!-- ======= More Services Section ======= -->
-    <section class="more-services section-bg">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="card">
-                        <img src="lan/assets/img/mtn%20logo.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="">MTN DATA</a></h5>
-                            <p class="card-text"></p>
-                            <a href="#" class="btn">Get Started</a>
+            <div class="row justify-content-end">
+                <div class="col-lg-5">
+                    <div class="info">
+                        <div class="section-head mb-60">
+                            <h6 class="color-main text-uppercase wow fadeInUp">Why choose us</h6>
+                            <h2 class="wow fadeInUp">
+                                Boost Your Business <span class="fw-normal">With New Tech</span>
+                            </h2>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="card">
-                        <img src="lan/assets/img/Glon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="">GLO DATA</a></h5>
-                            <p class="card-text"></p>
-                            <a href="#" class="btn">Get started</a>
+                        <div class="text">
+                            The enterprise is a leading business in telecommunication and other aspect of needs of business owners and individuals.
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="card">
-                        <img src="lan/assets/img/airtel.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="">AIRTEL DATA</a></h5>
-                            <p class="card-text"></p>
-                            <a href="#" class="btn">Get started</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-5 mb-lg-0">
-                    <div class="card">
-                        <img src="lan/assets/img/9mobile.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="">9MOBILE DATA</a></h5>
-                            <p class="card-text"></p>
-                            <a href="#" class="btn">Get started</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section><!-- End More Services Section -->
-
-    <!-- ======= Info Box Section ======= -->
-    <section class="info-box py-0">
-        <div class="container-fluid">
-
-            <div class="row">
-
-                <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-
-                    <div class="content">
-                        <h3><strong>FREQUENTLY ASKED QUESTIONS</strong></h3>
-                        <p>
-                            How we can help you ?
-                        </p>
-                    </div>
-
-                    <div class="accordion-list">
                         <ul>
-                            <li>
-                                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> how can i register? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
-                                    <p>
-                                        click on sign Up botton and fill your details in there, then click on register, that how you have an account with us
-                                    </p>
-                                </div>
+                            <li class="wow fadeInUp">
+                                <span class="icon">
+                                    <i class="bi bi-check2"></i>
+                                </span>
+                                <h6>
+                                    Buy Airtime & Data at cheaper rate
+                                </h6>
                             </li>
-
-                            <li>
-                                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> How can i fund my account ? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
-                                    <p>
-                                        Transfer to the account number on your dashboard, and your account will be automatically fund, you don't need to tend reciecpt before it deliver
-                                    </p>
-                                </div>
+                            <li class="wow fadeInUp">
+                                <span class="icon">
+                                    <i class="bi bi-check2"></i>
+                                </span>
+                                <h6>
+                                    Over 100+ Payment Gateways Support
+                                </h6>
                             </li>
-
-                            <li>
-                                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> What are the services available on the Amazing-Data? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                                <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
-                                    <p>
-                                        Airtime VTU
-                                        MTN VTU Airtime, Airtel VTU Airtime, Glo VTU Airtime, 9mobile VTU Airtime
-                                        Data
-                                        MTN Data Bundle, Airtel Data Bundle, Glo Data Bundle, 9mobile Data Bundle
-                                        TV Subscription
-                                        DSTV subscription payment, GOTV Subscription Payment, Startimes Subscription Payment
-                                        Electricity Payment
-                                        Abuja Electricity Distribution Company (AEDC) – Prepaid, Port Harcourt Electricity Distribution Company (PHED) – Prepaid, Ikeja Electricity Distribution Company (IKEDC) – Prepaid, Eko Electricity Distribution Company (EKEDC) – Prepaid, Jos Electricity Distribution PLC (JEDplc) – Prepaid, Kano Electricity Distribution Company (KEDCO) – Prepaid,
-
-                                    </p>
-                                </div>
+                            <li class="wow fadeInUp">
+                                <span class="icon">
+                                    <i class="bi bi-check2"></i>
+                                </span>
+                                <h6>
+                                    Your payment is secure and your details will never be at risk
+                                </h6>
                             </li>
-
+                            <li class="wow fadeInUp">
+                                <span class="icon">
+                                    <i class="bi bi-check2"></i>
+                                </span>
+                                <h6>
+                                    Dedicated Support 24/7
+                                </h6>
+                            </li>
                         </ul>
+
+                        <a href="#" class="btn butn-gard border-0 text-white wow fadeInUp">
+                            <span>How We Works</span>
+                        </a>
                     </div>
-
                 </div>
-
-                <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img" style="background-image: url(assets/img/info-box.jpg);">&nbsp;</div>
             </div>
-
         </div>
-    </section><!-- End Info Box Section -->
+        <img src="{{asset('land/assets/img/choose_us/choose_lines.svg')}}" alt="" class="choose-us-img">
+        <img src="{{asset('land/assets/img/choose_us/choose_brands.png')}}" alt="" class="choose-us-brands">
+        <img src="{{asset('land/assets/img/choose_us/choose_bubbles.png')}}" alt="" class="choose-us-bubbles">
+    </section>
+    <!-- ====== end choose-us====== -->
 
-
-    <!-- ======= Our Team Section ======= -->
-    <section id="team" class="team">
+    <!-- ====== start contact ====== -->
+    <section class="contact section-padding bg-gradient style-1"  data-scroll-index="7">
         <div class="container">
-
-            <div class="section-title">
-                <h2>Our Team</h2>
-                <p>We are here to serve you, Thanks for coming.</p>
+            <div class="section-head mb-60 text-center">
+                <h6 class="text-white text-uppercase wow fadeInUp">contact us</h6>
+                <h2 class="wow fadeInUp text-white">
+                    Request Free <span class="fw-normal">Consultancy</span>
+                </h2>
             </div>
+            <div class="content">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5">
+                        <div class="contact_info text-white">
+                            <p class="wow fadeInUp">Hotline 24/7</p>
+                            <h4 class="wow fadeInUp">+2347036710638</h4>
+                            <ul>
+                                <li class="wow fadeInUp">
+                                    <strong>Address : </strong>No 53 Famuyiwa House,Mokin road, Ilaramokin, No 8,New Palace road, Behind UBA Ilaramokin
+                                </li>
+                                <li class="wow fadeInUp">
+                                    <strong>Email : </strong> info@amazingdata.com.ng
+                                </li>
 
-            <div class="row">
-
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="member">
-                        <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
-                            </div>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
+                                <li class="wow fadeInUp">
+                                    <strong>Work Hour : </strong> Mon - Sat: 9:00 - 18:00
+                                </li>
+                            </ul>
+                            <a href="#" class="wow fadeInUp">get direction</a>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6" data-wow-delay="0.1s">
-                    <div class="member">
-                        <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
+                    <div class="col-lg-6 offset-lg-1">
+                        <form class="contact_form" action="https://iteck-html.themescamp.com/contact.php" method="post">
+                            <div class="row gx-3">
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-3 wow fadeInUp">
+                                        <input type="text" name="name" class="form-control" placeholder="name *">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-3 wow fadeInUp">
+                                        <input type="text" name="email" class="form-control" placeholder="Email Address *">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-3 wow fadeInUp">
+                                        <select  name="option" class="form-select" aria-label="Default select example">
+                                            <option selected>Your inquiry about</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group mb-3 wow fadeInUp">
+                                        <textarea class="form-control" rows="4" placeholder="Write your inquiry here"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-check mb-4 wow fadeInUp">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label text-light small" for="flexCheckDefault">
+                                            By submitting, i’m agreed to the <a href="#" class="text-decoration-underline">Terms & Conditons</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="submit" value="Request Now" class="btn btn-dark wow fadeInUp text-light fs-14px">
+                                </div>
                             </div>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6" data-wow-delay="0.2s">
-                    <div class="member">
-                        <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
-                            </div>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-3 col-lg-4 col-md-6" data-wow-delay="0.3s">
-                    <div class="member">
-                        <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>Amanda Jepson</h4>
-                                <span>Accountant</span>
-                            </div>
-                            <div class="social">
-                                <a href=""><i class="bi bi-twitter"></i></a>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Our Team Section -->
-
-    <!-- ======= Contact Us Section ======= -->
-    <section id="contact" class="contact section-bg">
-
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
             </div>
         </div>
+        <img src="{{asset('land/assets/img/contact_globe.svg')}}" alt="" class="contact_globe">
+    </section>
+    <!-- ====== end contact ====== -->
+</main>
+<!--End-Contents-->
 
-        <div class="container-fluid">
-
-            <div class="row">
-
-                <div class="col-lg-6 d-flex align-items-stretch infos">
-
-                    <div class="row">
-
-                        <div class="col-lg-6 info d-flex flex-column align-items-stretch">
-                            <i class="bx bx-map"></i>
-                            <h4>Address</h4>
-                            <p>A108 Adam Street,<br>New York, NY 535022</p>
-                        </div>
-                        <div class="col-lg-6 info info-bg d-flex flex-column align-items-stretch">
-                            <i class="bx bx-phone"></i>
-                            <h4>Call Us</h4>
-                            <p>+1 5589 55488 55<br>+1 5589 22548 64</p>
-                        </div>
-                        <div class="col-lg-6 info info-bg d-flex flex-column align-items-stretch">
-                            <i class="bx bx-envelope"></i>
-                            <h4>Email Us</h4>
-                            <p>contact@example.com<br>info@example.com</p>
-                        </div>
-                        <div class="col-lg-6 info d-flex flex-column align-items-stretch">
-                            <i class="bx bx-time-five"></i>
-                            <h4>Working Hours</h4>
-                            <p>Mon - Fri: 9AM to 5PM<br>Sunday: 9AM to 1PM</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-lg-6 d-flex align-items-stretch contact-form-wrap">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="name">Your Name</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                            </div>
-                            <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <label for="email">Your Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="subject">Subject</label>
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="message">Message</label>
-                            <textarea class="form-control" name="message" rows="8" required></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"><button type="submit">Send Message</button></div>
-                    </form>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Contact Us Section -->
-
-</main><!-- End #main -->
-
-<!-- ======= Footer ======= -->
-<footer id="footer">
-    <div class="footer-top">
-        <div class="container">
-
-        </div>
-    </div>
-
+<!-- ====== start footer ====== -->
+<footer class="style-1">
     <div class="container">
-        <div class="copyright">
-            &copy; Copyright <strong><span>Amazing-Data</span></strong>. All Rights Reserved
+        <div class="content">
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <div class="foot_info">
+                        <a href="#" class="logo mb-3">
+                            <img src="{{asset('ama.jpg')}}" alt="">
+                        </a>
+                        <div class="text mb-4">
+                            Best IT Solutions & Technology WordPress <br>
+                        </div>
+                        <ul class="mb-4">
+                            <li class="d-flex">
+                                <i class="bi bi-house me-3"></i>
+                                <a href="#">
+                                    <span>No 53 Famuyiwa House,Mokin road, Ilaramokin, No 8,New Palace road, Behind UBA Ilaramokin</span>
+                                </a>
+                            </li>
+                            <li class="d-flex">
+                                <i class="bi bi-envelope me-3"></i>
+                                <a href="#">
+                                    <span>info@amazingdata.com.ng</span>
+                                </a>
+                            </li>
+                            <li class="d-flex">
+                                <i class="bi bi-phone me-3"></i>
+                                <a href="#">
+                                    <span>+2347036710638</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="social_icons">
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="links">
+                        <div class="cont">
+                            <h6 class="link_title">
+                                Services
+                            </h6>
+                            <ul>
+                                <li>
+                                    <a href="#">IT Consultations </a>
+                                </li>
+                                <li>
+                                    <a href="#">Data Security </a>
+                                </li>
+                                <li>
+                                    <a href="#">Website Development </a>
+                                </li>
+                                <li>
+                                    <a href="#">CRM & Software </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="links">
+                        <div class="cont">
+                            <h6 class="link_title">
+                                Information
+                            </h6>
+                            <ul>
+                                <li>
+                                    <a href="#">About AmazingData </a>
+                                </li>
+                                <li>
+                                    <a href="#">Investors </a>
+                                </li>
+                                <li>
+                                    <a href="#">Blog </a>
+                                </li>
+                                <li>
+                                    <a href="#">Career </a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact </a>
+                                </li>
+                                <li>
+                                    <a href="#">How It Works </a>
+                                </li>
+                                <li>
+                                    <a href="#">Pricing Plan </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="foot_subscribe">
+                        <h6 class="link_title">
+                            Newsletter
+                        </h6>
+                        <p>
+                            Register now to get latest updates SME MTN DATA.
+                        </p>
+                        <div class="input-group my-4">
+                            <input type="text" class="form-control" placeholder="Enter your email" aria-label="Enter your email" aria-describedby="button-addon2">
+                            <button class="btn butn-gard border-0 text-white px-3" type="button" id="button-addon2">
+                                <span>Subscribe</span>
+                            </button>
+                        </div>
+                        <p class="fst-italic">By subscribing, you accepted the our <a href="{{route('login')}}" class="text-decoration-underline"> Policy</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bootstrap-3-one-page-template-free-shuffle/ -->
-            Designed by <a href="https://bootstrapmade.com/">JOSEPH IT</a>
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="foot">
+                    <p>
+                        © 2023 Copyrights by <a href="#" class="text-white text-decoration-underline">AmazingData</a> All Rights Reserved by <a href="#" class="text-white text-decoration-underline"> Amazing</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-</footer><!-- End Footer -->
-
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<!-- Vendor JS Files -->
-<script src="{{asset('lan/assets/vendor/purecounter/purecounter.js')}}"></script>
-<script src="{{asset('lan/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('lan/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-<script src="{{asset('lan/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
-<script src="{{asset('lan/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-<script src="{{asset('lan/assets/vendor/waypoints/noframework.waypoints.js')}}"></script>
-<script src="{{asset('lan/assets/vendor/php-email-form/validate.js')}}"></script>
-
-<!-- Template Main JS File -->
-<script src="{{asset('lan/assets/js/main.js')}}"></script>
+    <img src="{{asset('land/assets/img/footer/foot_l.png')}}" alt="" class="foot_l">
+    <img src="{{asset('land/assets/img/footer/foot_r.png')}}" alt="" class="foot_r">
+</footer>
+<!-- ====== end footer ====== -->
 
 
-<style>
+<!-- ====== start to top button ====== -->
+<a href="#" class="to_top">
+    <i class="bi bi-chevron-up"></i>
+    <small>top</small>
+</a>
+<!-- ====== end to top button ====== -->
+
+
+<!-- ====== request ====== -->
+<script src="{{asset('land/assets/js/lib/jquery-3.0.0.min.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/jquery-migrate-3.0.0.min.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/wow.min.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/jquery.fancybox.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/lity.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/swiper.min.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/jquery.waypoints.min.j')}}s"></script>
+<script src="{{asset('land/assets/js/lib/jquery.counterup.js')}}"></script>
+<script src="{{asset('land/assets/js/lib/scrollIt.min.js')}}"></script>
+<script src="{{asset('land/assets/js/main.js')}}"></script>
+
+
+    <style>
     .float{
         position:fixed;
         width:60px;
@@ -642,7 +738,7 @@
     }
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<a href="http:wa.me/2348080301180/?text=Goodday, My Username is....." class="float" target="_blank">
+<a href="http:wa.me/2347036710638/?text=Goodday, My Username is....." class="float" target="_blank">
     <i class="fa fa-whatsapp my-float"></i>
 </a>
 <script>

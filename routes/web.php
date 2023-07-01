@@ -42,16 +42,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 //
-Route::get('/', function () {
-    if (Auth()->user()) {
-        return redirect(route('dashboard'))
-            ->withSuccess('Signed in');
-
-    }else {
-        return view('auth.login');
-    }
-});
+//Route::get('/', function () {
+//    if (Auth()->user()) {
+//        return redirect(route('dashboard'))
+//            ->withSuccess('Signed in');
+//
+//    }else {
+//        return view('auth.login');
+//    }
+//});
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
+Route::get('/', [AuthController::class, 'landing']);
 
 //Route::get('select', function () {
 //    return view('select');

@@ -162,6 +162,12 @@
                     </li>
                     @endif
                     <li>
+                        <a href="{{url('/')}}" class="active">
+                            <span class="nav-icon uil uil-home"></span>
+                            <span class="menu-text">Home</span>
+                        </a>
+                    </li>
+                        <li>
                         <a href="{{route('dashboard')}}" class="active">
                             <span class="nav-icon uil uil-create-dashboard"></span>
                             <span class="menu-text">Dashboard</span>

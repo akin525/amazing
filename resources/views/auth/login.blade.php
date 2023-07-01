@@ -25,7 +25,7 @@
                 <div class="col-xxl-3 col-xl-4 col-md-6 col-sm-8">
                     <div class="edit-profile">
                         <div class="edit-profile__logos">
-                            <a href="index.html">
+                            <a href="{{url('/')}}">
                                 <img class="dark" src="{{asset('ama.jpg')}}" alt>
                                 <img class="light" src="{{asset('ama.jpg')}}" alt>
                             </a>
