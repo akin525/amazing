@@ -150,6 +150,7 @@
 </header>
 <main class="main-content">
     <div class="sidebar-wrapper">
+
         <div class="sidebar sidebar-collapse" id="sidebar">
             <div class="sidebar__menu-group">
                 <ul class="sidebar_nav">
