@@ -15,6 +15,7 @@
 
     </style>
     <div class="col-xxl-12 mb-25">
+        <marquee>Update:: {{$me->message}}.</marquee>
         <div class="card banner-feature--18 d-flex">
             <div class="container-fluid">
                 <div class="row">
@@ -22,7 +23,7 @@
                         <div class="card-body px-25">
                             <h1 class="banner-feature__heading color-white">{{$greet}} {{Auth::user()->username}}</h1>
                             <p class="banner-feature__para color-white">
-                               Notification:  {{$me->message}}
+                               Notification:  Welcome Back!!
                             </p>
                             <div class="d-flex justify-content-sm-start justify-content-center">
                                 @if(Auth::user()->apikey ==null)
