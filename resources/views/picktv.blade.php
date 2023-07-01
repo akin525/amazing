@@ -180,8 +180,10 @@
                                     Swal.fire({
                                         icon: 'info',
                                         title: 'Pending',
-                                        text: response.message
+                                        text: response.responseText
                                     });
+                                    console.log(response.responseText);
+
                                     // Handle any other response status
                                 }
 

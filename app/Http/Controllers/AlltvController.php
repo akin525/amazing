@@ -134,8 +134,7 @@ foreach ($plan as $pla) {
                 $tv = easy::where('id', $request->productid)->first();
 
 //                $wallet = wallet::where('username', $user->username)->first();
-
-
+//                return response()->json($tv);
                 if ($user->wallet < $tv->tamount) {
 
                     $mg = "You Cant Make Purchase Above" . "NGN" . $tv->tamount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
@@ -171,9 +170,11 @@ foreach ($plan as $pla) {
                         CURLOPT_TIMEOUT => 0,
                         CURLOPT_FOLLOWLOCATION => true,
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_SSL_VERIFYHOST => 0,
+                        CURLOPT_SSL_VERIFYPEER => 0,
                         CURLOPT_CUSTOMREQUEST => "POST",
                         CURLOPT_POSTFIELDS => array(
-                            'company' =>$request->code,
+                            'company' =>$tv->code,
                             'iucno' => $request['number'],
                             'package' =>$tv['plan_id'],
                         ),
@@ -184,6 +185,8 @@ foreach ($plan as $pla) {
                     ));
                     $response = curl_exec($curl);
                     curl_close($curl);
+
+//                    return response()->json($response);
                     $data = json_decode($response, true);
                     $success = $data["success"];
 
