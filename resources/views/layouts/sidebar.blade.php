@@ -169,6 +169,12 @@
                         </a>
                     </li>
                         <li>
+                        <a href="https://play.google.com/store/apps/details?id=com.a5starcompany.amazingdata" target="_blank" class="active">
+                            <span class="nav-icon uil uil-google-play"></span>
+                            <span class="menu-text">Download Our App</span>
+                        </a>
+                    </li>
+                        <li>
                         <a href="{{route('dashboard')}}" class="active">
                             <span class="nav-icon uil uil-create-dashboard"></span>
                             <span class="menu-text">Dashboard</span>

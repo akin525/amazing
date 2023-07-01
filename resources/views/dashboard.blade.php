@@ -33,6 +33,9 @@
                                 <a href="#" class="btn btn-danger m-2">Reseller</a>
                                 <a href="#" class="btn btn-success">Upgraded!</a>
                                 @endif
+
+                                    <a href="https://play.google.com/store/apps/details?id=com.a5starcompany.amazingdata "><img width="100" src="{{asset('play.png')}}"/> Download on playstore</a>
+
                             </div>
                         </div>
 
