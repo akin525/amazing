@@ -33,6 +33,7 @@ return array(
     'App\\Http\\Controllers\\DataserverController' => $baseDir . '/app/Http/Controllers/DataserverController.php',
     'App\\Http\\Controllers\\EducationController' => $baseDir . '/app/Http/Controllers/EducationController.php',
     'App\\Http\\Controllers\\EkectController' => $baseDir . '/app/Http/Controllers/EkectController.php',
+    'App\\Http\\Controllers\\FundController' => $baseDir . '/app/Http/Controllers/FundController.php',
     'App\\Http\\Controllers\\PdfController' => $baseDir . '/app/Http/Controllers/PdfController.php',
     'App\\Http\\Controllers\\RefersController' => $baseDir . '/app/Http/Controllers/RefersController.php',
     'App\\Http\\Controllers\\RenoController' => $baseDir . '/app/Http/Controllers/RenoController.php',

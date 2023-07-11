@@ -644,6 +644,7 @@ class ComposerStaticInite14b43af0803a45a82d036d1650fad34
         'App\\Http\\Controllers\\DataserverController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataserverController.php',
         'App\\Http\\Controllers\\EducationController' => __DIR__ . '/../..' . '/app/Http/Controllers/EducationController.php',
         'App\\Http\\Controllers\\EkectController' => __DIR__ . '/../..' . '/app/Http/Controllers/EkectController.php',
+        'App\\Http\\Controllers\\FundController' => __DIR__ . '/../..' . '/app/Http/Controllers/FundController.php',
         'App\\Http\\Controllers\\PdfController' => __DIR__ . '/../..' . '/app/Http/Controllers/PdfController.php',
         'App\\Http\\Controllers\\RefersController' => __DIR__ . '/../..' . '/app/Http/Controllers/RefersController.php',
         'App\\Http\\Controllers\\RenoController' => __DIR__ . '/../..' . '/app/Http/Controllers/RenoController.php',
