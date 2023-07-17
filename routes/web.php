@@ -185,6 +185,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin/depo', [TransactionController::class, 'finduser'])->name('admin/depo');
 
 
+
+    Route::get('admin/neco', [EducationController::class, 'adminneco'])->name('admin/neco');
+    Route::get('admin/waec', [EducationController::class, 'adminwaec'])->name('admin/waec');
+
 });
 Route::view('policy', 'policy');
 

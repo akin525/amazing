@@ -40,6 +40,7 @@ class BillController extends Controller
             $product = easy::where('id', $request->productid)->first();
             }
 
+
 //return $product;
             if ($user->apikey == '') {
                 $amount = $product->tamount;

@@ -263,5 +263,17 @@ public function neco(Request $request)
     }
 }
 
+public function adminneco()
+{
+    $all=neco::all();
+    return view('admin/neco', compact('all'));
+}
+
+public function adminwaec()
+{
+    $all=waec::all();
+    return view('admin/waec', compact('all'));
+}
+
 }
 
