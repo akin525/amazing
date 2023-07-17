@@ -95,6 +95,12 @@
                     <li class="nav-item">
                         <a  class="nav-link" href="{{ route('admin/bills') }}"  ><i class="fa fa-shopping-basket white_color"></i> <span>All Bills</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/neco') }}"  ><i class="fa fa-pie red_color"></i> <span>Neco-Pin</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('admin/waec') }}"  ><i class="fa fa-pie white_color"></i> <span>Waec-Pin</span></a>
+                    </li>
                     <li>
                         <a href="#app1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-product-hunt"></i> <span>Control Product</span></a>
                         <ul class="collapse list-unstyled" id="app1">
