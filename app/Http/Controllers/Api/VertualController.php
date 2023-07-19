@@ -228,10 +228,10 @@ class VertualController
     {
         if ($json = json_decode(file_get_contents("php://input"), true)) {
             print_r($json['reference']);
-//            $data = $json;
+            $data = $json;
 
         }
-        return $request;
+        return $data;
 
         $refid=$data["reference"];
         $amount=$data["amount"]/100;
