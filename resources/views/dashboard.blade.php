@@ -200,10 +200,14 @@
 
                                                 {{--                                                    <li class="text-white"><h6 class="text-white"><b>Personal Virtual Account Number</b></h6></li>--}}
                                                 {{--                                                    <br>--}}
-                                                <li class='text-info'><h6 class="text-info"><b>{{Auth::user()->account_name}}</b></h6></li>
+                                                <li class='text-info'><h6 class="text-info"><b>Name:{{Auth::user()->account_name}}</b></h6></li>
                                                 <li class='text-info'><h6 class="text-info"><b>Account No:{{Auth::user()->account_number}}</b></h6></li>
-                                                <li class='text-info'><h6 class="text-info"><b>WEMA-BANK</b></h6></li>
-                                                {{--                                                    <br>--}}
+                                                @if(Auth::user()->bank==null)
+                                                <li class='text-info'><h6 class="text-info"><b>Bank:WEMA-BANK</b></h6></li>
+                                                @else
+                                                    <li class='text-info'><h6 class="text-info"><b>Bank:{{Auth::user()->bank}}</b></h6></li>
+                                                @endif
+                                                    {{--                                                    <br>--}}
                                                 {{--                                                    <li class='text-white'><h6 class="text-white"><b>Note: All virtual funding are being set automatically</b></h6></li>--}}
                                             </ul>
                                         </div>
