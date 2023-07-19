@@ -28,7 +28,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'number' => ['required', 'numeric', 'digit:11'],
+            'number' => ['required', 'numeric', 'digits:11'],
             'address' => ['required', 'string',  'min:11'],
             'gender' => ['required', 'string'],
             'dob' => ['required', 'string'],
