@@ -36,14 +36,14 @@ class VertualController
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS =>'{
-    "firstname":"'.$input['name'].'"
-    "lastname":"'.$input['username'].'",
-    "address":'.$input['address'].',
-    "gender":"'.$input['gender'].'",
-    "email":"'.$input['email'].'",
-    "phone":"'.$input['number'].'",
-    "dob":"'.$input['dob'].'",
-    "provider":"gtb"
+   "firstname": "'.$input['name'].'",
+        "lastname": "'.$input['username'].'",
+        "address": "'.$input['address'].'",
+        "gender": "'.$input['gender'].'",
+        "email": "'.$input['email'].'",
+        "phone": "'.$input['number'].'",
+        "dob": "'.$input['dob'].'",
+        "provider": "gtb"
 }',
                 CURLOPT_HTTPHEADER => array(
                     'Content-Type: application/json',
