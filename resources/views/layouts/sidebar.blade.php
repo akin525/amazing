@@ -174,12 +174,15 @@
                             <span class="menu-text">Download Our App</span>
                         </a>
                     </li>
+
                         <li>
                         <a href="{{route('dashboard')}}" class="active">
                             <span class="nav-icon uil uil-create-dashboard"></span>
                             <span class="menu-text">Dashboard</span>
                         </a>
                     </li>
+
+
                         <li>
                         <a href="{{route('fund')}}" class="active">
                             <span class="nav-icon uil uil-money-bill"></span>
