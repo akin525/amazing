@@ -234,7 +234,7 @@ class VertualController
         $data = $json;
 
         $refid=$data["reference"];
-        $amount=$data["Body"]["amount"]/100;
+        $amount=$data["amount"]/100;
         $account=$data['receiving_account'];
 
         $wallet = User::where('account_number', $account)->first();
