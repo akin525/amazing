@@ -75,7 +75,7 @@ class VertualController
             }else{
 
                 Alert::error('Error', $response);
-                return redirect('dashboard');
+                return redirect('fund');
             }
         }
     }
