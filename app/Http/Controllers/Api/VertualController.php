@@ -231,7 +231,7 @@ class VertualController
 //            $data = $json;
 
         }
-        $data = $json;
+        return $json;
 
         $refid=$data["reference"];
         $amount=$data["amount"]/100;
