@@ -69,7 +69,7 @@ class VertualController
                 $input->save();
 
                 Alert::success('Succeaa', 'Virtual Account Successful Created');
-                return redirect("dashboard")->with('success', 'You are not allowed to access');
+                return redirect("fund")->with('success', 'You are not allowed to access');
 
 
             }else{
