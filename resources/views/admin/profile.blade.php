@@ -91,12 +91,12 @@
         <div class="card-body">
             <center>
                 <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
-                <a class="badge badge-primary" href="{{route('admin/credit')}}">Credit User</a>
+                <a class="badge badge-success" href="{{route('admin/credit')}}">Credit User</a>
 
-                <a class="badge badge-primary" href="{{route('admin/credit')}}">Refund User</a>
-                <a class="badge badge-primary" href="{{route('admin/charge')}}">Charge User</a>
-                <a class="badge badge-primary" href="{{route('admin/regen', $user->username)}}">Update Virtual Account</a>
-                <a class="badge badge-primary" href="{{route('admin/gen', $user->username)}}">Generate Account</a>
+                <a class="badge badge-success" href="{{route('admin/credit')}}">Refund User</a>
+                <a class="badge badge-success" href="{{route('admin/charge')}}">Charge User</a>
+                <a class="badge badge-success" href="{{route('admin/regen', $user->username)}}">Update Virtual Account</a>
+                <a class="badge badge-success" href="{{route('admin/gen', $user->username)}}">Generate Account</a>
 
                 <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
             </center>
@@ -399,7 +399,7 @@
                                             <div class="">
                                                 <div class="field">
                                                     <label class="label_field">Phone No</label>
-                                                    <input type="number" class="form-control" name="number" value="{{$user->phone_no}}" required />
+                                                    <input type="number" class="form-control" name="number" value="{{$user->phone}}" required />
                                                 </div>
                                                 <br>
                                                 <div class="field">
