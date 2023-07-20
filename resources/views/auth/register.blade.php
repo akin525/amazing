@@ -64,6 +64,21 @@
                                             <input type="text" name="email" class="form-control" id="email" placeholder="name@example.com">
                                         </div>
                                         <div class="form-group mb-20">
+                                            <label for="email">Address</label>
+                                            <input type="text" name="address" class="form-control" id="address" >
+                                        </div>
+                                        <div class="form-group mb-20">
+                                            <label for="email">Date of Birth</label>
+                                            <input type="date" name="dob" class="form-control" id="dob" >
+                                        </div>
+                                        <div class="form-group mb-20">
+                                            <label for="email">Select Gender</label>
+                                            <select  name="gender" class="form-control" id="gender" >
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-20">
                                             <label for="email">Phone Number</label>
                                             <input type="number" name="number" class="form-control"  >
                                         </div>

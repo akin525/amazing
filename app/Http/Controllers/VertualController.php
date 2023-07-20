@@ -20,28 +20,34 @@ class VertualController
     public function vertual(Request $request)
     {
         if (Auth::check()) {
-            $user = User::find($request->user()->id);
-            $username=$user->username.rand(1111, 9999);
-            $name=$user->name;
-            $email=$user->email;
-            $phone=$user->phone;
+            $input = User::find($request->user()->id);
+            $username=$input->username.rand(1111, 9999);
+
 
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://app2.mcd.5starcompany.com.ng/api/reseller/virtual-account',
+                CURLOPT_URL => 'https://app.paylony.com/api/v1/create_account',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_SSL_VERIFYHOST => 0,
-                CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('account_name' => $name, 'business_short_name' => 'Amazing-Data', 'uniqueid' => $username, 'email' => $email, 'phone' => $phone, 'webhook_url' => 'https://amazingdata.com.ng/api/run',),
+                CURLOPT_POSTFIELDS =>'{
+   "firstname": "'.$input['name'].'",
+        "lastname": "'.$input['username'].'",
+        "address": "'.$input['address'].'",
+        "gender": "'.$input['gender'].'",
+        "email": "'.$input['email'].'",
+        "phone": "'.$input['phone'].'",
+        "dob": "'.$input['dob'].'",
+        "provider": "gtb"
+}',
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: mcd_key_75rq4][oyfu545eyuriup1q2yue4poxe3jfd'
+                    'Content-Type: application/json',
+                    'Authorization: Bearer '.env('PAYLONY')
                 ),
             ));
 
@@ -49,23 +55,27 @@ class VertualController
 
             curl_close($curl);
             $data = json_decode($response, true);
-            if ($data['success']==1){
+
+            if ($data['success']=="true"){
                 $account = $data["data"]["account_name"];
                 $number = $data["data"]["account_number"];
-                $bank = $data["data"]["bank_name"];
+                $bank = $data["data"]["provider"];
+                $ref= $data['data']['reference'];
 
-                $user->account_number = $number;
-                $user->account_name = $account;
-                $user->save();
+                $input->account_number = $number;
+                $input->account_name = $account;
+                $input->bank = $bank;
+                $input->ref = $ref;
+                $input->save();
 
                 Alert::success('Succeaa', 'Virtual Account Successful Created');
-                return redirect("dashboard")->with('success', 'You are not allowed to access');
+                return redirect("fund")->with('success', 'You are not allowed to access');
 
 
-            }elseif ($data['success']==0){
+            }else{
 
                 Alert::error('Error', $response);
-                return redirect('dashboard');
+                return redirect('fund');
             }
         }
     }

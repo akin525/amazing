@@ -28,7 +28,10 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'number' => ['required', 'string', 'max:11', 'min:11'],
+            'number' => ['required', 'numeric', 'digits:11'],
+            'address' => ['required', 'string',  'min:11'],
+            'gender' => ['required', 'string'],
+            'dob' => ['required', 'string'],
             'username' => ['required', 'string',  'min:6', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
@@ -45,22 +48,30 @@ class CreateNewUser implements CreatesNewUsers
             }
 
 
-                $curl = curl_init();
+            $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://integration.mcd.5starcompany.com.ng/api/reseller/virtual-account',
+                CURLOPT_URL => 'https://app.paylony.com/api/v1/create_account',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_SSL_VERIFYHOST => 0,
-                CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array('account_name' => $input['name'], 'business_short_name' => 'Amazing-Data', 'uniqueid' => $input['username'], 'email' => $input['email'], 'phone' => $input['number'], 'webhook_url' => 'https://amazingdata.com.ng/api/run',),
+                CURLOPT_POSTFIELDS =>'{
+    "firstname": "'.$input['name'].'",
+        "lastname": "'.$input['username'].'",
+        "address": "'.$input['address'].'",
+        "gender": "'.$input['gender'].'",
+        "email": "'.$input['email'].'",
+        "phone": "'.$input['number'].'",
+        "dob": "'.$input['dob'].'",
+        "provider": "gtb"
+}',
                 CURLOPT_HTTPHEADER => array(
-                    'Authorization: mcd_key_75rq4][oyfu545eyuriup1q2yue4poxe3jfd'
+                    'Content-Type: application/json',
+                    'Authorization: Bearer '.env('PAYLONY')
                 ),
             ));
 
@@ -68,14 +79,17 @@ class CreateNewUser implements CreatesNewUsers
 
             curl_close($curl);
             $data = json_decode($response, true);
-            if ($data['success']==1){
+            if ($data['success']=="true"){
                 $account = $data["data"]["account_name"];
                 $number = $data["data"]["account_number"];
-                $bank = $data["data"]["bank_name"];
+                $bank = $data["data"]["provider"];
+                $ref= $data['data']['reference'];
 
-            }elseif ($data['success']==0){
+            }else{
                 $account = "1";
                 $number = "1";
+                $bank=null;
+                $ref=null;
 
             }
 
@@ -90,6 +104,11 @@ class CreateNewUser implements CreatesNewUsers
                 'email' => $input['email'],
                 'account_number'=>$number,
                 'account_name'=>$account,
+                'bank'=>$bank,
+                'ref'=>$ref,
+                'address'=>$input['address'],
+                'dob'=>$input['dob'],
+                'gender'=>$input['gender'],
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
                 $this->createTeam($user);

@@ -189,6 +189,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/neco', [EducationController::class, 'adminneco'])->name('admin/neco');
     Route::get('admin/waec', [EducationController::class, 'adminwaec'])->name('admin/waec');
 
+    Route::get('admin/regen/{username}', [VertualAController::class, 'regenerateaccount'])->name('admin/regen');
+    Route::get('admin/gen/{username}', [VertualAController::class, 'generateaccount'])->name('admin/gen');
+
 });
 Route::view('policy', 'policy');
 

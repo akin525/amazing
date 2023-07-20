@@ -33,6 +33,11 @@ class User extends Authenticatable
         'phone',
         'account_number',
         'account_name',
+        'address',
+        'gender',
+        'dob',
+        'ref',
+        'bank',
 
     ];
 
