@@ -54,6 +54,8 @@
                                 <li class="mt-2"><i class="fa fa-phone text-info "></i> <b>Account-No</b> : {{$user->account_number}}</li>
                                 <br>
                                 <li class="mt-2"><i class="fa fa-user text-info "></i> <b>Account-Name</b> : {{$user->account_name}}</li>
+                                    <br>
+                                    <li class="mt-2"><i class="fa fa-bank text-info "></i> <b>Bank</b> : {{$user->bank}}</li>
                                 @endif
                             </ul>
                         </div>
