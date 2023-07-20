@@ -91,10 +91,12 @@
         <div class="card-body">
             <center>
                 <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
-                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Credit User</a>
+                <a class="badge badge-primary" href="{{route('admin/credit')}}">Credit User</a>
 
-                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Refund User</a>
-                <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/charge')}}">Charge User</a>
+                <a class="badge badge-primary" href="{{route('admin/credit')}}">Refund User</a>
+                <a class="badge badge-primary" href="{{route('admin/charge')}}">Charge User</a>
+                <a class="badge badge-primary" href="{{route('admin/regen', $user->username)}}">Update Virtual Account</a>
+                <a class="badge badge-primary" href="{{route('admin/gen', $user->username)}}">Generate Account</a>
 
                 <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
             </center>
@@ -411,6 +413,25 @@
                                                     <input type="email" name="email" class="form-control" value="{{$user->email}}" required />
                                                 </div>
                                                 <br>
+                                                <div class="field">
+                                                    <label class="label_field">Address</label>
+                                                    <input type="text" name="address" class="form-control" value="{{$user->address}}" required />
+                                                </div>
+                                                <br/>
+                                                <div class="field">
+                                                    <label class="label_field">Date of birth</label>
+                                                    <input type="date" name="dob" class="form-control" value="{{$user->dob}}" required />
+                                                </div>
+                                                <br/>
+                                                <div class="field">
+                                                    <label class="label_field">Gender</label>
+                                                    <select  name="gender" class="form-control" >
+                                                        <option value="{{$user->gender}}">{{$user->gender}}</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                                <br/>
                                                 <div class="field">
                                                     <label class="label_field">Role</label>
                                                     <select  name="role" class="form-control"  required >
