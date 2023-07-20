@@ -37,6 +37,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-submit">
                                                 <button type="button" onclick="SquadPay()" class="btn btn-danger">Fund Now</button>
+                                                <br/>
                                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#fund">Fund With Transfer</button>
                                             </div>
                                         </div>
