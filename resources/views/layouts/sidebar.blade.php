@@ -186,52 +186,9 @@
                         <li>
                         <a href="{{route('fund')}}" class="active">
                             <span class="nav-icon uil uil-money-bill"></span>
-                            <span class="menu-text">Fund With Card</span>
+                            <span class="menu-text">Fund Wallet</span>
                         </a>
                     </li>
-                        <li data-bs-toggle="modal" data-bs-target="#fund">
-                            <span class="nav-icon uil uil-money-bill"></span>
-                            <span class="menu-text">Fund With Transfer</span>
-
-                    </li>
-                        <div class="modal fade" id="fund">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="loading-overlay" id="loadingSpinner" style="display: none;">
-                                    <div class="loading-spinner"></div>
-                                </div>
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Account Details</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                        </button>
-                                    </div>
-
-                                    @if(Auth::user()->bank==null)
-                                        <center>
-                                            <button type="button" class="btn btn-primary text-center">Generate Account Number</button>
-                                        </center>
-                                    @else
-                                        <div class="basic-list-group">
-                                            <div class="list-group"><a href="javascript:void(0);" class="list-group-item list-group-item-action active">Account
-                                                    Number </a><a href="javascript:void(0);" class="list-group-item list-group-item-action">
-                                                    {{Auth::user()->account_number}}</a>
-                                                <a href="javascript:void(0);" class="list-group-item list-group-item-action disabled">
-                                                    Account Name
-                                                </a> <a href="javascript:void(0);" class="list-group-item list-group-item-action">{{Auth::user()->account_name}}</a>
-                                                <a href="javascript:void(0);" class="list-group-item list-group-item-action active">
-                                                    Bank
-                                                </a>
-                                                <a href="javascript:void(0);" class="list-group-item list-group-item-action">{{Auth::user()->bank}}</a>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        {{--                        <button type="button" class="btn btn-primary">Save changes</button>--}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <li class="has-child">
                         <a href="#" class>
