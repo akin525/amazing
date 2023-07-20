@@ -67,7 +67,7 @@ class CreateNewUser implements CreatesNewUsers
         "email": "'.$input['email'].'",
         "phone": "'.$input['number'].'",
         "dob": "'.$input['dob'].'",
-        "provider": "providus"
+        "provider": "gtb"
 }',
                 CURLOPT_HTTPHEADER => array(
                     'Content-Type: application/json',

@@ -43,7 +43,7 @@ class VertualController
         "email": "'.$input['email'].'",
         "phone": "'.$input['phone'].'",
         "dob": "'.$input['dob'].'",
-        "provider": "providus"
+        "provider": "gtb"
 }',
                 CURLOPT_HTTPHEADER => array(
                     'Content-Type: application/json',
