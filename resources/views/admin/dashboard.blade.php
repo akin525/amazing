@@ -348,56 +348,6 @@
                         });
                     });
             </script>
-            <script>
-                fetch('/checkusers')
-                    .then(response => response.json())
-                    .then(data => {
-                        var ctx = document.getElementById('myPieChart').getContext('2d');
-                        var myPieChart = new Chart(ctx, {
-                            type: 'pie',
-                            data: {
-                                labels: ['Total Users '+ data.tusers, 'New Users '+ data.nusers],
-                                datasets: [{
-                                    data: [data.tusers, data.nusers],
-                                    backgroundColor: ['#20b016', '#d7b612'],
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                            }
-                        });
-                    });
-            </script>
-            <script>
-                fetch('/checklock')
-                    .then(response => response.json())
-                    .then(data => {
-                        var ctx = document.getElementById('transactionChart1').getContext('2d');
-
-                        var chart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: data.dates,
-                                datasets: [{
-                                    label: 'Wallet Charts',
-                                    data: data.amounts,
-                                    backgroundColor: 'rgb(22,48,176)',
-                                    borderColor: 'rgb(0,0,255)',
-                                    borderWidth: 1,
-                                    fill: 'origin' // Fill the area below the line
-
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                    });
-            </script>
 
 
         </div>
