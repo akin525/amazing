@@ -42,6 +42,7 @@
 
     <link rel="stylesheet" href="{{asset('admin/hp/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/hp/main.css')}}" />
+    <script src="{{ asset('js/Chart.min.js') }}"></script>
 
 </head>
 
