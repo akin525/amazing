@@ -1,4 +1,5 @@
 @include('admin.layouts.sidebar')
+
 <script src="{{ asset('js/Chart.min.js') }}"></script>
 
 <div class="midde_cont">
@@ -12,7 +13,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div class="bg bg-primary">
+                <div class="bg bg-secondary">
                     <div class="card-body">
                         <center>
                             <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->

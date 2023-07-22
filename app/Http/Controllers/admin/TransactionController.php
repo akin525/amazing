@@ -127,7 +127,7 @@ public function index()
     }
     public function lockPieChart()
     {
-        $transactions = wallet::selectRaw('DATE(created_at) as date, SUM(wallet) as total_amount')
+        $transactions = User::selectRaw('DATE(created_at) as date, SUM(wallet) as total_amount')
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get();
