@@ -14,6 +14,7 @@
         }
 
     </style>
+    <script src="{{ asset('js/Chart.min.js') }}"></script>
     <div class="col-xxl-12 mb-25">
         <marquee>Update:: {{$me->message}}.</marquee>
         <div class="card banner-feature--18 d-flex">
@@ -96,6 +97,16 @@
         </div>
     </div>
 
+    <div class="col-md-7 col-lg-6">
+        <div class="card">
+            <canvas id="transactionChart" width="800" height="500"></canvas>
+        </div>
+    </div>
+    <div class="col-md-7 col-lg-6">
+        <div class="card">
+            <canvas id="transactionChart1" width="800" height="500"></canvas>
+        </div>
+    </div>
 
     <div class="col-xxl-4 col-lg-6 mb-25">
         <div class="card border-0 chartLine-po-details h-100">
@@ -390,4 +401,66 @@
         });
 
     </script>
+
+    <script>
+        fetch('/transaction')
+            .then(response => response.json())
+            .then(data => {
+                var ctx = document.getElementById('transactionChart').getContext('2d');
+
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.dates,
+                        datasets: [{
+                            label: 'Deposit Amount',
+                            data: data.amounts,
+                            backgroundColor: 'rgba(53, 169, 21, 0.5)',
+                            borderColor: 'rgba(53, 169, 21, 1)',
+                            borderWidth: 1,
+                            fill: 'origin' // Fill the area below the line
+
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+    <script>
+        fetch('/transaction1')
+            .then(response => response.json())
+            .then(data => {
+                var ctx = document.getElementById('transactionChart1').getContext('2d');
+
+                var chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.dates,
+                        datasets: [{
+                            label: 'Purchase Charts',
+                            data: data.amounts,
+                            backgroundColor: 'rgb(169,137,21)',
+                            borderColor: 'rgb(169,137,21)',
+                            borderWidth: 1,
+                            fill: 'origin' // Fill the area below the line
+
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+
 @endsection

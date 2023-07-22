@@ -20,6 +20,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RefersController;
 use App\Http\Controllers\RenoController;
 use App\Http\Controllers\ResellerController;
+use App\Http\Controllers\Transaction1Controller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VertualController;
 use Illuminate\Support\Facades\Auth;
@@ -122,6 +123,10 @@ Route::middleware(['auth'])->group(function () {
     Route::view('recharge', 'recharge');
     Route::get('datapin', [\App\Http\Controllers\DatapinController::class, 'pinindex'])->name('datapin');
     Route::post('datapon', [\App\Http\Controllers\DatapinController::class, 'processdatapin'])->name('datapon');
+
+    Route::get('/transaction', [Transaction1Controller::class, 'getTransactions']);
+    Route::get('/transaction1', [Transaction1Controller::class, 'getTransactions1']);
+
 });
 
 Route::get('/logout', function(){
