@@ -109,20 +109,20 @@
         </div>
         </div>
 
-        <div class="row">
-            <div class="row column1">
-                <div class="col-md-7 col-lg-6">
-                    <div class="card">
-                        <canvas id="myPieChart"></canvas>
-                    </div>
-                </div>
-                <div class="col-md-7 col-lg-6">
-                    <div class="card">
-                        <canvas id="myPieChart1"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="row column1">--}}
+{{--                <div class="col-md-7 col-lg-6">--}}
+{{--                    <div class="card">--}}
+{{--                        <canvas id="myPieChart"></canvas>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-md-7 col-lg-6">--}}
+{{--                    <div class="card">--}}
+{{--                        <canvas id="myPieChart1"></canvas>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
             <div class="row column1">
                 <div class="col-md-7 col-lg-6">
                     <div class="full counter_section margin_bottom_30">
@@ -292,9 +292,9 @@
                 fetch('/transactions')
                     .then(response => response.json())
                     .then(data => {
-                        var ctx = document.getElementById('transactionChart').getContext('2d');
+                        var ctx1 = document.getElementById('transactionChart').getContext('2d');
 
-                        var chart = new Chart(ctx, {
+                        var chart = new Chart(ctx1, {
                             type: 'line',
                             data: {
                                 labels: data.dates,
