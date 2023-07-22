@@ -1,4 +1,6 @@
 @include('admin.layouts.sidebar')
+<script src="{{ asset('js/Chart.min.js') }}"></script>
+
 <div class="midde_cont">
     <div class="container-fluid">
         <div class="row column_title">
@@ -10,15 +12,15 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div class="alert alert-secondary">
+                <div class="bg bg-primary">
                     <div class="card-body">
                         <center>
                             <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Credit User</a>
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="#">Withdraw RENO Wallet</a>
+                            <a class="btn btn-rounded btn-success" href="{{route('admin/credit')}}">Credit User</a>
+                            <a class="btn btn-rounded btn-success" href="#">Withdraw RENO Wallet</a>
 
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/credit')}}">Refund User</a>
-                            <a class="w3-btn w3-green w3-border w3-round-large" href="{{route('admin/charge')}}">Charge User</a>
+                            <a class="btn btn-rounded btn-success" href="{{route('admin/credit')}}">Refund User</a>
+                            <a class="btn btn-rounded btn-success" href="{{route('admin/charge')}}">Charge User</a>
 
                             <!--                            <a class="w3-btn w3-green w3-border w3-round-large" href="method.php">All Payment Method</a>-->
                         </center>
@@ -27,6 +29,21 @@
             </div>
         </div>
         <br>
+        <div class="row">
+            <div class="row column1">
+                <div class="col-md-7 col-lg-6">
+                    <div class="card">
+                        <canvas id="transactionChart" width="800" height="600"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-6">
+                    <div class="card">
+                        <canvas id="transactionChart1" width="800" height="600"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
         <div class="row">
             <div class="row column1">
                 <div class="col-md-6 col-lg-3">
@@ -90,6 +107,21 @@
                     </div>
                 </div>
         </div>
+        </div>
+
+        <div class="row">
+            <div class="row column1">
+                <div class="col-md-7 col-lg-6">
+                    <div class="card">
+                        <canvas id="myPieChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-6">
+                    <div class="card">
+                        <canvas id="myPieChart1"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
             <div class="row column1">
                 <div class="col-md-7 col-lg-6">
@@ -260,34 +292,6 @@
 
         </div>
         <!-- /.row -->
-        <br>
-        <div class="card">
-            <div class="card-header">
-                <h4 class="mb-0">Deposit History</h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
-                        <thead>
-                        <th class="table-active"> Username </th>
-                        <th> Transaction Id </th>
-                        <th> Date</th>
-                        <th>Amount</th>
-                        </thead>
-                        <tbody>
-                        @foreach($deposite as $de)
-                            <tr>
-                                <td>{{$de->username}}</td>
-                                <td>{{$de->payment_ref}}</td>
-                                <td>{{$de->date}}</td>
-                                <td>{{$de->amount}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -344,6 +348,115 @@
                 }
             });
         </script>
+<script>
+    fetch('/transactions')
+        .then(response => response.json())
+        .then(data => {
+            var ctx = document.getElementById('transactionChart').getContext('2d');
 
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.dates,
+                    datasets: [{
+                        label: 'Deposit Amount',
+                        data: data.amounts,
+                        backgroundColor: 'rgba(53, 169, 21, 0.5)',
+                        borderColor: 'rgba(53, 169, 21, 1)',
+                        borderWidth: 1,
+                        fill: 'origin' // Fill the area below the line
+
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+</script>
+<script>
+    fetch('/transactions1')
+        .then(response => response.json())
+        .then(data => {
+            var ctx = document.getElementById('transactionChart1').getContext('2d');
+
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.dates,
+                    datasets: [{
+                        label: 'Purchase Charts',
+                        data: data.amounts,
+                        backgroundColor: 'rgb(169,137,21)',
+                        borderColor: 'rgb(169,137,21)',
+                        borderWidth: 1,
+                        fill: 'origin' // Fill the area below the line
+
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+</script>
+<script>
+    fetch('/checkusers')
+        .then(response => response.json())
+        .then(data => {
+            var ctx = document.getElementById('myPieChart').getContext('2d');
+            var myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Total Users '+ data.tusers, 'New Users '+ data.nusers],
+                    datasets: [{
+                        data: [data.tusers, data.nusers],
+                        backgroundColor: ['#20b016', '#d7b612'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+        });
+</script>
+<script>
+    fetch('/checklock')
+        .then(response => response.json())
+        .then(data => {
+            var ctx = document.getElementById('transactionChart1').getContext('2d');
+
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.dates,
+                    datasets: [{
+                        label: 'Wallet Charts',
+                        data: data.amounts,
+                        backgroundColor: 'rgb(22,48,176)',
+                        borderColor: 'rgb(0,0,255)',
+                        borderWidth: 1,
+                        fill: 'origin' // Fill the area below the line
+
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+</script>
         @include('layouts.footer')
 

@@ -126,6 +126,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/transaction', [Transaction1Controller::class, 'getTransactions']);
     Route::get('/transaction1', [Transaction1Controller::class, 'getTransactions1']);
+    Route::get('checkusers', [TransactionController::class, 'showPieChart']);
+    Route::get('checklock', [TransactionController::class, 'lockPieChart']);
+    Route::get('/transactions', [TransactionController::class, 'getTransactions']);
+    Route::get('/transactions1', [TransactionController::class, 'getTransactions1']);
 
 });
 

@@ -2,8 +2,12 @@
 
 namespace app\Http\Controllers\admin;
 
+use App\Models\bill_payment;
 use App\Models\bo;
 use App\Models\deposit;
+use App\Models\safe_lock;
+use App\Models\User;
+use App\Models\wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -79,6 +83,62 @@ public function index()
 
     }
 
+    public function getTransactions()
+    {
+        $transactions = deposit::selectRaw('DATE(date) as date, SUM(amount) as total_amount')
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get();
 
+        $dates = $transactions->pluck('date')->toArray();
+        $amounts = $transactions->pluck('total_amount')->toArray();
+
+        return response()->json([
+            'dates' => $dates,
+            'amounts' => $amounts,
+        ]);
+    }
+    public function getTransactions1()
+    {
+        $transactions = bo::selectRaw('DATE(date) as date, SUM(amount) as total_amount')
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        $dates = $transactions->pluck('date')->toArray();
+        $amounts = $transactions->pluck('total_amount')->toArray();
+
+        return response()->json([
+            'dates' => $dates,
+            'amounts' => $amounts,
+        ]);
+    }
+    public function showPieChart()
+    {
+        $today = Carbon::now()->format('Y-m-d');
+
+        $totalUsers = User::count();
+        $activeUsers =  User::where([['created_at', 'LIKE', $today . '%']])->count();
+
+        return response()->json([
+            'tusers' => $totalUsers,
+            'nusers' => $activeUsers,
+        ]);
+    }
+    public function lockPieChart()
+    {
+        $transactions = wallet::selectRaw('DATE(created_at) as date, SUM(wallet) as total_amount')
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        $dates = $transactions->pluck('date')->toArray();
+        $amounts = $transactions->pluck('total_amount')->toArray();
+
+        return response()->json([
+            'dates' => $dates,
+            'amounts' => $amounts,
+        ]);
+    }
 
 }
