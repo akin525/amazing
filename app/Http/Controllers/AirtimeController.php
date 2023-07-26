@@ -230,6 +230,11 @@ class AirtimeController
                 $am = "NGN $request->amount  Airtime Purchase Was Successful To";
                 $ph = $request->number;
 
+                $receiver = $user->email;
+                $admin = 'info@amazingdata.com.ng';
+
+                Mail::to($receiver)->send(new Emailtrans($bo));
+                Mail::to($admin)->send(new Emailtrans($bo));
                 return response()->json([
                     'status' => 'success',
                     'message' => $am.' '.$ph,
