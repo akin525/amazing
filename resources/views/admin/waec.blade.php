@@ -23,7 +23,7 @@
                         @foreach($all as $dat)
                             <tr>
                                 <td>{{$dat->id}}</td>
-                                <td><a href="{{route('waecpin', $re->id)}}"><i class="fa fa-eye"></i> </a> </td>
+                                <td><a href="{{route('waecpin', $dat->id)}}"><i class="fa fa-eye"></i> </a> </td>
                                 <td>{{$dat->username}}</td>
                                 <td>{{$dat->pin}}</td>
                                 <td>{{$dat->seria}}</td>
