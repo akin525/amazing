@@ -133,7 +133,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('waecpin/{id}', [EducationController::class, 'waecpdfview'])->name('waecpin');
+    Route::get('necopin/{id}', [EducationController::class, 'necopdfview'])->name('necopin');
     Route::get('waecpin1/{id}', [EducationController::class, 'waecpdfdownload'])->name('waecpin1');
+    Route::get('necopin1/{id}', [EducationController::class, 'necopdfdownload'])->name('necopin1');
 
 });
 

@@ -282,12 +282,24 @@ public function waecpdfview($request)
 
     return view('wpin', compact('waec'));
 }
+public function necopdfview($request)
+{
+    $waec=neco::where('id', $request)->first();
+
+    return view('npin', compact('waec'));
+}
 
 public function waecpdfdownload($request)
 {
     $waec=waec::where('id', $request)->first();
     $pdf = PDF::loadView('wpin1', compact('waec'));
     return $pdf->download('waecpin.pdf');
+}
+public function necopdfdownload($request)
+{
+    $waec=neco::where('id', $request)->first();
+    $pdf = PDF::loadView('npin1', compact('waec'));
+    return $pdf->download('necopin.pdf');
 }
 
 }
