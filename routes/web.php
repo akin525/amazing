@@ -131,6 +131,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transactions', [TransactionController::class, 'getTransactions']);
     Route::get('/transactions1', [TransactionController::class, 'getTransactions1']);
 
+
+    Route::get('waecpin/{id}', [EducationController::class, 'waecpdfview'])->name('waecpin');
+    Route::get('waecpin1/{id}', [EducationController::class, 'waecpdfdownload'])->name('waecpin1');
+
 });
 
 Route::get('/logout', function(){
