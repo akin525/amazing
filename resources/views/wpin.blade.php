@@ -33,8 +33,8 @@
             border: 2px solid #061cd7;
         }
     </style>
-
+<center>
     <a href="{{route('dashboard')}}" class="button button1">Dashboard</a>
     <a href="{{route('waecpin1', $waec['id'])}}" class="button button1">Save pdf</a>
-
+</center>
 </div></body></html>
