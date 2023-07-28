@@ -107,6 +107,7 @@ $amount1=$amount - $char->charges;
                     'fwallet' => $gt,
                 ]);
 
+                $deposit['narration']="Account been funding using Squado";
                 $deposit = deposit::create([
                     'username' => $user->username,
                     'payment_ref' => $reference,

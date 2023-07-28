@@ -75,6 +75,7 @@ class VertualController
         $refid=$data["ref"];
         $amount=$data["amount"];
         $no=$data["account_number"];
+        $narration=$data["sender_narration"];
 
         $wallet = User::where('account_number', $no)->first();
         $pt=$wallet['wallet'];
@@ -236,6 +237,7 @@ class VertualController
         $refid=$data["reference"];
         $amount=$data["amount"];
         $account=$data['receiving_account'];
+        $narration=$data["sender_narration"];
 
         $wallet = User::where('account_number', $account)->first();
         $pt=$wallet['wallet'];
@@ -254,6 +256,7 @@ class VertualController
                 $gt = $amount1 + $pt;
                 $reference=$refid;
 
+                $deposit['narration']=$narration;
                 $deposit = deposit::create([
                     'username' => $wallet->username,
                     'payment_ref' =>$refid,
