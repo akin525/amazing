@@ -1,4 +1,4 @@
-@include('admin.layouts.sidebar')
+{{--@include('admin.layouts.sidebar')--}}
 
 <div class="row">
     <div class="col-12">
@@ -66,4 +66,4 @@
         <!-- end col -->
     </div>
     <!-- end row -->
-{{--@include('layouts.footer')--}}
+@include('layouts.footer')

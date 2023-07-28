@@ -1,4 +1,4 @@
-@include('admin.layouts.sidebar')
+{{--@include('admin.layouts.sidebar')--}}
 
 <div class="row">
     <div class="col-12">
