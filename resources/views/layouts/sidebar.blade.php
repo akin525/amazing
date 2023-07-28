@@ -68,6 +68,7 @@
 {{--                    <span class="nav-item__title">{{\Illuminate\Support\Facades\Auth::user()->username}}<i class="las la-angle-down nav-item__arrow"></i></span>--}}
                 </a>
 
+
 {{--                <a class="navbar-brand rounded-circle" href="{{route('dashboard')}}">--}}
 {{--                    <img class="dark" width="100" src="{{asset('pa.jpg')}}" alt="logo">--}}
 {{--                    <img class="light" width="100" src="{{asset('pa.jpg')}}" alt="logo">--}}
