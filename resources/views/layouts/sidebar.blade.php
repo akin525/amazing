@@ -64,7 +64,7 @@
         <div class="navbar-left">
             <div class="logo-area ">
 
-                <a href="javascript:;" class="nav-item-toggle"><img src="{{asset('pa.jpg')}}" alt class="rounded-circle">
+                <a href="javascript:;" class="nav-item-toggle"><img width="50" src="{{asset('pa.jpg')}}" alt class="rounded-circle">
 {{--                    <span class="nav-item__title">{{\Illuminate\Support\Facades\Auth::user()->username}}<i class="las la-angle-down nav-item__arrow"></i></span>--}}
                 </a>
 
