@@ -66,4 +66,4 @@
         <!-- end col -->
     </div>
     <!-- end row -->
-@include('layouts.footer')
+{{--@include('layouts.footer')--}}
