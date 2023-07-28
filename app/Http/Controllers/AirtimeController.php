@@ -108,8 +108,8 @@ class AirtimeController
                     $receiver = $user->email;
                     $admin = 'info@amazingdata.com.ng';
 
-//                    Mail::to($receiver)->send(new Emailtrans($bo));
-//                    Mail::to($admin)->send(new Emailtrans($bo));
+                    Mail::to($receiver)->send(new Emailtrans($bo));
+                    Mail::to($admin)->send(new Emailtrans($bo));
                     $parise=$comission."₦ Commission Is added to your wallet balance";
                     $msg=$am.' ' .$ph.' & '.$parise;
 
