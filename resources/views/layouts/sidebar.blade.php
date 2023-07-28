@@ -62,11 +62,11 @@
 <header class="header-top">
     <nav class="navbar navbar-light">
         <div class="navbar-left">
-            <div class="logo-area">
+            <div class="logo-area ">
 
-                <a class="navbar-brand" href="{{route('dashboard')}}">
-                    <img class="dark rounded-circle" src="{{asset('pa.jpg')}}" alt="logo">
-                    <img class="light rounded-bottom" src="{{asset('pa.jpg')}}" alt="logo">
+                <a class="navbar-brand rounded-circle" href="{{route('dashboard')}}">
+                    <img class="dark" src="{{asset('pa.jpg')}}" alt="logo">
+                    <img class="light" src="{{asset('pa.jpg')}}" alt="logo">
                 </a>
                 <a href="#" class="sidebar-toggle">
                     <img class="svg" src="img/svg/align-center-alt.svg" alt="img"></a>
