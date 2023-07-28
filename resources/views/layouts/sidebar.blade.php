@@ -64,10 +64,14 @@
         <div class="navbar-left">
             <div class="logo-area ">
 
-                <a class="navbar-brand rounded-circle" href="{{route('dashboard')}}">
-                    <img class="dark" width="100" src="{{asset('pa.jpg')}}" alt="logo">
-                    <img class="light" width="100" src="{{asset('pa.jpg')}}" alt="logo">
+                <a href="javascript:;" class="nav-item-toggle"><img src="{{asset('pa.jpg')}}" alt class="rounded-circle">
+{{--                    <span class="nav-item__title">{{\Illuminate\Support\Facades\Auth::user()->username}}<i class="las la-angle-down nav-item__arrow"></i></span>--}}
                 </a>
+
+{{--                <a class="navbar-brand rounded-circle" href="{{route('dashboard')}}">--}}
+{{--                    <img class="dark" width="100" src="{{asset('pa.jpg')}}" alt="logo">--}}
+{{--                    <img class="light" width="100" src="{{asset('pa.jpg')}}" alt="logo">--}}
+{{--                </a>--}}
                 <a href="#" class="sidebar-toggle">
                     <img class="svg" src="img/svg/align-center-alt.svg" alt="img"></a>
             </div>
