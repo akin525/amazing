@@ -1,4 +1,4 @@
-{{--@include('admin.layouts.sidebar')--}}
+@include('admin.layouts.sidebar')
 
 <div class="row">
     <div class="col-12">
@@ -30,9 +30,9 @@
                         <tbody>
                         @foreach($server as $seller)
                             <tr>
-                                <link rel="stylesheet" href="{{asset('style.css')}}">
+                                <link rel="stylesheet" href="{{asset('admin/style.css')}}">
                                 <!--Only for demo purpose - no need to add.-->
-                                <link rel="stylesheet" href="{{asset('demo.css')}}"/>
+                                <link rel="stylesheet" href="{{asset('admin/demo.css')}}"/>
                                 <td> {{$seller->name}}</td>
                                 {{--                                <td><a href="{{route('editpayment', $pay->id)}}"--}}
                                 {{--                                       {{$pay->value}}class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>--}}
