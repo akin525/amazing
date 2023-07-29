@@ -78,6 +78,7 @@
                                         <table id="data-table-buttons" class="table table-striped table-bordered align-middle">
                                             <thead>
                                             <tr>
+                                                <th>Action</th>
                                                 <th>Date</th>
                                                 <th>Username</th>
                                                 <th>Seria-Number</th>
@@ -89,6 +90,7 @@
                                             <tbody>
                                             @foreach($ne as $re)
                                                 <tr>
+                                                    <td><a href="{{route('necopin', $re->id)}}"><i class="fa fa-eye"></i> </a></td>
                                                     <td>{{$re->created_at}}</td>
                                                     <td>{{$re->username}}</td>
                                                     <td>{{$re->seria}}</td>

@@ -108,8 +108,8 @@ class AirtimeController
                     $receiver = $user->email;
                     $admin = 'info@amazingdata.com.ng';
 
-//                    Mail::to($receiver)->send(new Emailtrans($bo));
-//                    Mail::to($admin)->send(new Emailtrans($bo));
+                    Mail::to($receiver)->send(new Emailtrans($bo));
+                    Mail::to($admin)->send(new Emailtrans($bo));
                     $parise=$comission."₦ Commission Is added to your wallet balance";
                     $msg=$am.' ' .$ph.' & '.$parise;
 
@@ -230,6 +230,11 @@ class AirtimeController
                 $am = "NGN $request->amount  Airtime Purchase Was Successful To";
                 $ph = $request->number;
 
+                $receiver = $user->email;
+                $admin = 'info@amazingdata.com.ng';
+
+                Mail::to($receiver)->send(new Emailtrans($bo));
+                Mail::to($admin)->send(new Emailtrans($bo));
                 return response()->json([
                     'status' => 'success',
                     'message' => $am.' '.$ph,
@@ -280,7 +285,7 @@ $success=0;
 
 
         if ($user->wallet < $request->amount) {
-            $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $wallet->balance. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+            $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
 Alert::error('Insufficient Balance', $mg);
             return back();
 

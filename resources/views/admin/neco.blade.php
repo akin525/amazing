@@ -11,6 +11,7 @@
                         <thead>
                         <tr>
                             <th>id</th>
+                            <th>Action</th>
                             <th>Username</th>
                             <th>pin</th>
                             <th>Ref</th>
@@ -21,6 +22,7 @@
                         @foreach($all as $dat)
                             <tr>
                                 <td>{{$dat->id}}</td>
+                                <td><a href="{{route('necopin', $dat->id)}}"><i class="fa fa-eye"></i> </a></td>
                                 <td>{{$dat->username}}</td>
                                 <td>{{$dat->pin}}</td>
                                 <td>{{$dat->ref}}</td>

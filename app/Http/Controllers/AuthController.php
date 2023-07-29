@@ -194,9 +194,12 @@ $login=$user->name;
 
         if (isset($serve)) {
             $user = User::find($request->user()->id);
-
-
+            if (Auth::user()->apikey==null)
             return view('select', compact('user', 'serve'));
+            else{
+                return view('select1', compact('user', 'serve'));
+
+            }
         } else {
             Alert::info('Server', 'Out of service, come back later');
             return redirect('dashboard');

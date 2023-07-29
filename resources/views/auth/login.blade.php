@@ -40,7 +40,7 @@
                                 @csrf
                             <div class="card-body">
                                 @if (session('status'))
-                                    <div class="mb-4 font-medium text-white alert alert-success">
+                                    <div class="alert alert-success">
                                         {{ session('status') }}
                                     </div>
                                 @endif

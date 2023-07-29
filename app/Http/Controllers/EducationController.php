@@ -12,6 +12,7 @@ use App\Models\server;
 use App\Models\User;
 use App\Models\waec;
 use App\Models\wallet;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -273,6 +274,32 @@ public function adminwaec()
 {
     $all=waec::all();
     return view('admin/waec', compact('all'));
+}
+
+public function waecpdfview($request)
+{
+    $waec=waec::where('id', $request)->first();
+
+    return view('wpin', compact('waec'));
+}
+public function necopdfview($request)
+{
+    $waec=neco::where('id', $request)->first();
+
+    return view('npin', compact('waec'));
+}
+
+public function waecpdfdownload($request)
+{
+    $waec=waec::where('id', $request)->first();
+    $pdf = PDF::loadView('wpin1', compact('waec'));
+    return $pdf->download('waecpin.pdf');
+}
+public function necopdfdownload($request)
+{
+    $waec=neco::where('id', $request)->first();
+    $pdf = PDF::loadView('npin1', compact('waec'));
+    return $pdf->download('necopin.pdf');
 }
 
 }
