@@ -75,7 +75,6 @@ class VertualController
         $refid=$data["ref"];
         $amount=$data["amount"];
         $no=$data["account_number"];
-        $narration=$data["sender_narration"];
 
         $wallet = User::where('account_number', $no)->first();
         $pt=$wallet['wallet'];
