@@ -54,6 +54,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 //});
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 Route::get('/', [AuthController::class, 'landing']);
+Route::post('passw', [AuthController::class, 'pass'])->name('passw');
 
 //Route::get('select', function () {
 //    return view('select');
@@ -67,7 +68,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('wac', [EducationController::class, 'waec'])->name('wac');
     Route::get('waec', [EducationController::class, 'indexw'])->name('waec');
     Route::get('neco', [EducationController::class, 'indexn'])->name('neco');
-    Route::post('passw', [AuthController::class, 'pass'])->name('passw');
     Route::post('pick', [AlltvController::class, 'tv'])->name('pick');
     Route::get('select', [AuthController::class, 'select'])->name('select');
     Route::get('select1', [AuthController::class, 'select1'])->name('select1');
