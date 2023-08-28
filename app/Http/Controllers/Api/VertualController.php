@@ -237,9 +237,7 @@ class VertualController
 
         }
 //        return $data;
-        $web = paylony::create([
-            'webbook' => $data,
-        ]);
+
         $refid=$data["reference"];
         $amount=$data["amount"];
         $account=$data['receiving_account'];
@@ -291,6 +289,9 @@ class VertualController
                 Mail::to($receiver)->send(new Emailcharges($charp ));
                 Mail::to($admin)->send(new Emailcharges($charp ));
 
+                $web = paylony::create([
+                    'webbook' => $json,
+                ]);
                 return;
 
 
