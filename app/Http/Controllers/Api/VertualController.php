@@ -5,6 +5,7 @@ use App\Mail\Emailcharges;
 use App\Mail\Emailfund;
 use App\Models\bo;
 use App\Models\charp;
+use app\Models\paylony;
 use App\Models\web;
 use App\Models\webook;
 use App\Models\deposit;
@@ -160,11 +161,14 @@ class VertualController
     }
     public function run1(Request $request)
     {
+
+
         if ($json = json_decode(file_get_contents("php://input"), true)) {
             print_r($json['TransactionRef']);
             $data = $json;
 
         }
+
         $refid=$data["TransactionRef"];
         $amount=$data["Body"]["amount"]/100;
         $type=$data["Body"]["transaction_type"];
@@ -226,13 +230,16 @@ class VertualController
     }
     public function run2(Request $request)
     {
+
         if ($json = json_decode(file_get_contents("php://input"), true)) {
             print_r($json['reference']);
             $data = $json;
 
         }
 //        return $data;
-
+        $web = paylony::create([
+            'webbook' => $data,
+        ]);
         $refid=$data["reference"];
         $amount=$data["amount"];
         $account=$data['receiving_account'];
