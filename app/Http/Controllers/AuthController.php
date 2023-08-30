@@ -302,7 +302,11 @@ $login=$user->name;
         } elseif ($se == 'easyaccess'){
             return view('airtime1', compact('totaldeposite'));
 
+        }elseif ($se == 'Ridamsub') {
+            return view('airtime2', compact('totaldeposite'));
+
         }else {
+
             Alert::info('Server', 'Out of service, come back later');
             return redirect('dashboard');
         }

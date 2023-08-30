@@ -89,6 +89,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('upgrade', [ResellerController::class, 'apiaccess'])->name('upgrade');
     Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
     Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
+    Route::post('buyairtime2', [AirtimeController::class, 'ridamsub'])->name('buyairtime2');
 
 
     //profile route
