@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="amount">Amount</label>
-                                                        <input type="number" id="amount" name="amount" min="100" max="4000" class="form-control" required>
+                                                        <input type="number" id="amount" oninput="calc()" name="amount" min="100" max="4000" class="form-control" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="Number">Number</label>
