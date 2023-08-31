@@ -318,6 +318,16 @@ $success=0;
 
 $curl = curl_init();
 
+            $requestData = array(
+                "network" => $request->name,
+                "amount" => $request->amount,
+                "mobile_number" => $request->number,
+                "Ported_number" => true,
+                "airtime_type" => "VTU"
+            );
+
+            $requestJson = json_encode($requestData);
+
 curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://ridamsub.com/api/topup/',
     CURLOPT_RETURNTRANSFER => true,
@@ -327,12 +337,7 @@ curl_setopt_array($curl, array(
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS =>array("network"=>$request->name,
-        "amount"=>$request->amount,
-        "mobile_number"=>$request->number,
-        "Ported_number"=>true,
-        "airtime_type"=>"VTU",
-    ),
+    CURLOPT_POSTFIELDS =>$requestJson,
     CURLOPT_HTTPHEADER => array(
         'Authorization: Token d281eaad090e83b849e2ec3cc1b1466dc639ca81',
         'Content-Type: application/json'
@@ -343,9 +348,12 @@ $response = curl_exec($curl);
 
 curl_close($curl);
 
-            $data = json_decode($response, true);
+//            $data = json_encode($response);
+            $data1 = json_decode($response, true);
 
-            if ($data['status']== 'successful') {
+//            return response()->json($data1['error'], Response::HTTP_BAD_REQUEST);
+
+            if ($data1['Status']== 'successful') {
 
                 $bo = bo::create([
                     'username' => $user->username,
@@ -356,6 +364,8 @@ curl_close($curl);
                     'phone' => $request->number,
                     'refid' => $request->refid,
                     'discountamoun' => '0',
+                    'fbalance'=>$user->wallet,
+                    'balance'=>$gt,
                 ]);
 
                 $success=1;
@@ -376,7 +386,7 @@ curl_close($curl);
                     'id'=>$bo['id'],
                 ]);
 
-            } elseif ($data['status']== 'failed') {
+            } elseif ($data1['Status']== 'failed') {
                 $zo = $user->balance + $request->amount;
                 $user->balance = $zo;
                 $user->save();
