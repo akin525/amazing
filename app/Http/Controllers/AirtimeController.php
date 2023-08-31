@@ -327,13 +327,12 @@ curl_setopt_array($curl, array(
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS =>'{"network":'+$request->name+',
-"amount":'+$request->amount+',
-"mobile_number":'+$request->number+',
-"Ported_number":true,
-"airtime_type":"VTU"
-
-}',
+    CURLOPT_POSTFIELDS =>array("network"=>$request->name,
+        "amount"=>$request->amount,
+        "mobile_number"=>$request->number,
+        "Ported_number"=>true,
+        "airtime_type"=>"VTU",
+    ),
     CURLOPT_HTTPHEADER => array(
         'Authorization: Token d281eaad090e83b849e2ec3cc1b1466dc639ca81',
         'Content-Type: application/json'
