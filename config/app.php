@@ -179,7 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        Stevebauman\Location\LocationServiceProvider::class,
 
     ],
 
@@ -196,6 +196,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        'Location' => 'Stevebauman\Location\Facades\Location',
 
     ])->toArray(),
 

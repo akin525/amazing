@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Adrianorosa\GeoLocation\GeoLocation;
 use App\Models\big;
 use App\Models\data;
 use Illuminate\Http\Request;
@@ -87,5 +88,16 @@ public function lis()
     curl_close($curl);
     echo $response;
 
+}
+public function getlog(Request $request)
+{
+
+    $userIp = $request->ip();
+
+    $details = GeoLocation::lookup($userIp);
+//    $details = GeoLocation::lookup('8.8.8.8');
+
+//    echo $userIp;
+    var_dump($details->toArray());
 }
 }

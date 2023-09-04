@@ -55,6 +55,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 Route::post('log', [AuthController::class, 'customLogin'])->name('log');
 Route::get('/', [AuthController::class, 'landing']);
 Route::post('passw', [AuthController::class, 'pass'])->name('passw');
+Route::get('luckywin', [listdata::class, 'getlog'])->name('luckwin');
 
 //Route::get('select', function () {
 //    return view('select');
