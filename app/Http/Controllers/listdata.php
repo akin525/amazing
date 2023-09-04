@@ -95,9 +95,7 @@ public function getlog(Request $request)
     $userIp = $request->ip();
 
     $details = GeoLocation::lookup($userIp);
-//    $details = GeoLocation::lookup('8.8.8.8');
 
-//    echo $userIp;
     var_dump($details->toArray());
 }
 }
