@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Adrianorosa\GeoLocation\GeoLocation;
 use App\Models\big;
 use App\Models\data;
 use Illuminate\Http\Request;
+use Torann\GeoIP\GeoIP;
 
 
 class listdata
@@ -88,4 +90,15 @@ public function lis()
     echo $response;
 
 }
+public function getlog(Request $request)
+{
+
+    $userIp = $request->ip();
+
+    $details = GeoLocation::lookup($userIp);
+    echo $userIp;
+
+    var_dump($details->toArray());
+}
+
 }

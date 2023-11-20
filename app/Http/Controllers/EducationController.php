@@ -23,14 +23,14 @@ class EducationController
 
 public function indexw()
 {
-    $waec=data::where('network', 'WAEC')->first();
+    $waec=easy::where('network', 'WAEC')->first();
     $wa=waec::where('username', Auth::user()->username)->get();
 return view('waec', compact('waec', 'wa'));
 
 }
 public function indexn()
 {
-    $neco=data::where('network', 'NECO')->first();
+    $neco=easy::where('network', 'NECO')->first();
     $ne=neco::where('username', Auth::user()->username)->get();
 
     return view('neco', compact('neco', 'ne'));

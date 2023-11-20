@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="amount">Amount</label>
-                                                        <input type="number" id="amount" name="amount" min="100" max="4000" class="form-control" required>
+                                                        <input type="number" id="amount" oninput="calc()" name="amount" min="100" max="4000" class="form-control" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="Number">Number</label>
@@ -43,6 +43,24 @@
                                         </div>
                                                     <input type="hidden" name="refid" value="<?php echo rand(10000000, 999999999); ?>">
                                                     <br>
+
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="amount" style="color: #000000"><b>Amount to Pay (<span>₦</span>)</b></label>
+                                                <br>
+                                                <span class="text-danger">2% Discount:</span> <b class="text-success">₦<span id="shownow1"></span></b>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            function calc(){
+                                                var value = document.getElementById("amount").value;
+                                                var percent = 2/100 * value;
+                                                var reducedvalue = value - percent;
+                                                document.getElementById("shownow1").innerHTML = reducedvalue;
+
+                                            }
+                                        </script>
+                                        <br/>
                                         <button type="submit" class=" btn" style="color: white;background-color: #28a745" id="btnsubmit"> Purchase Now</button>
                                     </form>
 

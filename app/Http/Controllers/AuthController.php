@@ -20,6 +20,7 @@ use App\Models\bo;
 use App\Models\data;
 use App\Models\deposit;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -56,15 +57,15 @@ class AuthController
     }elseif ($user->email == $request->email){
         $new= uniqid('Pass',true);
 
-        $user->password=$new;
+        $user->password=Hash::make($new);
         $user->save();
 
-        $admin= 'admin@Amazing-Data.com.ng';
+        $admin= 'info@amazingdata.com.ng';
         $admin1= 'Amazing-Data18@gmail.com';
 
         $receiver= $user->email;
-//        Mail::to($receiver)->send(new Emailpass($new));
-//        Mail::to($admin)->send(new Emailpass($new ));
+        Mail::to($receiver)->send(new Emailpass($new));
+        Mail::to($admin)->send(new Emailpass($new ));
 //        Mail::to($admin1)->send(new Emailpass($new ));
 
         return redirect(route('password.request'))
@@ -302,7 +303,11 @@ $login=$user->name;
         } elseif ($se == 'easyaccess'){
             return view('airtime1', compact('totaldeposite'));
 
+        }elseif ($se == 'Ridamsub') {
+            return view('airtime2', compact('totaldeposite'));
+
         }else {
+
             Alert::info('Server', 'Out of service, come back later');
             return redirect('dashboard');
         }

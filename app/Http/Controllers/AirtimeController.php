@@ -286,22 +286,21 @@ $success=0;
 
         if ($user->wallet < $request->amount) {
             $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
-Alert::error('Insufficient Balance', $mg);
-            return back();
+
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
         }
         if ($request->amount < 0) {
 
             $mg = "error transaction";
-            Alert::warning('Warning', $mg);
-            return back();
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
 
         }
         $bo = bo::where('refid', $request->refid)->first();
         if (isset($bo)) {
             $mg = "duplicate transaction";
-            Alert::error('Error', $mg);
-            return back();
+            return response()->json($mg, Response::HTTP_CONFLICT);
+
 
         } else {
             $user = User::find($request->user()->id);
@@ -319,6 +318,16 @@ Alert::error('Insufficient Balance', $mg);
 
 $curl = curl_init();
 
+            $requestData = array(
+                "network" => $request->name,
+                "amount" => $request->amount,
+                "mobile_number" => $request->number,
+                "Ported_number" => true,
+                "airtime_type" => "VTU"
+            );
+
+            $requestJson = json_encode($requestData);
+
 curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://ridamsub.com/api/topup/',
     CURLOPT_RETURNTRANSFER => true,
@@ -328,13 +337,7 @@ curl_setopt_array($curl, array(
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS =>'{"network":'+$request->name+',
-"amount":'+$request->amount+',
-"mobile_number":'+$request->number+',
-"Ported_number":true,
-"airtime_type":"VTU"
-
-}',
+    CURLOPT_POSTFIELDS =>$requestJson,
     CURLOPT_HTTPHEADER => array(
         'Authorization: Token d281eaad090e83b849e2ec3cc1b1466dc639ca81',
         'Content-Type: application/json'
@@ -344,16 +347,13 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 
 curl_close($curl);
-echo $response;
 
-//           return $response;
+//            $data = json_encode($response);
+            $data1 = json_decode($response, true);
 
-            $data = json_decode($response, true);
-//            $success = $data["message"];
-//            $tran1 = $data["discountAmount"];
+//            return response()->json($data1['error'], Response::HTTP_BAD_REQUEST);
 
-//                        return $response;
-            if ($data['success']== 'true') {
+            if ($data1['Status']== 'successful') {
 
                 $bo = bo::create([
                     'username' => $user->username,
@@ -364,6 +364,8 @@ echo $response;
                     'phone' => $request->number,
                     'refid' => $request->refid,
                     'discountamoun' => '0',
+                    'fbalance'=>$user->wallet,
+                    'balance'=>$gt,
                 ]);
 
                 $success=1;
@@ -375,35 +377,29 @@ echo $response;
                 $admin = 'info@amazingdata.com.ng';
 
 
-//                Mail::to($receiver)->send(new Emailtrans($bo));
-//                Mail::to($admin)->send(new Emailtrans($bo));
-//                Mail::to($admin2)->send(new Emailtrans($bo));
-//
-                Alert::success('Success', $am.' '.$ph);
-                return back();
+                Mail::to($receiver)->send(new Emailtrans($bo));
+                Mail::to($admin)->send(new Emailtrans($bo));
 
-            } elseif ($data['message']== 'Possible duplicate transaction, Please retry after 2 minutes') {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => $am.' '.$ph,
+                    'id'=>$bo['id'],
+                ]);
+
+            } elseif ($data1['Status']== 'failed') {
                 $zo = $user->balance + $request->amount;
                 $user->balance = $zo;
-                $user->save();
-$success=0;
-                $name = 'Airtime';
-                $am = "NGN $request->amount Was Refunded To Your Wallet";
-                $ph = ", Possible duplicate transaction, Please retry after 2 minutesl";
-
-                Alert::error('Error', $am.' '.$ph);
-                return back();
-
-            } elseif ($data['success']== 'false') {
-                $zo = $user->wallet + $request->amount;
-                $user->wallet = $zo;
                 $user->save();
                 $success=0;
                 $name = 'Airtime';
                 $am = "NGN $request->amount Was Refunded To Your Wallet";
-                $ph = ", Transaction fail";
-                Alert::error('Error', $am.' '.$ph);
-                return back();
+                $ph = ", Possible duplicate transaction, Please retry after 2 minutesl";
+
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => $response,
+
+                ]);
 
             }
         }
