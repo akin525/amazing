@@ -49,6 +49,38 @@ class DataserverController extends Controller
                     return $response;
 
             }
+    public function sammighty($request)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://pay.sammighty.com.ng/api/data",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'code' =>$request->plan_id,
+                'number' => $request->number,
+                'selling_amount' => $request->tamount,
+                'refid' => $request->refid, //update this on your script to receive webhook notifications
+            ),
+            CURLOPT_HTTPHEADER => array(
+                "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+//        echo $response;
+
+                    return $response;
+
+            }
 
     public function Ridamsub($request)
     {

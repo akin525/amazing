@@ -8,6 +8,7 @@ use App\Models\data;
 use App\Models\deposit;
 use App\Models\profit;
 use App\Models\easy;
+use App\Models\samm;
 use App\Models\server;
 use App\Models\setting;
 use App\Models\wallet;
@@ -38,6 +39,8 @@ class BillController extends Controller
                 $product = data::where('id', $request->productid)->first();
             }elseif ($serve->name == 'easyaccess') {
             $product = easy::where('id', $request->productid)->first();
+            }elseif ($serve->name == "sammighty"){
+                $product = samm::where('id', $request->productid)->first();
             }
 
 
@@ -202,6 +205,58 @@ class BillController extends Controller
                         ]);
                     }
 
+                } else if ($mcd->name == "sammighty"){
+                    $response = $daterserver->sammighty($object);
+
+                    $data = json_decode($response, true);
+//return $data;
+                    if ($data['success']==1) {
+
+//                    echo $success;
+                        $success = "1";
+                        $po = $amount - $product->amount;
+
+                        $bo = bo::create([
+                            'username' => $user->username,
+                            'plan' => $product->network . '|' . $product->plan,
+                            'amount' => $amount,
+                            'server_res' => $response,
+                            'result' => $success,
+                            'fbalance'=>$user->wallet,
+                            'balance'=>$gt,
+                            'phone' => $request->number,
+                            'refid' => $request->refid,
+                        ]);
+
+                        $profit = profit::create([
+                            'username' => $user->username,
+                            'plan' => $product->network . '|' . $product->plan,
+                            'amount' => $po,
+                        ]);
+
+                        $name = $product->plan;
+                        $am = "$product->plan  was successful delivered to";
+                        $ph = $request->number;
+
+                        return response()->json([
+                            'status' => 'success',
+                            'message' => $am.' '.$ph,
+                        ]);
+
+                    }elseif ($data['success']==0) {
+                        $success = 0;
+                        $zo = $user->wallet + $amount;
+                        $user->wallet = $zo;
+                        $user->save();
+
+                        $name = $product->plan;
+                        $am = "NGN $amount Was Refunded To Your Wallet";
+                        $ph = ", Transaction fail";
+                        return response()->json([
+                            'status' => 'fail',
+                            'message' => $am.' ' .$ph,
+                        ]);
+                    }
                 }
 
 

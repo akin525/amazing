@@ -10,6 +10,7 @@ use App\Mail\Emailpass;
 use App\Models\easy;
 use App\Models\Messages;
 use App\Models\refer;
+use App\Models\samm;
 use App\Models\server;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -314,6 +315,9 @@ $login=$user->name;
             return response()->json($options);
         }elseif ($serve->name == 'easyaccess') {
             $options = easy::where('network', $selectedValue)->get();
+            return response()->json($options);
+        }elseif ($serve->name =="sammighty"){
+            $options = samm::where('network', $selectedValue)->get();
             return response()->json($options);
         }
     }
