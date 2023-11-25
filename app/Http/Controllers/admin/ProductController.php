@@ -72,7 +72,7 @@ public function on(Request $request)
         $product->status = $give;
         $product->save();
 
-        return redirect('admin/product1')->with('success', 'Product update successfully');
+        return redirect('admin/product2')->with('success', 'Product update successfully');
 
     }
 public function in(Request $request)
