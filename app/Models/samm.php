@@ -19,7 +19,7 @@ class samm extends Authenticatable
      */
     use HasFactory;
 
-    protected $table = 'sammighty';
+    protected $table = 'samm';
     protected $guarded=[];
 
 }
