@@ -210,7 +210,7 @@ class BillController extends Controller
 
                     $data = json_decode($response, true);
 //return $data;
-                    if ($data['success']==1) {
+                    if ($data['success']== "1") {
 
 //                    echo $success;
                         $success = "1";

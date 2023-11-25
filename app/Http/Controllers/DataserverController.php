@@ -64,10 +64,11 @@ class DataserverController extends Controller
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => array(
-                'code' =>$request->plan_id,
+                'refid' => $request->refid,
+                'name' => $request->id,
                 'number' => $request->number,
-                'selling_amount' => $request->tamount,
-                'refid' => $request->refid, //update this on your script to receive webhook notifications
+                'amount' => $request->amount,
+                'reseller_price' => $request->amount
             ),
             CURLOPT_HTTPHEADER => array(
                 "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
