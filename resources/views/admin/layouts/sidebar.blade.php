@@ -117,6 +117,9 @@
                             <li class="active">
                                 <a href="{{ route('admin/product1') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>Easyaccess Product</span></a>
                             </li>
+                            <li class="active">
+                                <a href="{{ route('admin/product2') }}"  ><i class="fa fa-shopping-cart red_color"></i> <span>Sammighty Product</span></a>
+                            </li>
                         </ul>
                     </li>
                     <li>

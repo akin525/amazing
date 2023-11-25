@@ -6,6 +6,7 @@ use App\Models\airtimecon;
 use App\Models\big;
 use App\Models\data;
 use App\Models\easy;
+use App\Models\samm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,6 +23,12 @@ public function index()
         $product=easy::paginate(50);
 
         return view('admin/product1', compact('product'));
+    }
+    public function index2()
+    {
+        $product=samm::paginate(50);
+
+        return view('admin/product2', compact('product'));
     }
 public function on(Request $request)
 {
@@ -53,6 +60,21 @@ public function on(Request $request)
         return redirect('admin/product1')->with('success', 'Product update successfully');
 
     }
+    public function on2(Request $request)
+    {
+        $product = samm::where('id', $request->id)->first();
+
+        if ($product->status == "1") {
+            $give = "0";
+        } else {
+            $give = "1";
+        }
+        $product->status = $give;
+        $product->save();
+
+        return redirect('admin/product1')->with('success', 'Product update successfully');
+
+    }
 public function in(Request $request)
 {
 
@@ -66,6 +88,13 @@ return view('admin/editproduct', compact('pro'));
         $pro=easy::where('id', $request->id)->first();
 
         return view('admin/editproduct1', compact('pro'));
+    }
+    public function in2(Request $request)
+    {
+
+        $pro=samm::where('id', $request->id)->first();
+
+        return view('admin/editproduct2', compact('pro'));
     }
 public function edit(Request $request)
 {
@@ -101,6 +130,24 @@ public function edit(Request $request)
         $pro->ramount=$request->ramount;
         $pro->save();
         return redirect('admin/product1')->with('success', 'Product update successfully');
+
+    }
+    public function edit2(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'amount' => 'required',
+            'tamount' => 'required',
+            'ramount' => 'required',
+            'name' => 'required',
+        ]);
+        $pro=samm::where('id', $request->id)->first();
+        $pro->plan=$request->name;
+        $pro->amount=$request->amount;
+        $pro->tamount=$request->tamount;
+        $pro->ramount=$request->ramount;
+        $pro->save();
+        return redirect('admin/product2')->with('success', 'Product update successfully');
 
     }
 
