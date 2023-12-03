@@ -342,7 +342,7 @@ $success=0;
                 ),
 
                 CURLOPT_HTTPHEADER => array(
-                    'apikey: sk-RwQM6hymqWCe43ct3esB'
+                    'apikey: sk-ui8pjndeJA3ATMNIhgHw'
                 )));
 
             $response = curl_exec($curl);
