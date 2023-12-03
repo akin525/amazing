@@ -17,7 +17,7 @@
                         <center>
                             <!--                    <h4 class="w3-text-green"><b>&nbsp;&nbsp; &nbsp;&nbsp; <a class="w3-btn w3-green w3-border w3-round-large" href="with.php">Withdraw From MCD Wallet</a>-->
                             <a class="btn btn-rounded rounded btn-success" href="{{route('admin/credit')}}">Credit User</a>
-                            <a class="btn btn-rounded rounded btn-success" href="#">Withdraw RENO Wallet</a>
+                            <a class="btn btn-rounded rounded btn-success" href="#">Withdraw Sammighty Bonus Wallet</a>
 
                             <a class="btn btn-rounded btn-success" href="{{route('admin/credit')}}">Refund User</a>
                             <a class="btn btn-rounded btn-success" href="{{route('admin/charge')}}">Charge User</a>
@@ -233,7 +233,7 @@
                             <div>
                                 <h5 class="total_no text-center">₦{{number_format(intval($tran *1),2)}}</h5>
 
-                                <h6 class="head_couter">RENO Balance</h6>
+                                <h6 class="head_couter">Sammighty Balance</h6>
                             </div>
                         </div>
                     </div>

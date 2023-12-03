@@ -62,7 +62,7 @@ public function dashboard(Request $request)
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://renomobilemoney.com/api/dashboard',
+            CURLOPT_URL => 'https://pay.sammighty.com.ng/api/dashboard',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -73,7 +73,7 @@ public function dashboard(Request $request)
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apikey: RENO-63939122379b03.42488714'
+                'apikey: sk-RwQM6hymqWCe43ct3esB'
             ),
         ));
 
@@ -85,8 +85,7 @@ public function dashboard(Request $request)
 //                                                        return $response;
         $data = json_decode($response, true);
 //        $success = $data["success"];
-        $tran = $data["wallet"][0]['balance'];
-        $pa = $data["me"];
+        $tran = $data["user"]["wallet"];
         $today = Carbon::now()->format('Y-m-d');
 
 
@@ -124,7 +123,7 @@ public function dashboard(Request $request)
         if ($data1['success']=='true'){
             $easy=$data1['balance'];
         }
-        return view('admin/dashboard', compact('user',  'data', 'lock', 'totalcharge', 'pa',  'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count', 'easy'));
+        return view('admin/dashboard', compact('user',  'data', 'lock', 'totalcharge',   'tran', 'alluser', 'totaldeposite', 'totalwallet', 'deposite', 'me', 'bil2', 'bill', 'totalrefer', 'totalprofit',  'count', 'easy'));
 
     }
     return redirect("admin/login")->with('status', 'You are not allowed to access');
