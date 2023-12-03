@@ -73,7 +73,7 @@ public function dashboard(Request $request)
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apikey: sk-RwQM6hymqWCe43ct3esB'
+                'apikey: sk-ui8pjndeJA3ATMNIhgHw'
             ),
         ));
 
