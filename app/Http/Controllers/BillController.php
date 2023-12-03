@@ -246,6 +246,9 @@ class BillController extends Controller
 
                     }else{
                         $success = 0;
+                        $zo = $user->wallet + $amount;
+                        $user->wallet = $zo;
+                        $user->save();
 
 
                         $name = $product->plan;
