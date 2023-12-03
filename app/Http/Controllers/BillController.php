@@ -211,7 +211,7 @@ class BillController extends Controller
 
                     $data = json_decode($response, true);
 //return $data;
-                    if ($data['success']== "1") {
+                    if ($data['success']=="1") {
 
 //                    echo $success;
                         $success = "1";
@@ -245,6 +245,17 @@ class BillController extends Controller
                         ]);
 
                     }else{
+                        $bo = bo::create([
+                            'username' => $user->username,
+                            'plan' => $product->network . '|' . $product->plan,
+                            'amount' => $amount,
+                            'server_res' => $response,
+                            'result' => 0,
+                            'fbalance'=>$user->wallet,
+                            'balance'=>$gt,
+                            'phone' => $request->number,
+                            'refid' => $request->refid,
+                        ]);
                         $success = 0;
                         $zo = $user->wallet + $amount;
                         $user->wallet = $zo;
