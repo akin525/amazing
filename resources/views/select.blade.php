@@ -35,6 +35,11 @@
                             <option value="GLO">GLO</option>
                             <option value="9MOBILE">9MOBILE</option>
                             <option value="AIRTEL">AIRTEL</option>
+                        @elseif($serve->name=='sammighty')
+                            <option value="MTN">MTN</option>
+                            <option value="GLO">GLO</option>
+                            <option value="9MOBILE">9MOBILE</option>
+                            <option value="AIRTEL">AIRTEL</option>
                         @endif
                         @if ($serve->name == 'mcd')
                             <option value="airtel-data">AIRTEL</option>
