@@ -84,6 +84,7 @@ class BillController extends Controller
                 $object = json_decode($product);
                 $object->number = $request->number;
                 $object->id = $request->id;
+                $object->refid = $request->refid;
                 $json = json_encode($object);
 //return $object;
                 $daterserver = new DataserverController();
