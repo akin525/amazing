@@ -274,6 +274,130 @@ $success=0;
         }
 
         }
+    public function sammighty(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $user = User::find($request->user()->id);
+//        $wallet = wallet::where('username', $user->username)->first();
+
+
+        if ($user->wallet < $request->amount) {
+            $mg = "You Cant Make Purchase Above" . "NGN" . $request->amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
+        }
+        if ($request->amount < 0) {
+
+            $mg = "error transaction";
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
+
+        }
+        if ($request->amount < 100) {
+
+            $mg = "Amount Must be more than 100";
+            return response()->json($mg, Response::HTTP_BAD_REQUEST);
+
+        }
+        $bo = bo::where('refid', $request->refid)->first();
+        if (isset($bo)) {
+            $mg = "duplicate transaction";
+            return response()->json($mg, Response::HTTP_CONFLICT);
+
+        } else {
+            $user = User::find($request->user()->id);
+            $bt = data::where("id", $request->id)->first();
+//            $wallet = wallet::where('username', $user->username)->first();
+
+
+            $gt = $user->wallet - $request->amount;
+
+
+            $user->wallet = $gt;
+            $user->save();
+            $resellerURL = 'https://pay.sammighty.com.ng/api/airtime';
+
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL =>$resellerURL,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_SSL_VERIFYHOST => 0,
+                CURLOPT_SSL_VERIFYPEER => 0,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array(
+                    'refid' => $request->refid,
+                    'name' => $request->id,
+                    'number' => $request->number,
+                    'amount' => $request->amount,
+                    'reseller_price' => $request->amount
+                ),
+
+                CURLOPT_HTTPHEADER => array(
+                    'apikey: sk-RwQM6hymqWCe43ct3esB'
+                )));
+
+            $response = curl_exec($curl);
+            curl_close($curl);
+            $data = json_decode($response, true);
+            $success = $data["success"];
+            if ($success == "1") {
+
+                $bo = bo::create([
+                    'username' => $user->username,
+                    'plan' => 'airtime',
+                    'amount' => $request->amount,
+                    'server_res' => $response,
+                    'result' => 1,
+                    'phone' => $request->number,
+                    'refid' => $request->refid,
+                    'discountamoun' => '0',
+                    'fbalance'=>$user->wallet,
+                    'balance'=>$gt,
+                ]);
+
+                $success=1;
+                $name = "Airtime";
+                $am = "NGN $request->amount  Airtime Purchase Was Successful To";
+                $ph = $request->number;
+
+                $receiver = $user->email;
+                $admin = 'info@amazingdata.com.ng';
+
+                Mail::to($receiver)->send(new Emailtrans($bo));
+                Mail::to($admin)->send(new Emailtrans($bo));
+                return response()->json([
+                    'status' => 'success',
+                    'message' => $am.' '.$ph,
+                    'id'=>$bo['id'],
+                ]);
+            } else{
+                $zo = $user->balance + $request->amount;
+                $user->balance = $zo;
+                $user->save();
+$success=0;
+                $name = 'Airtime';
+                $am = "NGN $request->amount Was Refunded To Your Wallet";
+                $ph = ", Possible duplicate transaction, Please retry after 2 minutesl";
+
+                return response()->json([
+                    'status' => 'fail',
+                    'message' => $am.' ' .$ph,
+//                            'data' => $responseData // If you want to include additional data
+                ]);
+
+            }
+        }
+
+        }
     public function ridamsub(Request $request)
     {
         $request->validate([

@@ -306,7 +306,10 @@ $login=$user->name;
         }elseif ($se == 'Ridamsub') {
             return view('airtime2', compact('totaldeposite'));
 
-        }else {
+        }elseif ($se == 'Sammighty') {
+            return view('airtime3', compact('totaldeposite'));
+
+        } else {
 
             Alert::info('Server', 'Out of service, come back later');
             return redirect('dashboard');
