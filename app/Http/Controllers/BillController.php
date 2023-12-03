@@ -242,6 +242,7 @@ class BillController extends Controller
                         return response()->json([
                             'status' => 'success',
                             'message' => $am.' '.$ph,
+                            'id'=>$bo['id'],
                         ]);
 
                     }else{
@@ -268,6 +269,8 @@ class BillController extends Controller
                         return response()->json([
                             'status' => 'fail',
                             'message' => "Pending Contact Admin",
+                            'id'=>$bo['id'],
+
                         ]);
                     }
                 }
