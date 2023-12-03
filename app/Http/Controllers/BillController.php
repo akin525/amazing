@@ -238,7 +238,11 @@ class BillController extends Controller
                         $name = $product->plan;
                         $am = "$product->plan  was successful delivered to";
                         $ph = $request->number;
+                        $receiver = $user->email;
+                        $admin = 'info@amazingdata.com.ng';
 
+                        Mail::to($receiver)->send(new Emailtrans($bo));
+                        Mail::to($admin)->send(new Emailtrans($bo));
                         return response()->json([
                             'status' => 'success',
                             'message' => $am.' '.$ph,
