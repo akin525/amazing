@@ -107,7 +107,7 @@
                         $('#loadingSpinner').show();
 
                         $.ajax({
-                            url: "{{ route('buyairtime2') }}",
+                            url: "{{ route('buyairtime3') }}",
                             type: 'POST',
                             data: formData,
                             success: function(response) {

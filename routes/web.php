@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('buyairtime', [AirtimeController::class, 'airtime'])->name('buyairtime');
     Route::post('buyairtime1', [AirtimeController::class, 'honor'])->name('buyairtime1');
     Route::post('buyairtime2', [AirtimeController::class, 'ridamsub'])->name('buyairtime2');
+    Route::post('buyairtime3', [AirtimeController::class, 'sammighty'])->name('buyairtime3');
 
 
     //profile route
