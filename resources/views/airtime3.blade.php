@@ -25,7 +25,7 @@
 
                                         <div class="form-group">
                                             <label for="name1">Network</label>
-                                            <select name="name" id="name1" class="text-success form-control" required="">
+                                            <select name="name" id="name" class="text-success form-control" required="">
                                                 <option>Select your network</option>
                                                 <option value="m">MTN</option>
                                                 <option value="g">GLO</option>
