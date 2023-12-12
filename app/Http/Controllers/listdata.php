@@ -92,12 +92,10 @@ public function lis()
 }
 public function getlog(Request $request)
 {
-
     $userIp = $request->ip();
 
     $details = GeoLocation::lookup($userIp);
     echo $userIp;
-
     var_dump($details->toArray());
 }
 
