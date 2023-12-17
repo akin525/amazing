@@ -65,21 +65,16 @@ class DatapinController extends Controller
 
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://easyaccess.com.ng/api/datacard.php",
+                CURLOPT_URL => "http://pay.sammighty.com.ng/api/buydatacard",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => array(
-                    'network' =>01,
-                    'no_of_pins' => 1,
-                    'dataplan' => 165,
-                ),
+                CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => array(
-                    "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                    "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
                     "cache-control: no-cache"
                 ),
             ));
@@ -88,11 +83,8 @@ class DatapinController extends Controller
 
             $data = json_decode($response, true);
 
-            if ($data['success'] == 'true') {
+            if ($data['success'] == '1') {
                 $success = 1;
-                $ms = $data['message'];
-
-//                    echo $success;
 
                 $po = $amount - $product->amount;
 
@@ -127,7 +119,7 @@ class DatapinController extends Controller
                     'id'=>$bo['id'],
                 ]);
 
-            } elseif ($data['success'] == 'false') {
+            } else {
                 $success = 0;
                 $zo = $user->wallet + $request->amount;
                 $user->wallet = $zo;
