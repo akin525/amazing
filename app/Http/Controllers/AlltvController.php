@@ -159,11 +159,10 @@ foreach ($plan as $pla) {
                     $user->wallet= $gt;
                     $user->save();
 
-                    $resellerURL = 'https://renomobilemoney.com/api/';
 
                     $curl = curl_init();
                     curl_setopt_array($curl, array(
-                        CURLOPT_URL => "https://easyaccess.com.ng/api/paytv.php",
+                        CURLOPT_URL => "https://sammighty.com.ng/api/paytv",
                         CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_ENCODING => "",
                         CURLOPT_MAXREDIRS => 10,
@@ -174,12 +173,12 @@ foreach ($plan as $pla) {
                         CURLOPT_SSL_VERIFYPEER => 0,
                         CURLOPT_CUSTOMREQUEST => "POST",
                         CURLOPT_POSTFIELDS => array(
-                            'company' =>$tv->code,
-                            'iucno' => $request['number'],
-                            'package' =>$tv['plan_id'],
+                            'code' =>$tv->plan_id,
+                            'number' => $request['number'],
+                            'refid' =>$request['refid'],
                         ),
                         CURLOPT_HTTPHEADER => array(
-                            "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                            "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
                             "cache-control: no-cache"
                         ),
                     ));
@@ -190,7 +189,7 @@ foreach ($plan as $pla) {
                     $data = json_decode($response, true);
                     $success = $data["success"];
 
-                    if ($success == "true") {
+                    if ($success == "1") {
 
                         $bo = bo::create([
                             'username' => $user->username,
