@@ -173,7 +173,7 @@ foreach ($plan as $pla) {
                         CURLOPT_SSL_VERIFYPEER => 0,
                         CURLOPT_CUSTOMREQUEST => "POST",
                         CURLOPT_POSTFIELDS => array(
-                            'code' =>$tv->plan_id,
+                            'coded' =>$tv->plan_id,
                             'number' => $request['number'],
                             'refid' =>$request['refid'],
                         ),
