@@ -32,7 +32,7 @@
 
                                     <div class="add-product__body px-sm-40 px-20">
                                         <form style="padding-left: 30px;" class="text-center">
-                                            <div class="text-left" style="color:red; font-family: Verdana; font-size: 30px;">Fund Wallet</div>
+{{--                                            <div class="text-left" style="color:red; font-family: Verdana; font-size: 30px;">Fund Wallet</div>--}}
                                                 <div class='card'>
                                                     <strong>Notification: </br></strong><b class='align-content-center'>Jamb</b></div>
                                                 <strong>Notification: </br></strong><b class='align-content-center'>Jamb Not available yet comback next year 2024</b>
@@ -80,7 +80,7 @@
                                 <div class="card-body">
                                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                            <h6 class="text-white text-capitalize ps-3">Nabteb Pins</h6>
+                                            <h6 class="text-white text-capitalize ps-3">jamb Pins</h6>
                                         </div>
                                     </div>
 
