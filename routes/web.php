@@ -63,12 +63,17 @@ Route::get('luckywin', [listdata::class, 'getlog'])->name('luckwin');
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return view('dashboard');
 //})->name('dashboard');
+
 Route::middleware(['auth'])->group(function () {
     Route::view('picktv', 'picktv');
     Route::post('nec', [EducationController::class, 'neco'])->name('nec');
     Route::post('wac', [EducationController::class, 'waec'])->name('wac');
+    Route::post('nab', [EducationController::class, 'nabteb'])->name('nab');
+//    Route::post('jam', [EducationController::class, 'jamb'])->name('jam');
     Route::get('waec', [EducationController::class, 'indexw'])->name('waec');
+    Route::get('nabteb', [EducationController::class, 'indexne'])->name('nabteb');
     Route::get('neco', [EducationController::class, 'indexn'])->name('neco');
+    Route::get('jamb', [EducationController::class, 'indexjamb'])->name('jamb');
     Route::post('pick', [AlltvController::class, 'tv'])->name('pick');
     Route::get('select', [AuthController::class, 'select'])->name('select');
     Route::get('select1', [AuthController::class, 'select1'])->name('select1');

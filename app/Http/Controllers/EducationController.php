@@ -7,7 +7,10 @@ use App\Models\bill_payment;
 use App\Models\bo;
 use App\Models\data;
 use App\Models\easy;
+use App\Models\Jamb;
+use App\Models\Nabteb;
 use App\Models\neco;
+use App\Models\samm;
 use App\Models\server;
 use App\Models\User;
 use App\Models\waec;
@@ -23,9 +26,23 @@ class EducationController
 
 public function indexw()
 {
-    $waec=easy::where('network', 'WAEC')->first();
+    $waec=samm::where('network', 'WAEC')->first();
     $wa=waec::where('username', Auth::user()->username)->get();
 return view('waec', compact('waec', 'wa'));
+
+}
+public function indexne()
+{
+    $nabteb=samm::where('network', 'Nabteb')->first();
+    $wa=Nabteb::where('username', Auth::user()->username)->get();
+return view('nabteb', compact('nabteb', 'wa'));
+
+}
+public function indexjamb()
+{
+    $jamb=samm::where('network', 'jamb')->first();
+    $wa=Jamb::where('username', Auth::user()->username)->get();
+return view('jamb', compact('jamb', 'wa'));
 
 }
 public function indexn()
@@ -101,10 +118,9 @@ $request->validate([
             'fbalance'=>$user->wallet,
             'balance'=>$gt,
         ]);
-        $resellerURL = 'https://app2.mcd.5starcompany.com.ng/api/reseller/';
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/waec_v2.php",
+            CURLOPT_URL => "https://pay.sammighty.com.ng/api/waec",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -113,10 +129,10 @@ $request->validate([
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => array(
-                'no_of_pins' =>$request->value,
+                'value' =>$request->value,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
@@ -126,7 +142,7 @@ $request->validate([
         $data = json_decode($response, true);
 //        return $data;
 
-        if ($data['success']=="true") {
+        if ($data['success']=="1") {
             $ref=$data['reference_no'];
             $token=$data['pin'];
 //return $token1;
@@ -145,12 +161,12 @@ $request->validate([
                 'id'=>$bo['id'],
             ]);
 
-        }elseif($data['success']=="false"){
+        }else{
 
             Alert::error('Fail', $response);
             return redirect('waec')->with('error', $response);
         }
-return $response;
+//return $response;
     }
 
 }
@@ -217,7 +233,7 @@ public function neco(Request $request)
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://easyaccess.com.ng/api/neco_v2.php",
+            CURLOPT_URL => "https://pay.sammighty.com.ng/api/neco",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -226,17 +242,17 @@ public function neco(Request $request)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => array(
-                'no_of_pins' =>$request->value,
+                'value' =>$request->value,
             ),
             CURLOPT_HTTPHEADER => array(
-                "AuthorizationToken: 61a6704775b3bd32b4499f79f0b623fc", //replace this with your authorization_token
+                "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
                 "cache-control: no-cache"
             ),
         ));
         $response = curl_exec($curl);
         curl_close($curl);
         $data = json_decode($response, true);
-        if ($data['success']=="true") {
+        if ($data['success']=="1") {
             $ref=$data['reference_no'];
             $token=$data['pin'];
                 $insert=neco::create([
@@ -245,14 +261,14 @@ public function neco(Request $request)
                     'ref'=>$ref,
                 ]);
 
-            $mg='Waec Checker Successful Generated, kindly check your pin';
+            $mg='Neco Checker Successful Generated, kindly check your pin';
             return response()->json([
                 'status' => 'success',
                 'message' => $mg,
                 'id'=>$bo['id'],
             ]);
 
-        }elseif($data['success']=="false"){
+        }else{
 
             return response()->json([
                 'status' => 'fail',
@@ -260,9 +276,231 @@ public function neco(Request $request)
                 'id'=>$bo['id'],
             ]);
         }
-        return $response;
+//        return $response;
     }
 }
+public function nabteb(Request $request)
+{
+    $request->validate([
+        'value'=>'required',
+        'amount'=>'required',
+    ]);
+    $user = User::find($request->user()->id);
+    $serve = server::where('status', '1')->first();
+    $product=samm::where('network', 'Nabteb')->first();
+
+    if ($user->apikey == '') {
+        $amount = $product->tamount *$request->value;
+    } elseif ($user != '') {
+        $amount = $product->ramount *$request->value;
+    }
+
+    if ($user->wallet < $amount) {
+        $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
+
+    }
+    if ($request->amount < 0) {
+
+        $mg = "error transaction";
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
+
+    }
+    $bo = bo::where('refid', $request->id)->first();
+    if (isset($bo)) {
+        $mg = "duplicate transaction";
+        return response()->json($mg, Response::HTTP_CONFLICT );
+
+
+    } else {
+
+        $user = User::find($request->user()->id);
+//                $bt = data::where("id", $request->productid)->first();
+
+
+        $gt = $user->wallet - $amount;
+
+
+        $user->wallet = $gt;
+        $user->save();
+        $bo = bo::create([
+            'username' => $user->username,
+            'plan' => $product->network ,
+            'amount' => $amount,
+            'server_res' => 'ur fault',
+            'result' => 1,
+            'phone' => 'no',
+            'refid' => $request->id,
+            'discountamoun'=>0,
+            'fbalance'=>$user->wallet,
+            'balance'=>$gt,
+        ]);
+
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://pay.sammighty.com.ng/api/nabteb",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'value' =>$request->value,
+                'refid' =>$request->refid,
+            ),
+            CURLOPT_HTTPHEADER => array(
+                "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $data = json_decode($response, true);
+        if ($data['success']=="1") {
+            $ref=$data['reference_no'];
+            $token=$data['pin'];
+                $insert=Nabteb::create([
+                    'username'=>$user->username,
+                    'pin'=>$token,
+                    'ref'=>$ref,
+                ]);
+
+            $mg='Nabteb Checker Successful Generated, kindly check your pin';
+            return response()->json([
+                'status' => 'success',
+                'message' => $mg,
+                'id'=>$bo['id'],
+            ]);
+
+        }else{
+
+            return response()->json([
+                'status' => 'fail',
+                'message' => $response,
+                'id'=>$bo['id'],
+            ]);
+        }
+//        return $response;
+    }
+}
+public function Jamb(Request $request)
+{
+    $request->validate([
+        'number'=>'required',
+        'refid'=>'required',
+    ]);
+    $user = User::find($request->user()->id);
+    $serve = server::where('status', '1')->first();
+    $product=samm::where('network', 'Nabteb')->first();
+
+    if ($user->apikey == '') {
+        $amount = $product->tamount *$request->value;
+    } elseif ($user != '') {
+        $amount = $product->ramount *$request->value;
+    }
+
+    if ($user->wallet < $amount) {
+        $mg = "You Cant Make Purchase Above" . "NGN" . $amount . " from your wallet. Your wallet balance is NGN $user->wallet. Please Fund Wallet And Retry or Pay Online Using Our Alternative Payment Methods.";
+
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
+
+    }
+    if ($request->amount < 0) {
+
+        $mg = "error transaction";
+        return response()->json($mg, Response::HTTP_BAD_REQUEST );
+
+
+    }
+    $bo = bo::where('refid', $request->id)->first();
+    if (isset($bo)) {
+        $mg = "duplicate transaction";
+        return response()->json($mg, Response::HTTP_CONFLICT );
+
+
+    } else {
+
+        $user = User::find($request->user()->id);
+//                $bt = data::where("id", $request->productid)->first();
+
+
+        $gt = $user->wallet - $amount;
+
+
+        $user->wallet = $gt;
+        $user->save();
+        $bo = bo::create([
+            'username' => $user->username,
+            'plan' => $product->network ,
+            'amount' => $amount,
+            'server_res' => 'ur fault',
+            'result' => 1,
+            'phone' => 'no',
+            'refid' => $request->id,
+            'discountamoun'=>0,
+            'fbalance'=>$user->wallet,
+            'balance'=>$gt,
+        ]);
+
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://pay.sammighty.com.ng/api/jamb",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'number' =>$request->number,
+                'refid' =>$request->refid,
+            ),
+            CURLOPT_HTTPHEADER => array(
+                "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $data = json_decode($response, true);
+        if ($data['success']=="1") {
+            $token=$data['pin'];
+            $insert=Jamb::create([
+                'username'=>$user->username,
+                'serial'=>$data['Serial No'],
+                'pin'=>$token,
+                'response'=>$data,
+            ]);
+
+            $mg='Jamb Pin Successful Generated, kindly check your pin';
+            return response()->json([
+                'status' => 'success',
+                'message' => $mg,
+                'id'=>$bo['id'],
+            ]);
+
+        }else{
+
+            return response()->json([
+                'status' => 'fail',
+                'message' => $response,
+                'id'=>$bo['id'],
+            ]);
+        }
+//        return $response;
+    }
+}
+
+
 
 public function adminneco()
 {

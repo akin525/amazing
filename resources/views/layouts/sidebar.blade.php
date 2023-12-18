@@ -234,7 +234,10 @@
                                 <a href="{{route('neco')}}">Neco Token</a>
                             </li>
                             <li class>
-                                <a href="{{route('datapin')}}">Nabteb Pin</a>
+                                <a href="{{route('nabteb')}}">Nabteb Pin</a>
+                            </li>
+                            <li class>
+                                <a href="{{route('jamb')}}">Jamb</a>
                             </li>
                         </ul>
                     </li>
