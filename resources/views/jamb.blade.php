@@ -133,7 +133,7 @@
 
                 // Send the AJAX request
                 $.ajax({
-                    url: "{{ route('jam') }}",
+                    url: "#",
                     type: 'POST',
                     data: formData,
                     success: function(response) {
