@@ -87,6 +87,17 @@ class BillController extends Controller
                 $object->refid = $request->refid;
                 $json = json_encode($object);
 //return $object;
+                $bo = bo::create([
+                    'username' => $user->username,
+                    'plan' => $product->network . '|' . $product->plan,
+                    'amount' => $product->tamount,
+                    'server_res' => "response",
+                    'result' =>0,
+                    'phone' => $request->number,
+                    'refid' => $request->refid,
+                    'fbalance'=>$user->wallet,
+                    'balance'=>$gt,
+                ]);
                 $daterserver = new DataserverController();
                 $mcd = server::where('status', "1")->first();
 //return $mcd;
@@ -104,16 +115,9 @@ class BillController extends Controller
 
                         $po = $amount - $product->amount;
 
-                        $bo = bo::create([
-                            'username' => $user->username,
-                            'plan' => $product->network . '|' . $product->plan,
-                            'amount' => $product->tamount,
+                        $update = bo::where('id', $bo->id)->update([
                             'server_res' => $response,
-                            'result' => $success,
-                            'phone' => $request->number,
-                            'refid' => $request->refid,
-                            'fbalance'=>$user->wallet,
-                            'balance'=>$gt,
+                            'result' => 1,
                         ]);
 
                         $profit = profit::create([
@@ -163,17 +167,7 @@ class BillController extends Controller
                         $success = "1";
                         $po = $amount - $product->amount;
 
-                        $bo = bo::create([
-                            'username' => $user->username,
-                            'plan' => $product->network . '|' . $product->plan,
-                            'amount' => $amount,
-                            'server_res' => $response,
-                            'result' => $success,
-                            'fbalance'=>$user->wallet,
-                            'balance'=>$gt,
-                            'phone' => $request->number,
-                            'refid' => $request->refid,
-                        ]);
+
 
                         $profit = profit::create([
                             'username' => $user->username,
@@ -217,16 +211,9 @@ class BillController extends Controller
                         $success = "1";
                         $po = $amount - $product->amount;
 
-                        $bo = bo::create([
-                            'username' => $user->username,
-                            'plan' => $product->network . '|' . $product->plan,
-                            'amount' => $amount,
+                        $update = bo::where('id', $bo->id)->update([
                             'server_res' => $response,
-                            'result' => $success,
-                            'fbalance'=>$user->wallet,
-                            'balance'=>$gt,
-                            'phone' => $request->number,
-                            'refid' => $request->refid,
+                            'result' => 1,
                         ]);
 
                         $profit = profit::create([
