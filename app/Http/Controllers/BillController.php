@@ -237,22 +237,14 @@ class BillController extends Controller
                         ]);
 
                     }else{
-                        $bo = bo::create([
-                            'username' => $user->username,
-                            'plan' => $product->network . '|' . $product->plan,
-                            'amount' => $amount,
-                            'server_res' => $response,
-                            'result' => 0,
-                            'fbalance'=>$user->wallet,
-                            'balance'=>$gt,
-                            'phone' => $request->number,
-                            'refid' => $request->refid,
-                        ]);
+
                         $success = 0;
                         $zo = $user->wallet + $amount;
                         $user->wallet = $zo;
                         $user->save();
-
+                        $update = bo::where('id', $bo->id)->update([
+                            'server_res' => $response,
+                        ]);
 
                         $name = $product->plan;
                         $am = "NGN $amount Was Refunded To Your Wallet";
