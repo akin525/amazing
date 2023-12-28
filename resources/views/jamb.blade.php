@@ -10,7 +10,7 @@
                 <div class="col-xxl-7 col-lg-10">
                     <div class="mx-sm-30 mx-20 ">
 
-                        <div class="card add-product p-sm-30 p-20 mb-30">
+                        <div class="card add-product bm p-sm-30 p-20 mb-30">
                             <div class="card-body p-0">
                                 <div class="card-header">
                                     <h6 class="fw-500">Jamb</h6>
