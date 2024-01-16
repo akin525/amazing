@@ -64,7 +64,7 @@
                                     <div class="col-lg-12">
                                         <label class="small mb-1" for="numofpins" style="color: #000000">Amount per Unit (₦)</label>
                                         <div class="input-group input-group-outline my-3">
-                                            <input id="amount" name="amount" class="form-control rounded-right py-4" value="{{$nabteb['tamount']}}" style="border-radius: 0px;" readonly="">
+                                            <input id="amount" name="amount" class="form-control rounded-right py-4" value="{{$jamb['tamount']}}" style="border-radius: 0px;" readonly="">
                                         </div>
                                     </div>
                                     <input type="hidden" name="id" value="{{rand(111111111, 999999999)}}">
