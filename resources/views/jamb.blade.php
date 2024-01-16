@@ -192,17 +192,17 @@
                 var inputValue = inputElement.value;
                 var third = $('#name');
 
-                    $('#loadingSpinner1').show();
+                    $('#loadingSpinner').show();
 
                     $.ajax({
                         url: '{{ url('verifypro') }}/' + inputValue,
                         type: 'GET',
                         success: function(response) {
-                            $('#loadingSpinner1').hide();
+                            $('#loadingSpinner').hide();
                             $('#name').val(response);
                         },
                         error: function(xhr) {
-                            $('#loadingSpinner1').hide();
+                            $('#loadingSpinner').hide();
                             Swal.fire({
                                 icon: 'error',
                                 title: 'fail',
