@@ -502,7 +502,7 @@ public function Jamb(Request $request)
 }
 public function verifyJamb($request)
 {
-    $user = User::find($request->user()->id);
+//    $user = User::find($request->user()->id);
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
