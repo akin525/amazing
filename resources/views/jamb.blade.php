@@ -31,38 +31,46 @@
 
 
                                     <div class="add-product__body px-sm-40 px-20">
-                                        <form style="padding-left: 30px;" class="text-center">
+{{--                                        <form style="padding-left: 30px;" class="text-center">--}}
 {{--                                            <div class="text-left" style="color:red; font-family: Verdana; font-size: 30px;">Fund Wallet</div>--}}
-                                                <div class='card'>
-                                                    <strong>Notification: </br></strong><b class='align-content-center'>Jamb</b></div>
-                                                <strong>Notification: </br></strong><b class='align-content-center'>Jamb Not available yet comback next year 2024</b>
+{{--                                                <div class='card'>--}}
+{{--                                                    <strong>Notification: </br></strong><b class='align-content-center'>Jamb</b></div>--}}
+{{--                                                <strong>Notification: </br></strong><b class='align-content-center'>Jamb Not available yet comback next year 2024</b>--}}
 
 
                                     </div>
 
 
 
-                                    {{--                            <form  id="dataForm">--}}
-{{--                                @csrf--}}
-{{--                                <div class="row card card-body">--}}
-{{--                                <x-jet-validation-errors class="alert alert-success" />--}}
+                                                                <form  id="dataForm">
+                                @csrf
+                                <div class="row card card-body">
+                                <x-jet-validation-errors class="alert alert-success" />
 
-{{--                                    <div class="col-lg-12">--}}
-{{--                                        <label class="small mb-1" for="numofpins" style="color: #000000">JAMB PROFILE ID </label>--}}
-{{--                                        <div class="input-group input-group-outline my-3">--}}
-{{--                                            <input id="jamnid" type="number" name="jambid" class="form-control rounded-right py-4"  style="border-radius: 0px;" required>--}}
+                                    <div class="col-lg-12">
+                                        <label class="small mb-1" for="numofpins" style="color: #000000">JAMB PROFILE CODE </label>
+                                        <div class="input-group input-group-outline my-3">
+                                            <input id="jamnid" type="number" name="number" class="form-control rounded-right py-4"  style="border-radius: 0px;" required>
 
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col-lg-12">--}}
-{{--                                        <label class="small mb-1" for="numofpins" style="color: #000000">Amount per Unit (₦)</label>--}}
-{{--                                        <div class="input-group input-group-outline my-3">--}}
-{{--                                            <input id="amount" name="amount" class="form-control rounded-right py-4" value="{{$nabteb['tamount']}}" style="border-radius: 0px;" readonly="">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <input type="hidden" name="id" value="{{rand(111111111, 999999999)}}">--}}
-{{--                                    <button class="btn btn-primary font-weight-bold py-2 my-4" type="submit">Generate</button>--}}
-{{--                            </form>--}}
+                                        </div>
+                                    </div>
+                                    <div  class="form-group">
+                                        <label  class="requiredField">
+                                            Candidate Name
+                                            <span class="asteriskField">*</span>
+                                        </label>
+                                        <input type="text" id="name" name="name" class="text-success form-control" readonly>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <label class="small mb-1" for="numofpins" style="color: #000000">Amount per Unit (₦)</label>
+                                        <div class="input-group input-group-outline my-3">
+                                            <input id="amount" name="amount" class="form-control rounded-right py-4" value="{{$nabteb['tamount']}}" style="border-radius: 0px;" readonly="">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="id" value="{{rand(111111111, 999999999)}}">
+                                    <button id="confirm" class="btn btn-primary font-weight-bold py-2 my-4" type="button">Verify Profile</button>
+                                    <button class="btn btn-primary font-weight-bold py-2 my-4" type="submit">Generate</button>
+                            </form>
                             <a class="btn btn-info text-center font-weight-bold py-2 my-4" href="{{route('dashboard')}}" style="text-decoration: none;">
                                 Back to Dashboard
                             </a>
@@ -177,6 +185,39 @@
         });
 
     </script>
+    <script>
+        $(document).ready(function() {
+            function handleButtonClick() {
+                var inputElement = document.getElementById("number");
+                var inputValue = inputElement.value;
+                var third = $('#name');
+
+                    $('#loadingSpinner1').show();
+
+                    $.ajax({
+                        url: '{{ url('verifypro') }}/' + inputValue,
+                        type: 'GET',
+                        success: function(response) {
+                            $('#loadingSpinner1').hide();
+                            $('#name').val(response);
+                        },
+                        error: function(xhr) {
+                            $('#loadingSpinner1').hide();
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'fail',
+                                text: xhr.responseText
+                            });
+                            console.log(xhr.responseText);
+                        }
+                    });
+                }
+
+            // Bind the function to the button click event
+            $('#confirm').on('click', handleButtonClick);
+        });
+    </script>
+
 @endsection
 
 

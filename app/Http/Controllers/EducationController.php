@@ -393,6 +393,7 @@ public function Jamb(Request $request)
 {
     $request->validate([
         'number'=>'required',
+        'code'=>'required',
         'refid'=>'required',
     ]);
     $user = User::find($request->user()->id);
@@ -499,6 +500,34 @@ public function Jamb(Request $request)
 //        return $response;
     }
 }
+public function verifyJamb($request)
+{
+    $user = User::find($request->user()->id);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://pay.sammighty.com.ng/api/verifyid",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'profileid' =>$request,
+            ),
+            CURLOPT_HTTPHEADER => array(
+                "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $data = json_decode($response, true);
+            return response()->json([$data['message']]);
+
+    }
 
 
 
