@@ -61,6 +61,13 @@
                                         </label>
                                         <input type="text" id="name" name="name" class="text-success form-control" readonly>
                                     </div>
+                                    <div  class="form-group">
+                                        <label  class="requiredField">
+                                            Candidate Mobile No
+                                            <span class="asteriskField">*</span>
+                                        </label>
+                                        <input type="text" id="number1" name="number1" class="text-success form-control" required>
+                                    </div>
                                     <div class="col-lg-12">
                                         <label class="small mb-1" for="numofpins" style="color: #000000">Amount per Unit (₦)</label>
                                         <div class="input-group input-group-outline my-3">
@@ -141,7 +148,7 @@
 
                 // Send the AJAX request
                 $.ajax({
-                    url: "#",
+                    url: "{{route('jam')}}",
                     type: 'POST',
                     data: formData,
                     success: function(response) {

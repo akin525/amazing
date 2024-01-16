@@ -393,12 +393,12 @@ public function Jamb(Request $request)
 {
     $request->validate([
         'number'=>'required',
-        'code'=>'required',
+        'number1'=>'required',
         'refid'=>'required',
     ]);
     $user = User::find($request->user()->id);
     $serve = server::where('status', '1')->first();
-    $product=samm::where('network', 'Nabteb')->first();
+    $product=samm::where('network', 'jamb')->first();
 
     if ($user->apikey == '') {
         $amount = $product->tamount *$request->value;
@@ -462,8 +462,9 @@ public function Jamb(Request $request)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => array(
-                'number' =>$request->number,
+                'number' =>$request->number1,
                 'refid' =>$request->refid,
+                'code'=>'utme',
             ),
             CURLOPT_HTTPHEADER => array(
                 "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
@@ -477,7 +478,7 @@ public function Jamb(Request $request)
             $token=$data['pin'];
             $insert=Jamb::create([
                 'username'=>$user->username,
-                'serial'=>$data['Serial No'],
+                'serial'=>"serial",
                 'pin'=>$token,
                 'response'=>$data,
             ]);

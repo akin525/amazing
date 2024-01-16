@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('wac', [EducationController::class, 'waec'])->name('wac');
     Route::post('nab', [EducationController::class, 'nabteb'])->name('nab');
     Route::get('verifypro/{id}', [EducationController::class, 'verifyJamb'])->name('verifypro');
-//    Route::post('jam', [EducationController::class, 'jamb'])->name('jam');
+    Route::post('jam', [EducationController::class, 'jamb'])->name('jam');
     Route::get('waec', [EducationController::class, 'indexw'])->name('waec');
     Route::get('nabteb', [EducationController::class, 'indexne'])->name('nabteb');
     Route::get('neco', [EducationController::class, 'indexn'])->name('neco');
