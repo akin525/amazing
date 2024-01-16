@@ -50,7 +50,7 @@
                                     <div class="col-lg-12">
                                         <label class="small mb-1" for="numofpins" style="color: #000000">JAMB PROFILE CODE </label>
                                         <div class="input-group input-group-outline my-3">
-                                            <input id="jamnid" type="number" name="number" class="form-control rounded-right py-4"  style="border-radius: 0px;" required>
+                                            <input id="number" type="number" name="number" class="form-control rounded-right py-4"  style="border-radius: 0px;" required>
 
                                         </div>
                                     </div>
