@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('nabteb', [EducationController::class, 'indexne'])->name('nabteb');
     Route::get('neco', [EducationController::class, 'indexn'])->name('neco');
     Route::get('jamb', [EducationController::class, 'indexjamb'])->name('jamb');
+    Route::get('de', [EducationController::class, 'indexde'])->name('de');
     Route::post('pick', [AlltvController::class, 'tv'])->name('pick');
     Route::get('select', [AuthController::class, 'select'])->name('select');
     Route::get('select1', [AuthController::class, 'select1'])->name('select1');

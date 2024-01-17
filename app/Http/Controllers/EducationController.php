@@ -45,6 +45,13 @@ public function indexjamb()
 return view('jamb', compact('jamb', 'wa'));
 
 }
+public function indexde()
+{
+    $jamb=samm::where('network', 'de')->first();
+    $wa=Jamb::where('username', Auth::user()->username)->get();
+return view('de', compact('jamb', 'wa'));
+
+}
 public function indexn()
 {
     $neco=easy::where('network', 'NECO')->first();
@@ -395,6 +402,7 @@ public function Jamb(Request $request)
         'number'=>'required',
         'number1'=>'required',
         'refid'=>'required',
+        'code'=>'required',
     ]);
     $user = User::find($request->user()->id);
     $serve = server::where('status', '1')->first();
@@ -464,7 +472,7 @@ public function Jamb(Request $request)
             CURLOPT_POSTFIELDS => array(
                 'number' =>$request->number1,
                 'refid' =>$request->refid,
-                'code'=>'utme',
+                'code'=>$request->code,
             ),
             CURLOPT_HTTPHEADER => array(
                 "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
@@ -517,6 +525,36 @@ public function verifyJamb($request)
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => array(
                 'profileid' =>$request,
+                'code'=>'utme',
+            ),
+            CURLOPT_HTTPHEADER => array(
+                "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token
+                "cache-control: no-cache"
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $data = json_decode($response, true);
+            return response()->json([$data['message']]);
+
+    }
+public function verifyde($request)
+{
+//    $user = User::find($request->user()->id);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://pay.sammighty.com.ng/api/verifyid",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => array(
+                'profileid' =>$request,
+                'code'=>'de',
             ),
             CURLOPT_HTTPHEADER => array(
                 "apikey: sk-ui8pjndeJA3ATMNIhgHw", //replace this with your authorization_token

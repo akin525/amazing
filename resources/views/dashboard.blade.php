@@ -268,6 +268,36 @@
         </a>
     </div>
     <div class="col-xxl-3 col-lg-4 col-md-6 mb-25">
+        <a href="{{route('jamb')}}">
+        <div class="feature-cards5 d-flex justify-content-between border-0 radius-xl p-25">
+            <div class="application-task d-flex align-items-center">
+                <div class="application-task-icon wh-60 bg-success content-center">
+                    <I class="fa fa-network-wired text-white"></I>
+                </div>
+                <div class="application-task-content">
+                    <h4>Jamb E-pin</h4>
+                    <span class="text-light fs-14 mt-1 text-capitalize">JAMB</span>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+    <div class="col-xxl-3 col-lg-4 col-md-6 mb-25">
+        <a href="{{route('de')}}">
+        <div class="feature-cards5 d-flex justify-content-between border-0 radius-xl p-25">
+            <div class="application-task d-flex align-items-center">
+                <div class="application-task-icon wh-60 bg-success content-center">
+                    <I class="fa fa-network-wired text-white"></I>
+                </div>
+                <div class="application-task-content">
+                    <h4>Jamb Direct Entry</h4>
+                    <span class="text-light fs-14 mt-1 text-capitalize">JAMB</span>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+    <div class="col-xxl-3 col-lg-4 col-md-6 mb-25">
         <div class="feature-cards5 d-flex justify-content-between border-0 radius-xl p-25">
             <div class="application-task d-flex align-items-center">
                 <div class="application-task-icon wh-60 bg-dark content-center">

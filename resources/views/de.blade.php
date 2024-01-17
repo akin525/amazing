@@ -13,7 +13,7 @@
                         <div class="card add-product bm p-sm-30 p-20 mb-30">
                             <div class="card-body p-0">
                                 <div class="card-header">
-                                    <h6 class="fw-500">Jamb</h6>
+                                    <h6 class="fw-500">Direct Entry</h6>
                                 </div>
 
                                 <div class="add-product__body px-sm-40 px-20">
@@ -48,7 +48,7 @@
                                 <x-jet-validation-errors class="alert alert-success" />
 
                                     <div class="col-lg-12">
-                                        <label class="small mb-1" for="numofpins" style="color: #000000">JAMB PROFILE CODE </label>
+                                        <label class="small mb-1" for="numofpins" style="color: #000000">PROFILE CODE </label>
                                         <div class="input-group input-group-outline my-3">
                                             <input id="number" type="number" name="number" class="form-control rounded-right py-4"  style="border-radius: 0px;" required>
 
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="id" value="{{rand(111111111, 999999999)}}">
-                                    <input type="hidden" name="code" value="utme">
+                                    <input type="hidden" name="code" value="de">
                                     <button id="confirm" class="btn btn-primary font-weight-bold py-2 my-4" type="button">Verify Profile</button>
                                     <button class="btn btn-primary font-weight-bold py-2 my-4" type="submit">Generate</button>
                             </form>
