@@ -34,10 +34,14 @@
                                     <h6>Sign-up in Amazing Data</h6>
                                 </div>
                             </div>
+                            @if (session('error'))
+                                <div class="alert alert-success">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <form method="post" role="form" action="{{ route('register') }}">
                                 @csrf
                                 <x-jet-validation-errors class="alert alert-danger" />
-
                                 <div class="card-body">
                                 <div class="edit-profile__body">
                                     <div class="edit-profile__body">
