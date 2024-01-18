@@ -33,6 +33,8 @@
                                 <div class="edit-profile__title">
                                     <h6>Sign-up in Amazing Data</h6>
                                 </div>
+                                <x-jet-validation-errors class="alert alert-danger" />
+
                             </div>
                             @if (session('error'))
                                 <div class="alert alert-success">
@@ -41,7 +43,6 @@
                             @endif
                             <form method="post" role="form" action="{{ route('register') }}">
                                 @csrf
-                                <x-jet-validation-errors class="alert alert-danger" />
                                 <div class="card-body">
                                 <div class="edit-profile__body">
                                     <div class="edit-profile__body">
