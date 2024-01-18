@@ -74,7 +74,7 @@
                                             <input id="amount" name="amount" class="form-control rounded-right py-4" value="{{$jamb['tamount']}}" style="border-radius: 0px;" readonly="">
                                         </div>
                                     </div>
-                                    <input type="hidden" name="id" value="{{rand(111111111, 999999999)}}">
+                                    <input type="hidden" name="refid" value="{{rand(111111111, 999999999)}}">
                                     <input type="hidden" name="code" value="de">
                                     <button id="confirm" class="btn btn-primary font-weight-bold py-2 my-4" type="button">Verify Profile</button>
                                     <button class="btn btn-primary font-weight-bold py-2 my-4" type="submit">Generate</button>
