@@ -68,6 +68,19 @@
                                         </label>
                                         <input type="text" id="number1" name="number1" class="text-success form-control" required>
                                     </div>
+                                    <div  class="form-group">
+                                        <label  class="requiredField">
+                                            UTME TYPE
+                                            <span class="asteriskField">*</span>
+                                        </label>
+                                        <div class="input-group input-group-outline my-3">
+                                            <select name="code" class="text-success form-control" required>
+                                                <option selected="">---------</option>
+                                                    <option value="utme-mock">utme-mock</option>
+                                                    <option value="utme-no-mock">utme-no-mock</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12">
                                         <label class="small mb-1" for="numofpins" style="color: #000000">Amount per Unit (₦)</label>
                                         <div class="input-group input-group-outline my-3">
@@ -75,7 +88,7 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="refid" value="{{rand(111111111, 999999999)}}">
-                                    <input type="hidden" name="code" value="utme">
+{{--                                    <input type="hidden" name="code" value="utme">--}}
                                     <button id="confirm" class="btn btn-primary font-weight-bold py-2 my-4" type="button">Verify Profile</button>
                                     <button class="btn btn-primary font-weight-bold py-2 my-4" type="submit">Generate</button>
                             </form>

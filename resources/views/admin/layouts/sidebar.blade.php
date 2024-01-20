@@ -102,6 +102,9 @@
                     <li class="active">
                         <a href="{{ route('admin/waec') }}"  ><i class="fa fa-book white_color"></i> <span>Waec-Pin</span></a>
                     </li>
+                    <li class="active">
+                        <a href="{{ route('admin/jamb') }}"  ><i class="fa fa-book white_color"></i> <span>jamb-Pin</span></a>
+                    </li>
                     <li>
                         <a href="#app1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-product-hunt"></i> <span>Control Product</span></a>
                         <ul class="collapse list-unstyled" id="app1">

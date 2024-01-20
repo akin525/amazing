@@ -581,6 +581,11 @@ public function adminwaec()
     $all=waec::all();
     return view('admin/waec', compact('all'));
 }
+public function adminjamb()
+{
+    $all=Jamb::all();
+    return view('admin/jamb', compact('all'));
+}
 
 public function waecpdfview($request)
 {
@@ -594,12 +599,24 @@ public function necopdfview($request)
 
     return view('npin', compact('waec'));
 }
+public function jambpdfview($request)
+{
+    $jamb=Jamb::where('id', $request)->first();
+
+    return view('npin2', compact('waec'));
+}
 
 public function waecpdfdownload($request)
 {
     $waec=waec::where('id', $request)->first();
     $pdf = PDF::loadView('wpin1', compact('waec'));
     return $pdf->download('waecpin.pdf');
+}
+public function jambpdfdownload($request)
+{
+    $waec=Jamb::where('id', $request)->first();
+    $pdf = PDF::loadView('wpin1', compact('waec'));
+    return $pdf->download('jambpin.pdf');
 }
 public function necopdfdownload($request)
 {
