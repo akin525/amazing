@@ -615,7 +615,7 @@ public function waecpdfdownload($request)
 public function jambpdfdownload($request)
 {
     $waec=Jamb::where('id', $request)->first();
-    $pdf = PDF::loadView('wpin1', compact('waec'));
+    $pdf = PDF::loadView('jpin', compact('waec'));
     return $pdf->download('jambpin.pdf');
 }
 public function necopdfdownload($request)
