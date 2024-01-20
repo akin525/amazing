@@ -603,7 +603,7 @@ public function jambpdfview($request)
 {
     $jamb=Jamb::where('id', $request)->first();
 
-    return view('npin2', compact('waec'));
+    return view('npin2', compact('jamb'));
 }
 
 public function waecpdfdownload($request)
