@@ -147,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('jambpin/{id}', [EducationController::class, 'jambpdfview'])->name('jambpin');
     Route::get('waecpin1/{id}', [EducationController::class, 'waecpdfdownload'])->name('waecpin1');
     Route::get('necopin1/{id}', [EducationController::class, 'necopdfdownload'])->name('necopin1');
-    Route::get('jambpin1/{id}', [EducationController::class, 'jambpdfdownload'])->name('necopin1');
+    Route::get('jambpin1/{id}', [EducationController::class, 'jambpdfdownload'])->name('jambpin1');
 
 });
 
