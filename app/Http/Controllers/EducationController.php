@@ -482,7 +482,7 @@ public function Jamb(Request $request)
         $response = curl_exec($curl);
         curl_close($curl);
         $data = json_decode($response, true);
-        if ($data['success']=="1") {
+        if ($data['success']==1) {
             $token=$data['pin'];
             $insert=Jamb::create([
                 'username'=>$user->username,
