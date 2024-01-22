@@ -488,7 +488,7 @@ public function Jamb(Request $request)
                 'username'=>$user->username,
                 'serial'=>"serial",
                 'pin'=>$token,
-                'response'=>$data,
+                'response'=>"Check back",
             ]);
 
             $mg='Jamb Pin Successful Generated, kindly check your pin';
