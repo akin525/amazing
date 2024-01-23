@@ -409,9 +409,9 @@ public function Jamb(Request $request)
     $product=samm::where('network', 'jamb')->first();
 
     if ($user->apikey == '') {
-        $amount = $product->tamount *$request->value;
+        $amount = $product->tamount ;
     } elseif ($user != '') {
-        $amount = $product->ramount *$request->value;
+        $amount = $product->ramount;
     }
 
     if ($user->wallet < $amount) {
