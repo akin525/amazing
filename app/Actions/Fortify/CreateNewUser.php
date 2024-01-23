@@ -25,7 +25,7 @@ class CreateNewUser implements CreatesNewUsers
      * @return \App\Models\User
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function create(array $input)
+    public function create(array $input): User
     {
         Validator::make($input, [
             'name' => ['required', 'max:255'],
