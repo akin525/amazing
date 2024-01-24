@@ -489,7 +489,7 @@ public function Jamb(Request $request)
             $insert=Jamb::create([
                 'username'=>$user->username,
                 'serial'=>"serial",
-                'pin'=>$token,
+                'pin'=>$token. ' '.$request->name,
                 'response'=>"Check back",
             ]);
 
