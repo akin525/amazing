@@ -400,6 +400,7 @@ public function Jamb(Request $request)
 {
     $request->validate([
         'number'=>'required',
+        'name'=>'required',
         'number1'=>'required',
         'refid'=>'required',
         'code'=>'required',
@@ -472,6 +473,7 @@ public function Jamb(Request $request)
             CURLOPT_POSTFIELDS => array(
                 'number' =>$request->number,
                 'refid' =>$request->refid,
+                'name'=>$request->name,
                 'code'=>$request->code,
             ),
             CURLOPT_HTTPHEADER => array(
