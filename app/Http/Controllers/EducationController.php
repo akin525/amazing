@@ -400,6 +400,7 @@ public function Jamb(Request $request)
 {
     $request->validate([
         'number'=>'required',
+        'name'=>'required',
         'number1'=>'required',
         'refid'=>'required',
         'code'=>'required',
@@ -409,9 +410,9 @@ public function Jamb(Request $request)
     $product=samm::where('network', 'jamb')->first();
 
     if ($user->apikey == '') {
-        $amount = $product->tamount *$request->value;
+        $amount = $product->tamount ;
     } elseif ($user != '') {
-        $amount = $product->ramount *$request->value;
+        $amount = $product->ramount;
     }
 
     if ($user->wallet < $amount) {
@@ -472,6 +473,7 @@ public function Jamb(Request $request)
             CURLOPT_POSTFIELDS => array(
                 'number' =>$request->number,
                 'refid' =>$request->refid,
+                'name'=>$request->name,
                 'code'=>$request->code,
             ),
             CURLOPT_HTTPHEADER => array(
@@ -487,8 +489,8 @@ public function Jamb(Request $request)
             $insert=Jamb::create([
                 'username'=>$user->username,
                 'serial'=>"serial",
-                'pin'=>$token,
-                'response'=>$data,
+                'pin'=>$token. ' '.$request->name,
+                'response'=>"Check back",
             ]);
 
             $mg='Jamb Pin Successful Generated, kindly check your pin';
