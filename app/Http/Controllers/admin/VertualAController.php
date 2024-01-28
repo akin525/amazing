@@ -172,7 +172,7 @@ public function generateaccount($request)
         "email": "'.$input['email'].'",
         "phone": "'.$input['phone'].'",
         "dob": "'.$input['dob'].'",
-        "provider": "providus"
+        "provider": "safeheaven"
 }',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',

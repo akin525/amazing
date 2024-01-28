@@ -20,7 +20,7 @@ class VertualController
     public function vertual(Request $request)
     {
         if (Auth::check()) {
-            $input = User::find($request->user()->id);
+            $input = User::where('username', Auth::user()->username)->first();
             $username=$input->username.rand(1111, 9999);
 
 
