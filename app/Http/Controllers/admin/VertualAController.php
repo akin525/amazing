@@ -113,7 +113,7 @@ public function regenerateaccount($request)
         "email": "'.$input['email'].'",
         "phone": "'.$input['phone'].'",
         "dob": "'.$input['dob'].'",
-        "provider": "safeheaven"
+        "provider": "vfd"
 }',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
