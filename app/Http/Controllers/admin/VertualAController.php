@@ -113,7 +113,7 @@ public function regenerateaccount($request)
         "email": "'.$input['email'].'",
         "phone": "'.$input['phone'].'",
         "dob": "'.$input['dob'].'",
-        "provider": "vfd"
+        "provider": "safeheaven"
 }',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
@@ -156,7 +156,7 @@ public function generateaccount($request)
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://app.paylony.com/api/v1/create_account',
+        CURLOPT_URL => 'https://api.paylony.com/api/v1/create_account',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
