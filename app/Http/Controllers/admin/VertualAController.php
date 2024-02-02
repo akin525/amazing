@@ -113,7 +113,7 @@ public function regenerateaccount($request)
         "email": "'.$input['email'].'",
         "phone": "'.$input['phone'].'",
         "dob": "'.$input['dob'].'",
-        "provider": "safeheaven"
+        "provider": "safehaven"
 }',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
@@ -172,7 +172,7 @@ public function generateaccount($request)
         "email": "'.$input['email'].'",
         "phone": "'.$input['phone'].'",
         "dob": "'.$input['dob'].'",
-        "provider": "safeheaven"
+        "provider": "safehaven"
 }',
         CURLOPT_HTTPHEADER => array(
             'Content-Type: application/json',
