@@ -249,6 +249,7 @@ public function neco(Request $request)
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => array(
+                'refid'=>$request->id,
                 'value' =>$request->value,
             ),
             CURLOPT_HTTPHEADER => array(
